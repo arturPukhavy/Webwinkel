@@ -1,2 +1,2 @@
 # Webwinkel App
-This is a simple Angular based application.
+This is a simple Angular based CRUD application.
