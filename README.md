@@ -8,4 +8,5 @@ This is a simple Angular based CRUD application.
 * Docker: to run Nginx in a container
 
 ## Diagram
+<img src="img/web-winkel-diagram.drawio.png" width="80%">
 TODO
