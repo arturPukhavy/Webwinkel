@@ -10,7 +10,7 @@ This is a simple Angular based CRUD application.
 TODO
 
 ## Use Angular dev-server proxy
-Angular allows to configure CLI dev-server proxy
+Angular allows to configure CLI dev-server proxy. This is an example of `proxy.conf.json` configuration:
 ```
 {
    "/api/v1/products": {
