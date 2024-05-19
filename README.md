@@ -19,3 +19,7 @@ Angular allows to configure CLI dev-server proxy. This is an example of `proxy.c
    }
 }
 ```
+Use the following command to run dev-proxy:
+```
+ng serve --proxy-config proxy.conf.json
+```
