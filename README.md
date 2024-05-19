@@ -8,3 +8,14 @@ This is a simple Angular based CRUD application.
 ## Diagram
 <img src="img/web-winkel-diagram.png" width="100%">
 TODO
+
+## Use Angular dev-server proxy
+Angular allows to configure CLI dev-server proxy
+```
+{
+   "/api/v1/products": {
+      "target": "http://localhost:3000",
+      "secure": false
+   }
+}
+```
