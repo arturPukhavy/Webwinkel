@@ -7,23 +7,23 @@ Express web-framework is used.
 node webwinkel-api.js
 ```
 ## The following endpoints are used
-#### Retrieving a list of all products
+#### Retrieve a list of all products
 ```
 GET /api/v1/products
 ```
 TODO
 
-#### Creating a new product
+#### Create a new product
 ```
 POST /api/v1/products
 ```
 
-#### Updating an existing product
+#### Update an existing product
 ```
 PUT /api/v1/products/{id}
 ```
 
-#### Deleting a product
+#### Delete a product
 ```
 DELETE /api/v1/products/{id}
 ```
