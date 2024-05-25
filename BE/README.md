@@ -1,9 +1,8 @@
 # Webwinkel-API 
-This is an API for a web-winkel application.
-API based on Express server
-TODO
+This is a simple Node.js API for a web-winkel application. 
+Express web-framework is used.
 
-## Run server
+## Run API server
 ```
 node webwinkel-api.js
 ```
