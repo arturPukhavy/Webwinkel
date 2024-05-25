@@ -11,7 +11,6 @@ node webwinkel-api.js
 ```
 GET /api/v1/products
 ```
-TODO
 
 #### Create a new product
 ```
