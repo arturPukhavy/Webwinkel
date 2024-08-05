@@ -1,1 +1,136 @@
-<p>products works!</p>
+<div class="container">
+    <div class="row">
+      <app-alert
+      *ngIf="errorHandlingMode"
+      (close)="onHandleError()"
+      ></app-alert>
+      <div class="col-xs-12 col-md-6 col-md-offset-3">
+        <form #postForm="ngForm" (ngSubmit)="onCreatePost()">
+          <div class="form-group invisible">
+            <label for="id">Id</label>
+            <input
+              type="text"
+              class="form-control"
+              id="id"
+              ngModel
+              readonly
+              name="id"
+            />
+          </div>
+          <div class="custom-field">
+            <label for="naam">Naam</label>
+            <input
+              type="text"
+              class="form-control"
+              id="naam"
+              required
+              ngModel
+              name="naam"
+            />
+          </div>
+          <div class="custom-field">
+            <label for="merk">Brand</label>
+            <input
+              type="text"
+              class="form-control"
+              id="merk"
+              required
+              ngModel
+              name="merk"
+            />
+          </div>
+          <div class="custom-field">
+            <label for="voorraad">Stock</label>
+            <input
+              type="number"
+              class="form-control"
+              id="voorraad"
+              required
+              pattern="^[1-9]+[0-9]*$"
+              ngModel
+              name="voorraad"
+            />
+          </div>
+          <div class="custom-field">
+            <label for="price">Price, €</label>
+            <input
+              type="number"
+              class="form-control"
+              id="price"
+              required
+              pattern="^\d*.?\d{1,2}?$"
+              ngModel
+              name="price"
+            />
+          </div>
+          <button
+            class="btn btn-primary"
+            type="submit"
+            [disabled]="editMode || !postForm.valid"
+          >
+            Send Post
+          </button>
+          |
+          <button
+          class="btn btn-success"
+          type="button"
+          [disabled]="!editMode || !postForm.valid"
+          (click)="onUpdatePost()"
+          >
+            Update Post
+          </button>
+          |
+          <button
+          class="btn btn-danger"
+          type="button"
+          (click)="onCancel()"
+          >
+            Cancel
+          </button>
+        </form>
+      </div>
+    </div>
+    <ngx-spinner>
+      <div class="cssload-container">
+        <div class="cssload-speeding-wheel"></div>
+      </div>
+    </ngx-spinner>
+    <div class="row">
+    <table class="table table-striped">
+      <tr>
+        <th colspan="2">#</th>
+        <th>Name</th>
+        <th>Brand</th>
+        <th>Stock</th>
+        <th>Price</th>
+        <div class="row">
+          <div class="col-xs-12 col-md-6 col-md-offset-3">
+            <button
+              class="btn btn-danger"
+              [disabled]="loadedPosts.length < 1"
+              (click)="onClearPosts()"
+            >
+              Clear Posts
+            </button>
+          </div>
+        </div>
+      </tr>
+      <tbody>
+        <tbody *ngIf="loadedPosts.length < 1">No posts available!</tbody>
+        <tbody *ngIf="loadedPosts.length >=1 ">
+          <tr *ngFor="let item of loadedPosts; let i = index">
+            <td scope="row">{{item.id}}</td>
+            <td>{{item.naam}}</td>
+            <td>{{item.merk}}</td>
+            <td>{{item.voorraad}}</td>
+            <td>{{item.price}}</td>
+            <td>
+              <button class="btn btn-danger" (click)="onDeleteProduct()">Delete</button>
+              |
+              <button class="btn btn-success" (click)="onEditProduct(i)">Edit</button>
+            </td>
+          </tr>
+      </tbody> 
+    </table>
+    </div>
+</div>
