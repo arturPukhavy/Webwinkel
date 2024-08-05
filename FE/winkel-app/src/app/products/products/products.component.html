@@ -98,12 +98,12 @@
     <div class="row">
     <table class="table table-striped">
       <tr>
-        <th colspan="2">#</th>
-        <th>Name</th>
-        <th>Brand</th>
-        <th>Stock</th>
-        <th>Price</th>
-        <div class="row">
+        <th scope="col">#</th>
+        <th scope="col">Name</th>
+        <th scope="col">Brand</th>
+        <th scope="col">Stock</th>
+        <th scope="col">Price</th>
+        <th scope="col">
           <div class="col-xs-12 col-md-6 col-md-offset-3">
             <button
               class="btn btn-danger"
@@ -113,19 +113,19 @@
               Clear Posts
             </button>
           </div>
-        </div>
+        </th>
       </tr>
       <tbody>
         <tbody *ngIf="loadedPosts.length < 1">No posts available!</tbody>
         <tbody *ngIf="loadedPosts.length >=1 ">
           <tr *ngFor="let item of loadedPosts; let i = index">
-            <td scope="row">{{item.id}}</td>
+            <th scope="row">{{item.id}}</th>
             <td>{{item.naam}}</td>
             <td>{{item.merk}}</td>
             <td>{{item.voorraad}}</td>
             <td>{{item.price}}</td>
             <td>
-              <button class="btn btn-danger" (click)="onDeleteProduct()">Delete</button>
+              <button class="btn btn-danger" (click)="onDeleteProduct(item.id)">Delete</button>
               |
               <button class="btn btn-success" (click)="onEditProduct(i)">Edit</button>
             </td>

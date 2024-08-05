@@ -83,14 +83,15 @@
     font-weight: bold;
     }
     th {
-    padding: 10px 20px;
+    padding: 10px 10px;
     background: #56433D;
     color: #F9C941;
     border-right: 2px solid; 
     font-size: 0.9em;
+    text-align: center;
     }
     th:first-child {
-    text-align: left;
+    text-align: center;
     }
     th:last-child {
     border-right: none;
@@ -109,7 +110,7 @@
     border-right: none;
     }
     td:nth-child(2){
-    text-align: left;
+    text-align: center;
     }
 
     .custom-field {
