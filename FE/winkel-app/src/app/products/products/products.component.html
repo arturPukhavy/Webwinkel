@@ -1,6 +1,7 @@
 <div class="container">
     <div class="row">
       <app-alert
+      [message]="error"
       *ngIf="errorHandlingMode"
       (close)="onHandleError()"
       ></app-alert>
