@@ -48,7 +48,11 @@ app.post('/api/v1/products', (req, res) => {
 
   products.push(product)
   console.log(`New product has been added: ${JSON.stringify(product)}`)
-  res.json({id: product.id});
+
+  //Add intentional latency
+  setTimeout((() => { 
+    res.json({id: product.id});
+  }), 2000)
 });
 
 //--- HTTP PUT: Update existing product by id
@@ -65,7 +69,7 @@ app.put('/api/v1/products', (req, res) => {
   } else {
     //TODO return an error
     console.log('Product not found');
-    return res.status(404).json({error: 'Product not found'});
+    return res.status(400).json({error: 'Product not found'});
   }
 
   console.log(`Product has been updated: ${JSON.stringify(productToUpdate)}`)
@@ -86,6 +90,15 @@ app.delete('/api/v1/products', (req, res) => {
 app.delete('/api/v1/product', (req, res) => {
   const id = req.body.id;
   console.log(`Delete product with id=${id}`)
+
+  if(id==1){
+    console.log(`Cannot delete (mock a HTTP400 functional error)`)
+    return res.status(400).json({error: 'Product not found'});
+  }
+  if(id==2){
+    console.log(`Cannot delete (mock a HTTP503 Technical error)`)
+    return res.status(503).json({error: 'Server not available'});
+  }
 
   const  productToDelete= findObjectById(products, id);
   if (productToDelete) {
