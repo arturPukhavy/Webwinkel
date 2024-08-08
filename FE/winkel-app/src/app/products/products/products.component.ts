@@ -19,7 +19,7 @@ export class ProductsComponent implements OnInit, OnDestroy{
   editItemIndex: number;  
   editedItem: Product;
   errorHandlingMode = false;
-
+  error: string;
 
   constructor(private prService: ProductsService, private spinnerService: NgxSpinnerService ) {}
   
@@ -42,36 +42,37 @@ export class ProductsComponent implements OnInit, OnDestroy{
           })
         }
     ) 
-  }
+  };
 
   onCreatePost() {
     this.spinnerService.show();
     this.prService.createPost(this.productForm.value).subscribe({
       next: data => {
-        setTimeout(() => {
-          this.spinnerService.hide();
-        }, 1000);
+        this.spinnerService.hide();
         console.log('Product added: ' + JSON.stringify(data));
         this.onFetchPosts();
       },
       error: error => {
+        this.errorHandlingMode = true;
+        this.error = error.message;
         console.error('There was an error: ', error.message);
       }
-    });;
-  }
+    })
+  };
 
   onUpdatePost() {
     this.prService.updatePost(this.productForm.value).subscribe({
       next: data => {
         console.log('Product changed: ' + JSON.stringify(data));
         this.onFetchPosts()
-        this.errorHandlingMode = true;
       },
       error: error => {
+        this.errorHandlingMode = true;
+        this.error = error.message;
         console.error('There was an error: ', error.message);
       }
-    });  
-  }
+    }) 
+  };
 
   onFetchPosts() {
     this.prService.fetchPosts().subscribe({
@@ -82,36 +83,39 @@ export class ProductsComponent implements OnInit, OnDestroy{
         this.loadedPosts = data;
       },
       error: error => {
+        this.errorHandlingMode = true;
+        this.error = error.message;
         console.error('There was an error: ', error.message);
       }
-  });
-      ;
-  }
+    })
+  };
   onDeleteProduct(id: number) {
     this.prService.deleteProduct(id).subscribe({
       next: data => {
         this.loadedPosts = this.loadedPosts.filter(item => item.id !== id);
         console.log('Delete successful, id: ' + id);
-        this.errorHandlingMode = true;
       },
       error: error => {
-          console.error('There was an error: ', error.message);
+        this.errorHandlingMode = true;
+        this.error = error.message;
+        console.error('There was an error: ', error.message);
       }
-    });
-  }
+    })
+  };
 
   onClearPosts() {
     this.prService.clearPosts().subscribe({
       next: data => {
         console.log('All products deleted');
         this.loadedPosts = [];
-        this.errorHandlingMode = true;
       },
       error: error => {
+        this.errorHandlingMode = true;
+        this.error = error.message;
         console.error('There was an error: ', error.message);
       }
-    });;
-  }
+    })
+  };
 
   onEditProduct(index: number) {
     this.prService.startedEditing.next(index);
