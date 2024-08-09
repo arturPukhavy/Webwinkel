@@ -1,10 +1,10 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { Subscription} from 'rxjs';
+import { Subscription } from 'rxjs';
 import { NgForm } from '@angular/forms';
 import { ProductsService } from '../products.service';
 import { Product } from '../product.model';
 import { NgxSpinnerService } from 'ngx-spinner';
-
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-products',
@@ -54,8 +54,8 @@ export class ProductsComponent implements OnInit, OnDestroy{
       },
       error: error => {
         this.errorHandlingMode = true;
-        this.error = error.message;
-        console.error('There was an error: ', error.message);
+        this.error = error.error.error;
+        console.error('There was an error: ', error.error.error);
       }
     })
   };
@@ -68,8 +68,8 @@ export class ProductsComponent implements OnInit, OnDestroy{
       },
       error: error => {
         this.errorHandlingMode = true;
-        this.error = error.message;
-        console.error('There was an error: ', error.message);
+        this.error = error.error.error;
+        console.error('There was an error: ', error.error.error);
       }
     }) 
   };
@@ -84,8 +84,8 @@ export class ProductsComponent implements OnInit, OnDestroy{
       },
       error: error => {
         this.errorHandlingMode = true;
-        this.error = error.message;
-        console.error('There was an error: ', error.message);
+        this.error = error.error.error;
+        console.error('There was an error: ', error.error.error);
       }
     })
   };
@@ -97,8 +97,8 @@ export class ProductsComponent implements OnInit, OnDestroy{
       },
       error: error => {
         this.errorHandlingMode = true;
-        this.error = error.message;
-        console.error('There was an error: ', error.message);
+        this.error = error.error.error;
+        console.error('There was an error: ', error.error.error);
       }
     })
   };
@@ -111,8 +111,8 @@ export class ProductsComponent implements OnInit, OnDestroy{
       },
       error: error => {
         this.errorHandlingMode = true;
-        this.error = error.message;
-        console.error('There was an error: ', error.message);
+        this.error = error.error.error;
+        console.error('There was an error: ', error.error.error);
       }
     })
   };
