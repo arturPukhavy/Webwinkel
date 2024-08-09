@@ -52,7 +52,7 @@ export class ProductsComponent implements OnInit, OnDestroy{
         console.log('Product added: ' + JSON.stringify(data));
         this.onFetchPosts();
       },
-      error: error => {
+      error: (error: HttpErrorResponse) => {
         this.errorHandlingMode = true;
         this.error = error.error.error;
         console.error('There was an error: ', error.error.error);
@@ -66,7 +66,7 @@ export class ProductsComponent implements OnInit, OnDestroy{
         console.log('Product changed: ' + JSON.stringify(data));
         this.onFetchPosts()
       },
-      error: error => {
+      error: (error: HttpErrorResponse) => {
         this.errorHandlingMode = true;
         this.error = error.error.error;
         console.error('There was an error: ', error.error.error);
@@ -82,7 +82,7 @@ export class ProductsComponent implements OnInit, OnDestroy{
         });
         this.loadedPosts = data;
       },
-      error: error => {
+      error: (error: HttpErrorResponse) => {
         this.errorHandlingMode = true;
         this.error = error.error.error;
         console.error('There was an error: ', error.error.error);
@@ -95,7 +95,7 @@ export class ProductsComponent implements OnInit, OnDestroy{
         this.loadedPosts = this.loadedPosts.filter(item => item.id !== id);
         console.log('Delete successful, id: ' + id);
       },
-      error: error => {
+      error: (error: HttpErrorResponse) => {
         this.errorHandlingMode = true;
         this.error = error.error.error;
         console.error('There was an error: ', error.error.error);
@@ -109,7 +109,7 @@ export class ProductsComponent implements OnInit, OnDestroy{
         console.log('All products deleted');
         this.loadedPosts = [];
       },
-      error: error => {
+      error: (error: HttpErrorResponse) => {
         this.errorHandlingMode = true;
         this.error = error.error.error;
         console.error('There was an error: ', error.error.error);
