@@ -1,0 +1,48 @@
+[
+    {
+        "firstName": "Maxim",
+        "lastName": "Petrov",
+        "birthDate": "2000-03-30",
+        "role": "Employee",
+        "address": [
+          {
+            "street": "Street_1",
+            "houseNumber": "1",
+            "postCode": "2624ll",
+            "city": "Delft"
+          },
+          {
+            "street": "Street_2",
+            "houseNumber": "2",
+            "postCode": "2624hh",
+            "city": "Delft"
+          }
+        ],
+        "userName": "max",
+        "password": "12345",
+        "email": "max@dd.com"
+      },
+      {
+        "firstName": "Anna",
+        "lastName": "Petrova",
+        "birthDate": "1995-02-27",
+        "role": "Customer",
+        "address": [
+          {
+            "street": "Street_1",
+            "houseNumber": "1",
+            "postCode": "2624ll",
+            "city": "Delft"
+          },
+          {
+            "street": "Street_2",
+            "houseNumber": "2",
+            "postCode": "2624hh",
+            "city": "Delft"
+          }
+        ],
+        "userName": "anna",
+        "password": "12345",
+        "email": "anna@dd.com"
+      }      
+]

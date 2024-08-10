@@ -6,6 +6,13 @@
    "/api/v1/product": {
       "target": "http://localhost:3000",
       "secure": false
+   },
+   "/api/v1/login": {
+      "target": "http://localhost:3000",
+      "secure": false
+   },
+   "/api/v1/users": {
+      "target": "http://localhost:3000",
+      "secure": false
    }
-
 }
