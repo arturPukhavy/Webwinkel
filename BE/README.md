@@ -28,13 +28,15 @@ DELETE /api/v1/products/{id}
 ```
 ## Login API
 #### Fetch an user by userName and password
+(Note: this is just a simple non-secured example, should not be used in real projects)
 ```
 curl 'http://localhost:3000/api/v1/login' \
 --header 'Content-Type: application/json' \
 --data '{
     "userName": "max",
     "password": "*******"
-}'```
+}'
+```
 
 TODO
 
