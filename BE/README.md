@@ -6,7 +6,7 @@ Express web-framework is used.
 ```
 node webwinkel-api.js
 ```
-## The following endpoints are used
+## Products API
 #### Retrieve a list of all products
 ```
 GET /api/v1/products
@@ -26,6 +26,8 @@ PUT /api/v1/products/{id}
 ```
 DELETE /api/v1/products/{id}
 ```
+## Login API
+TODO
 
 ## Resources
 * [Install express](https://expressjs.com/en/starter/installing.html)
