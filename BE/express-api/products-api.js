@@ -141,7 +141,8 @@ app.post('/api/v1/login', (req, res) => {
   if (user) {
     console.log(`User: ${JSON.stringify(user)}`)
     if(user.password === login.password){
-      res.json({loggedin: true});
+      user.password = '******'
+      res.json(user);
     } else {
       return res.status(401).json({error: 'Password is not correct'});
     }
