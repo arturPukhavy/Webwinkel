@@ -11,11 +11,14 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { ProductsService } from './products/products.service';
 import { UserComponent } from './users/user/user.component';
+import { LoginComponent } from './login/login.component';
+import { ShoppingListComponent } from './shopping-list/shopping-list.component';
 @NgModule({
   declarations: [
     AppComponent,
     ProductsComponent,
-    AlertComponent
+    AlertComponent,
+  
   ],
   imports: [
     BrowserModule,
@@ -24,7 +27,9 @@ import { UserComponent } from './users/user/user.component';
     NgxSpinnerModule,
     BrowserAnimationsModule,
     FormsModule,
-    UserComponent
+    UserComponent,
+    LoginComponent,
+    ShoppingListComponent
   ],
   providers: [ProductsService],
   bootstrap: [AppComponent]
