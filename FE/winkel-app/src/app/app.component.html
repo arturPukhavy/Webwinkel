@@ -1,12 +1,29 @@
 <div class="container">
   <h3>CRUD app-example</h3>
   <div class="row">
-    <!-- <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2"> -->
       <ul class="nav nav-tabs">
-        <li role="presentation" class="active" routerLinkActive="active"><a routerLink="/products">Products</a></li>
-        <li role="presentation" routerLinkActive="active"><a routerLink="/user">Users</a></li>
+
+        <li role="presentation" class="nav-item">
+          <a routerLink="/products" class="nav-link active" routerLinkActive="active" aria-current="page">Products</a>
+        </li>
+        <li role="presentation"  class="nav-item">
+          <a a routerLink="/user" class="nav-link" routerLinkActive="active">Users</a>
+        </li>
+
+        <!-- TODO: implement "Shopping" and "Login" -->
+        <li role="presentation"  class="nav-item">
+          <a a routerLink="/shop" class="nav-link" routerLinkActive="active">Shopping</a>
+        </li>
+        <li role="presentation"  class="nav-item">
+          <a a routerLink="/login" class="nav-link" routerLinkActive="active">Login</a>
+        </li>
+
+        <!-- This is just an example of a disabled tab -->
+        <li class="nav-item">
+          <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+        </li>
+        
       </ul>
-    <!-- </div> -->
   </div>
   <router-outlet></router-outlet>
 </div>
