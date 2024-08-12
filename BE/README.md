@@ -6,7 +6,7 @@ Express web-framework is used.
 ```
 node webwinkel-api.js
 ```
-## The following endpoints are used
+## Products API
 #### Retrieve a list of all products
 ```
 GET /api/v1/products
@@ -26,6 +26,19 @@ PUT /api/v1/products/{id}
 ```
 DELETE /api/v1/products/{id}
 ```
+## Login API
+#### Fetch an user by userName and password
+(Note: this is just a simple non-secured example. It should not be used in real projects)
+```
+curl 'http://localhost:3000/api/v1/login' \
+--header 'Content-Type: application/json' \
+--data '{
+    "userName": "max",
+    "password": "*******"
+}'
+```
+
+TODO
 
 ## Resources
 * [Install express](https://expressjs.com/en/starter/installing.html)
