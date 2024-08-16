@@ -23,3 +23,6 @@ Use the following command to run dev-proxy:
 ng serve --proxy-config proxy.conf.json
 ```
 This configuration is ONLY for a development purpose, it should not be used in a production environment.
+
+## Resources
+* https://getbootstrap.com/docs/5.3/content/tables/
