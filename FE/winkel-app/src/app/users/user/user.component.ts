@@ -13,7 +13,7 @@ import { Role } from './model/Role';
 export class UserComponent implements OnInit{
 
   ngOnInit(): void {
-    //This is just an example
+    //This is just an example to see how to create an instance of "User"
     let a1: Address
     a1 = {
       street: 'Street_1',
