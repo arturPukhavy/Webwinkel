@@ -11,7 +11,9 @@ export class ProductsService {
   startedEditing = new Subject<number>();
  
 
-  constructor( private http: HttpClient ) { }
+  constructor( private http: HttpClient ) {
+    console.log('Create ProductsService instance')
+   }
 
   fetchPosts() {
     return this.http.get<Product[]>('/api/v1/products')
