@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Address } from './model/Address';
-import { User } from './model/User';
-import { Role } from './model/Role';
+import { Address } from './model/Address.model';
+import { User } from './model/User.model';
+import { Role } from './model/Role.model';
 
 
 @Component({

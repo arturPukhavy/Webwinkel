@@ -1,5 +1,5 @@
-import { Person } from "./Person";
-import { Role } from "./Role";
+import { Person } from "./Person.model";
+import { Role } from "./Role.model";
 
 export interface User extends Person {
     role: Role;
