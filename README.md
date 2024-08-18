@@ -1,5 +1,5 @@
 # Webwinkel App
-This is a simple Angular based CRUD application.
+This is a simple web-shop application. It includes two parts - Angular front-end application and node-based back-end API server.
 
 ## Used technology
 * Angular: FE application
