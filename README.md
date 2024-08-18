@@ -38,8 +38,13 @@ This configuration is ONLY for a development purpose, it should not be used in a
 ## How to start
 The project includes two parts: back-end and front-end. Back-end is an API-server based on Expressjs
 #### API server
+First the API server should be started
+```
+cd Webwinkel/BE/express-api
+node products-api.js
+```
+This will start the server on the port 3000
 
-TODO
 #### Angular app
 TODO
 
