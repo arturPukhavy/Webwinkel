@@ -8,9 +8,12 @@ This is a simple Angular based CRUD application.
 ### Used Angular fetures
 * Components (both modules and standalone)
 * HTTP Client
-* Authentication
-* Forms
 * Routing
+* Authentication and route protection
+* Observable
+* Services
+* Dependency injection
+* Forms
 * Pipes
 
 ## Diagram
