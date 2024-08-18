@@ -46,7 +46,12 @@ node products-api.js
 This will start the server on the port 3000
 
 #### Angular app
-TODO
+When API-server is up and running, the FE-app can be staarted:
+```
+cd Webwinkel/FE/winkel-app
+ng serve --proxy-config proxy.conf.json
+```
+This will start the Anfular app on the localhost port 4200: `http://localhost:4200/`
 
 ## Resources
 * [Bootstrap](https://getbootstrap.com/docs/5.3/content/tables/)
