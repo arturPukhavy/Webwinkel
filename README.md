@@ -35,5 +35,13 @@ ng serve --proxy-config proxy.conf.json
 ```
 This configuration is ONLY for a development purpose, it should not be used in a production environment.
 
+## How to start
+The project includes two parts: back-end and front-end. Back-end is an API-server based on Expressjs
+#### API server
+
+TODO
+#### Angular app
+TODO
+
 ## Resources
 * [Bootstrap](https://getbootstrap.com/docs/5.3/content/tables/)
