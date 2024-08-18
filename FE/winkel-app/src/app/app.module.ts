@@ -13,6 +13,7 @@ import { ProductsService } from './products/products.service';
 import { UserComponent } from './users/user/user.component';
 import { LoginComponent } from './login/login.component';
 import { ShoppingListComponent } from './shopping-list/shopping-list.component';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,7 +32,7 @@ import { ShoppingListComponent } from './shopping-list/shopping-list.component';
     LoginComponent,
     ShoppingListComponent
   ],
-  providers: [ProductsService],
+  providers: [ProductsService, provideAnimationsAsync()],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

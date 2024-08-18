@@ -1,0 +1,18 @@
+.validation-message {
+    color: red;
+    position: absolute;
+    width: 100%;
+    height: 1em;
+    margin-top: 5px;
+    line-height: 1em;
+    font-size: 0.857em;
+    text-align: left;
+  }
+.form-row{
+    display:inline-block;
+    margin-left: 150px;
+}
+.form-section{
+    display:inline-block;
+    margin-left: 80px;
+}
