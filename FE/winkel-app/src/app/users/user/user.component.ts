@@ -1,19 +1,24 @@
 import { Address } from './model/Address.model';
 import { User } from './model/User.model';
 import { Role } from './model/Role.model';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
+
 
 
 
 
 
 @Component({
-  standalone: true,
+  // standalone: true,
   selector: 'app-user',
   templateUrl: './user.component.html',
   styleUrl: './user.component.css',
 })
 export class UserComponent implements OnInit{
+  @ViewChild('form') userForm: NgForm;
+  viewForm = false; 
+  secondAddress = false;
 
   ngOnInit(): void {
     //This is just an example to see how to create an instance of "User"
@@ -44,6 +49,27 @@ export class UserComponent implements OnInit{
       email: 'dd@dd.com'
     }
     console.log('Test user: ' + JSON.stringify(usr));
+  }
+
+  onAddAddress() {
+    this.secondAddress = true;
+  }
+
+  onAddUser() {
+  }
+
+  onAdd() {
+    this.viewForm = true;
+  }
+  onUpdateUser() {
+
+  }
+  onDeleteAll() {
+
+  }
+  onCancel() {
+    this.userForm.reset();
+    this.viewForm = false;
   }
 
 }

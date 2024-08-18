@@ -10,9 +10,30 @@
   }
 .form-row{
     display:inline-block;
-    margin-left: 150px;
+    margin-left: 90px;
 }
 .form-section{
     display:inline-block;
-    margin-left: 80px;
+    margin-left: 165px;
+}
+.col-md-6{
+    margin-left: 250px;
+    margin-top: 30px;
+    display:inline-block;
+
+}
+.col-xs-12{
+    margin-left: 0px;
+    margin-top: 30px;
+    display:inline-block;
+    
+}
+.custom-field{
+    margin-left: 485px;
+    margin-top: 30px;
+}
+.row{
+    margin-left: 585px;
+    margin-top: -30px;
+    margin-bottom: 30px;
 }

@@ -1,11 +1,34 @@
-<form>
-    <div class="form-control">
+<form #form="ngForm" (ngSubmit)="onAddUser()">
+    <div class="col-md-6">
+      <button
+        class="btn btn-success"
+        type="button"
+        *ngIf="!viewForm"
+        (click)="onAdd()"
+        >
+        Add New User
+      </button>
+    </div>
+    <div class="col-xs-12">
+        <button
+          class="btn btn-danger"
+          type="button"
+          *ngIf="!viewForm"
+          (click)="onDeleteAll()"
+          >
+          Delete All Users
+        </button>
+      </div>
+    <div class="form-control" *ngIf="viewForm">
       <div class="form-section">
-        <label for="userName" class="label text-muted"> First Name </label>
-        <input formControlName="userName"
-               id="userName"
+        <label for="firstName" class="label text-muted"> First Name </label>
+        <input name="firstName"
+               id="firstName"
                autocomplete="off"
-               class="form-control"/>
+               class="form-control"
+               type="text"
+               required
+               ngModel/>
         <div >
           <!-- <div  class="validation-message">
             Need to fill
@@ -13,11 +36,14 @@
         </div>
       </div>
       <div class="form-section">
-        <label for="userEmail" class="label text-muted"> Last Name </label>
-        <input formControlName="userEmail"
-               id="userEmail"
+        <label for="lastName" class="label text-muted"> Last Name </label>
+        <input name="lastName"
+               id="lastName"
                autocomplete="off"
-               class="form-control"/>
+               class="form-control"
+               type="text"
+               required
+               ngModel/>
         <div>
           <!-- <div  class="validation-message">
             Incorrect Email
@@ -25,23 +51,15 @@
         </div>
       </div>
       <div class="form-section">
-        <label for="userEmail" class="label text-muted"> Role </label>
-        <input formControlName="userEmail"
-               id="userEmail"
-               autocomplete="off"
-               class="form-control"/>
-        <div>
-          <!-- <div  class="validation-message">
-            Incorrect Email
-          </div> -->
-        </div>
-      </div>
-      <div class="form-section">
-        <label for="userEmail" class="label text-muted"> Email </label>
-        <input formControlName="userEmail"
-               id="userEmail"
-               autocomplete="off"
-               class="form-control"/>
+        <label for="role" class="label text-muted"> Role </label>
+        <select name="role"
+                id="role"
+                autocomplete="off"
+                class="form-control">
+                  <option value="Admin">Admin</option>
+                  <option value="Employee">Employee</option>
+                  <option value="Customer">Customer</option>
+        </select>
         <div>
           <!-- <div  class="validation-message">
             Incorrect Email
@@ -49,41 +67,211 @@
         </div>
       </div>
       <hr>
-      <div class="form-row">
-        <label for="userEmail" class="label text-muted"> Username </label>
-        <input formControlName="userEmail"
-               id="userEmail"
-               autocomplete="off"
-               class="form-control"/>
+      <div class="form-section">
+        <label for="email" class="label text-muted"> Email </label>
+        <input name="email"
+               id="email"
+               autocomplete="on"
+               class="form-control"
+               type="email"
+               required
+               ngModel/>
         <div>
           <!-- <div  class="validation-message">
             Incorrect Email
           </div> -->
         </div>
       </div>
-      <div class="form-row">
-        <label for="userEmail" class="label text-muted"> Birth Date </label>
-        <input formControlName="userEmail"
-               id="userEmail"
+      <div class="form-section">
+        <label for="userName" class="label text-muted"> Username </label>
+        <input name="userName"
+               id="userName"
                autocomplete="off"
-               class="form-control"/>
+               class="form-control"
+               type="text"
+               required
+               ngModel/>
         <div>
           <!-- <div  class="validation-message">
             Incorrect Email
           </div> -->
         </div>
       </div>
-      <div class="form-row">
-        <label for="userEmail" class="label text-muted"> Address </label>
-        <input formControlName="userEmail"
-               id="userEmail"
+      <div class="form-section">
+        <label for="birthDate" class="label text-muted"> Birth Date </label>
+        <input name="birthDate"
+               id="birthDate"
                autocomplete="off"
-               class="form-control"/>
+               class="form-control"
+               type="date"
+               required
+               ngModel/>
         <div>
           <!-- <div  class="validation-message">
             Incorrect Email
           </div> -->
         </div>
+      </div>
+      <hr>
+      <div class="form-group">
+        <div class="form-row">
+          <label for="city" class="label text-muted"> City </label>
+          <input name="city"
+                 id="city"
+                 autocomplete="off"
+                 class="form-control"
+                 type="text"
+                 required
+                 ngModel/>
+          <div>
+          <!-- <div  class="validation-message">
+             Incorrect Email
+             </div> -->
+          </div>
+        </div>
+        <div class="form-row">
+            <label for="street" class="label text-muted"> Street </label>
+            <input name="street"
+                   id="street"
+                   autocomplete="off"
+                   class="form-control"
+                   type="text"
+                   required
+                   ngModel/>
+            <div>
+            <!-- <div  class="validation-message">
+               Incorrect Email
+               </div> -->
+            </div>
+          </div>
+          <div class="form-row">
+            <label for="houseNumber" class="label text-muted"> House Number </label>
+            <input name="houseNumber"
+                   id="houseNumber"
+                   autocomplete="off"
+                   class="form-control"
+                   type="number"
+                   required
+                   pattern="^[1-9]+[0-9]*$"
+                   ngModel/>
+            <div>
+            <!-- <div  class="validation-message">
+               Incorrect Email
+               </div> -->
+            </div>
+          </div>
+          <div class="form-row">
+            <label for="postCode" class="label text-muted"> Post Code </label>
+            <input name="postCode"
+                   id="postCode"
+                   autocomplete="off"
+                   class="form-control"
+                   type="text"
+                   required
+                   ngModel/>
+            <div>
+            <!-- <div  class="validation-message">
+               Incorrect Email
+               </div> -->
+            </div>
+          </div>
+       </div>
+       <div class="form-group" *ngIf="secondAddress">
+        <div class="form-row">
+          <label for="city" class="label text-muted"> City </label>
+          <input name="city"
+                 id="city"
+                 autocomplete="off"
+                 class="form-control"
+                 type="text"
+                 required
+                 ngModel/>
+          <div>
+          <!-- <div  class="validation-message">
+             Incorrect Email
+             </div> -->
+          </div>
+        </div>
+        <div class="form-row">
+            <label for="street" class="label text-muted"> Street </label>
+            <input name="street"
+                   id="street"
+                   autocomplete="off"
+                   class="form-control"
+                   type="text"
+                   required
+                   ngModel/>
+            <div>
+            <!-- <div  class="validation-message">
+               Incorrect Email
+               </div> -->
+            </div>
+          </div>
+          <div class="form-row">
+            <label for="houseNumber" class="label text-muted"> House Number </label>
+            <input name="houseNumber"
+                   id="houseNumber"
+                   autocomplete="off"
+                   class="form-control"
+                   type="number"
+                   required
+                   pattern="^[1-9]+[0-9]*$"
+                   ngModel/>
+            <div>
+            <!-- <div  class="validation-message">
+               Incorrect Email
+               </div> -->
+            </div>
+          </div>
+          <div class="form-row">
+            <label for="postCode" class="label text-muted"> Post Code </label>
+            <input name="postCode"
+                   id="postCode"
+                   autocomplete="off"
+                   class="form-control"
+                   type="text"
+                   required
+                   ngModel/>
+            <div>
+            <!-- <div  class="validation-message">
+               Incorrect Email
+               </div> -->
+            </div>
+          </div>
+       </div>
+       <div class="row" *ngIf="!secondAddress">
+            <div class="col-xs-12">
+                <button 
+                    type="button"   
+                    class="btn btn-success"
+                    style="margin-top: 10px;"
+                    (click)="onAddAddress()">+Address</button>
+            </div>
+        </div>
+      <hr>
+      <div class="custom-field">
+        <button
+        class="btn btn-primary"
+        type="submit"
+        > 
+        Add User
+        </button>
+        |
+        <button
+        class="btn btn-success"
+        type="button"
+        (click)="onUpdateUser()"
+        >
+        Update User
+        </button>
+        |
+        <button
+        class="btn btn-danger"
+        type="button"
+        (click)="onCancel()"
+        >
+        Cancel
+        </button>
       </div>
     </div>
 </form>
