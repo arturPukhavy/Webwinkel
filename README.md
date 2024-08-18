@@ -54,5 +54,6 @@ ng serve --proxy-config proxy.conf.json
 This will start the Anfular app on the localhost port 4200: `http://localhost:4200/`
 
 ## Resources
+* [Angular docs](https://v17.angular.io/docs)
 * [Typescript docs](https://www.typescriptlang.org/docs/)
 * [Bootstrap](https://getbootstrap.com/docs/5.3/content/tables/)
