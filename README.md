@@ -5,7 +5,7 @@ This is a simple Angular based CRUD application.
 * Angular: FE application
 * Expressjs: Nodejs-based API server
 
-### Used Angular fetures
+#### Used Angular fetures
 * Components (both modules and standalone)
 * HTTP Client
 * Routing
