@@ -29,11 +29,22 @@
     
 }
 .custom-field{
-    margin-left: 485px;
+    margin-left: 540px;
     margin-top: 30px;
 }
 .row{
     margin-left: 585px;
     margin-top: -30px;
     margin-bottom: 30px;
+}
+.btn{
+    border: 3px solid;
+}
+.table{
+    margin-top: 30px;
+    text-align: center;
+}
+.dark{
+    margin: 100px;
+    margin-left: 500px;
 }

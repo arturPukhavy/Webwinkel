@@ -1,7 +1,12 @@
 <form #form="ngForm" (ngSubmit)="onAddUser()">
     <div class="col-md-6">
+      <app-alert
+      [message]="error"
+      *ngIf="errorHandlingMode"
+      (close)="onHandleError()"
+      ></app-alert>
       <button
-        class="btn btn-success"
+        class="btn btn-outline-success"
         type="button"
         *ngIf="!viewForm"
         (click)="onAdd()"
@@ -11,7 +16,7 @@
     </div>
     <div class="col-xs-12">
         <button
-          class="btn btn-danger"
+          class="btn btn-outline-danger"
           type="button"
           *ngIf="!viewForm"
           (click)="onDeleteAll()"
@@ -184,7 +189,6 @@
                  autocomplete="off"
                  class="form-control"
                  type="text"
-                 required
                  ngModel/>
           <div>
           <!-- <div  class="validation-message">
@@ -199,7 +203,6 @@
                    autocomplete="off"
                    class="form-control"
                    type="text"
-                   required
                    ngModel/>
             <div>
             <!-- <div  class="validation-message">
@@ -214,7 +217,6 @@
                    autocomplete="off"
                    class="form-control"
                    type="number"
-                   required
                    pattern="^[1-9]+[0-9]*$"
                    ngModel/>
             <div>
@@ -230,7 +232,6 @@
                    autocomplete="off"
                    class="form-control"
                    type="text"
-                   required
                    ngModel/>
             <div>
             <!-- <div  class="validation-message">
@@ -243,7 +244,7 @@
             <div class="col-xs-12">
                 <button 
                     type="button"   
-                    class="btn btn-success"
+                    class="btn btn-outline-dark"
                     style="margin-top: 10px;"
                     (click)="onAddAddress()">+Address</button>
             </div>
@@ -251,22 +252,25 @@
       <hr>
       <div class="custom-field">
         <button
-        class="btn btn-primary"
+        *ngIf="!editMode"
+        class="btn btn-outline-primary"
         type="submit"
+        [disabled]="!userForm.valid"
         > 
         Add User
         </button>
-        |
         <button
-        class="btn btn-success"
+        *ngIf="editMode"
+        class="btn btn-outline-warning"
         type="button"
         (click)="onUpdateUser()"
+        [disabled]="!userForm.valid"
         >
         Update User
         </button>
         |
         <button
-        class="btn btn-danger"
+        class="btn btn-outline-danger"
         type="button"
         (click)="onCancel()"
         >
@@ -274,5 +278,35 @@
         </button>
       </div>
     </div>
+    <h4 class="dark" *ngIf="users.length < 1">No Users available!</h4>
+    <table 
+      class="table table-success table-striped-columns"
+      *ngIf="users.length >=1 ">
+      <tr>
+        <th scope="col">First Name</th>
+        <th scope="col">Last Name</th>
+        <th scope="col">Role</th>
+        <th scope="col">Email</th>
+        <th scope="col">Usrername</th>
+        <th scope="col">Birth Date</th>
+        <th scope="col">Address</th>
+      </tr>
+      <tbody >
+          <tr *ngFor="let item of users; let i = index">
+            <td>{{item.firstName}}</td>
+            <td>{{item.lastName}}</td>
+            <td>{{item.role}}</td>
+            <td>{{item.email}}</td>
+            <td>{{item.userName}}</td>
+            <td>{{item.birthDate}}</td>
+            <td>City:{{item.city}}, Street:{{item.street}}, House Number:{{item.houseNumber}}, Post Code:{{item.postCode}}</td>
+            <td>
+              <button class="btn btn-success" type="button" (click)="onEditUser(i)">Edit</button>
+              |
+              <button class="btn btn-danger" type="button" (click)="onDeleteUser(item.id)" >Delete</button>
+            </td>
+          </tr>
+      </tbody> 
+    </table>
 </form>
 
