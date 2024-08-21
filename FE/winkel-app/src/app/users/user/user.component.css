@@ -1,0 +1,51 @@
+.validation-message {
+    color: red;
+    position: absolute;
+    width: 100%;
+    height: 1em;
+    margin-top: 5px;
+    line-height: 1em;
+    font-size: 0.857em;
+    text-align: left;
+  }
+.form-row{
+    display:inline-block;
+    margin-left: 90px;
+}
+.form-section{
+    display:inline-block;
+    margin-left: 165px;
+}
+.col-md-6{
+    margin-left: 250px;
+    margin-top: 30px;
+    display:inline-block;
+
+}
+.col-xs-12{
+    margin-left: 0px;
+    margin-top: 30px;
+    display:inline-block;
+    
+}
+.custom-field{
+    margin-left: 540px;
+    margin-top: 30px;
+}
+.row{
+    margin-left: 585px;
+    margin-top: -30px;
+    margin-bottom: 30px;
+}
+.btn{
+    border: 3px solid;
+}
+.table{
+    margin-top: 30px;
+    text-align: center;
+}
+.dark{
+    margin: 100px;
+    margin-left: 500px;
+}
+

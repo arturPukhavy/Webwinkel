@@ -8,17 +8,21 @@ import { AlertComponent } from './alert/alert.component';
 import { ProductsComponent } from './products/products/products.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProductsService } from './products/products.service';
 import { UserComponent } from './users/user/user.component';
 import { LoginComponent } from './login/login.component';
 import { ShoppingListComponent } from './shopping-list/shopping-list.component';
+import { HeaderComponent } from './header/header.component';
+
 @NgModule({
   declarations: [
     AppComponent,
     ProductsComponent,
     AlertComponent,
-  
+    UserComponent,
+    HeaderComponent
+
   ],
   imports: [
     BrowserModule,
@@ -27,9 +31,9 @@ import { ShoppingListComponent } from './shopping-list/shopping-list.component';
     NgxSpinnerModule,
     BrowserAnimationsModule,
     FormsModule,
-    UserComponent,
     LoginComponent,
-    ShoppingListComponent
+    ShoppingListComponent,
+    ReactiveFormsModule
   ],
   providers: [ProductsService],
   bootstrap: [AppComponent]

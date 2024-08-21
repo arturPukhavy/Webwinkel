@@ -16,7 +16,6 @@ export class ProductsComponent implements OnInit, OnDestroy{
   subscription: Subscription;
   loadedPosts: Product[] = [];
   editMode = false;
-  editItemIndex: number;  //TODO: seems this is not used. It can bedeleted
   editedItem: Product;
   errorHandlingMode = false;
   error: string;
@@ -31,7 +30,6 @@ export class ProductsComponent implements OnInit, OnDestroy{
     this.subscription = this.prService.startedEditing
       .subscribe(
         (index: number) => {
-          this.editItemIndex = index; //TODO: delete it
           console.log('Product to edit: ' + JSON.stringify(this.getProduct(index)));
           this.editMode = true;
           this.editedItem = this.getProduct(index);
