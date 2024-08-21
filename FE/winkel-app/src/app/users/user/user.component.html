@@ -60,7 +60,9 @@
         <select name="role"
                 id="role"
                 autocomplete="off"
-                class="form-control">
+                class="form-control"
+                required
+                ngModel>
                   <option value="Admin">Admin</option>
                   <option value="Employee">Employee</option>
                   <option value="Customer">Customer</option>
@@ -128,11 +130,6 @@
                  type="text"
                  required
                  ngModel/>
-          <div>
-          <!-- <div  class="validation-message">
-             Incorrect Email
-             </div> -->
-          </div>
         </div>
         <div class="form-row">
             <label for="street" class="label text-muted"> Street </label>
@@ -143,11 +140,6 @@
                    type="text"
                    required
                    ngModel/>
-            <div>
-            <!-- <div  class="validation-message">
-               Incorrect Email
-               </div> -->
-            </div>
           </div>
           <div class="form-row">
             <label for="houseNumber" class="label text-muted"> House Number </label>
@@ -159,11 +151,7 @@
                    required
                    pattern="^[1-9]+[0-9]*$"
                    ngModel/>
-            <div>
-            <!-- <div  class="validation-message">
-               Incorrect Email
-               </div> -->
-            </div>
+
           </div>
           <div class="form-row">
             <label for="postCode" class="label text-muted"> Post Code </label>
@@ -174,70 +162,45 @@
                    type="text"
                    required
                    ngModel/>
-            <div>
-            <!-- <div  class="validation-message">
-               Incorrect Email
-               </div> -->
-            </div>
           </div>
        </div>
        <div class="form-group" *ngIf="secondAddress">
         <div class="form-row">
           <label for="city" class="label text-muted"> City </label>
-          <input name="city"
+          <input name="city1"
                  id="city"
                  autocomplete="off"
                  class="form-control"
                  type="text"
                  ngModel/>
-          <div>
-          <!-- <div  class="validation-message">
-             Incorrect Email
-             </div> -->
-          </div>
         </div>
         <div class="form-row">
             <label for="street" class="label text-muted"> Street </label>
-            <input name="street"
+            <input name="street1"
                    id="street"
                    autocomplete="off"
                    class="form-control"
                    type="text"
                    ngModel/>
-            <div>
-            <!-- <div  class="validation-message">
-               Incorrect Email
-               </div> -->
-            </div>
           </div>
           <div class="form-row">
             <label for="houseNumber" class="label text-muted"> House Number </label>
-            <input name="houseNumber"
+            <input name="houseNumber1"
                    id="houseNumber"
                    autocomplete="off"
                    class="form-control"
                    type="number"
                    pattern="^[1-9]+[0-9]*$"
                    ngModel/>
-            <div>
-            <!-- <div  class="validation-message">
-               Incorrect Email
-               </div> -->
-            </div>
           </div>
           <div class="form-row">
             <label for="postCode" class="label text-muted"> Post Code </label>
-            <input name="postCode"
+            <input name="postCode1"
                    id="postCode"
                    autocomplete="off"
                    class="form-control"
                    type="text"
                    ngModel/>
-            <div>
-            <!-- <div  class="validation-message">
-               Incorrect Email
-               </div> -->
-            </div>
           </div>
        </div>
        <div class="row" *ngIf="!secondAddress">
@@ -299,7 +262,11 @@
             <td>{{item.email}}</td>
             <td>{{item.userName}}</td>
             <td>{{item.birthDate}}</td>
-            <td>City:{{item.city}}, Street:{{item.street}}, House Number:{{item.houseNumber}}, Post Code:{{item.postCode}}</td>
+            <td style="text-align: left;">
+              <tr *ngFor="let item of item.address; let i = index">
+                City: {{item.city}}, Street: {{item.street}}, House Number: {{item.houseNumber}}, Post Code: {{item.postCode}}
+              </tr>
+            </td>
             <td>
               <button class="btn btn-success" type="button" (click)="onEditUser(i)">Edit</button>
               |

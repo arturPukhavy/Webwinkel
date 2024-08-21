@@ -7,6 +7,7 @@ import { UsersService } from '../users.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Subscription } from 'rxjs';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
 
 
 
@@ -38,21 +39,26 @@ export class UserComponent implements OnInit, OnDestroy{
       .subscribe(
         (index: number) => {
           console.log('User to edit: ' + JSON.stringify(this.getUser(index)));
-          this.viewForm = true;
           this.editMode = true;
           this.editedUser = this.getUser(index);
-          this.userForm.setValue({
-            fistName: this.editedUser.firstName,
+          setTimeout(() => {
+          this.userForm.form.patchValue({
+            firstName: this.editedUser.firstName,
             lastName: this.editedUser.lastName,
             role: this.editedUser.role,
             email: this.editedUser.email,
             birthDate: this.editedUser.birthDate,
             userName: this.editedUser.userName,
-            city: this.editedUser.city,
-            street: this.editedUser.street,
-            houseNumber: this.editedUser.houseNumber,
-            postCode: this.editedUser.postCode
+            city: this.editedUser.address[0].city,
+            street: this.editedUser.address[0].street,
+            houseNumber: this.editedUser.address[0].houseNumber,
+            postCode: this.editedUser.address[0].postCode,
+            city1: this.editedUser.address[1].city,
+            street1: this.editedUser.address[1].street,
+            houseNumber1: this.editedUser.address[1].houseNumber,
+            postCode1: this.editedUser.address[1].postCode
           })
+        }, 10);
         }
       ) 
   }
@@ -138,6 +144,8 @@ export class UserComponent implements OnInit, OnDestroy{
 
   }
   onEditUser(index: number) {
+    this.viewForm = true;
+    this.secondAddress = true;
     this.userService.startedEditing.next(index);
   }
   onCancel() {
