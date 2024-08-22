@@ -63,9 +63,9 @@
                 class="form-control"
                 required
                 ngModel>
-                  <option value="Admin">Admin</option>
-                  <option value="Employee">Employee</option>
-                  <option value="Customer">Customer</option>
+                <option *ngFor="let role of roles ">
+                  {{ role }}
+                </option>                  
         </select>
         <div>
           <!-- <div  class="validation-message">
