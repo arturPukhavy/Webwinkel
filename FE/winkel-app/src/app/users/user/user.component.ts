@@ -30,7 +30,7 @@ export class UserComponent implements OnInit, OnDestroy{
   editedUser: User;
   errorHandlingMode = false;
   error: string;
-  roles = Object.values(Role);
+  roles: string[] = Object.values(Role);
 
   constructor( private userService: UsersService, private spinnerService: NgxSpinnerService) {}
 
