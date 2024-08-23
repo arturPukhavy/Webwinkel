@@ -33,11 +33,13 @@
                class="form-control"
                type="text"
                required
-               ngModel/>
+               ngModel
+               #firstName="ngModel"/>
         <div >
-          <!-- <div  class="validation-message">
+          <div class="validation-message"
+          *ngIf="firstName.invalid && (firstName.dirty || firstName.touched)">
             Need to fill
-          </div> -->
+          </div>
         </div>
       </div>
       <div class="form-section">
@@ -48,11 +50,13 @@
                class="form-control"
                type="text"
                required
-               ngModel/>
+               ngModel
+               #lastName="ngModel"/>
         <div>
-          <!-- <div  class="validation-message">
-            Incorrect Email
-          </div> -->
+          <div class="validation-message"
+          *ngIf="lastName.invalid && (lastName.dirty || lastName.touched)">
+            Need to fill
+          </div>
         </div>
       </div>
       <div class="form-section">
@@ -62,19 +66,18 @@
                 autocomplete="off"
                 class="form-control"
                 required
-                ngModel>
+                ngModel
+                #role="ngModel">
                 <option *ngFor="let role of roles ">
                   {{ role }}
                 </option>                  
         </select>
-        <div>
-          <!-- <div  class="validation-message">
-            Incorrect Email
-          </div> -->
-        </div>
+          <div class="validation-message"
+          *ngIf="role.invalid && role.touched">
+            Need to choose
+          </div>
       </div>
-      <hr>
-      <div class="form-section">
+      <div class="form-section" style="margin-top: 25px;">
         <label for="email" class="label text-muted"> Email </label>
         <input name="email"
                id="email"
@@ -82,11 +85,13 @@
                class="form-control"
                type="email"
                required
-               ngModel/>
+               ngModel
+               #email="ngModel"/>
         <div>
-          <!-- <div  class="validation-message">
+          <div class="validation-message"
+          *ngIf="email.invalid && (email.dirty || email.touched)">
             Incorrect Email
-          </div> -->
+          </div>
         </div>
       </div>
       <div class="form-section">
@@ -97,11 +102,13 @@
                class="form-control"
                type="text"
                required
-               ngModel/>
+               ngModel
+               #userName="ngModel"/>
         <div>
-          <!-- <div  class="validation-message">
-            Incorrect Email
-          </div> -->
+          <div class="validation-message"
+          *ngIf="userName.invalid && (userName.dirty || userName.touched)">
+            Incorrect Username
+          </div>
         </div>
       </div>
       <div class="form-section">
@@ -112,15 +119,16 @@
                class="form-control"
                type="date"
                required
-               ngModel/>
+               ngModel
+               #birthDate="ngModel"/>
         <div>
-          <!-- <div  class="validation-message">
-            Incorrect Email
-          </div> -->
+          <div class="validation-message"
+          *ngIf="birthDate.invalid && (birthDate.dirty || birthDate.touched)">
+            Need to fill
+          </div>
         </div>
       </div>
-      <hr>
-      <div class="form-group">
+      <div class="form-group" style="margin-top: 25px;">
         <div class="form-row">
           <label for="city" class="label text-muted"> City </label>
           <input name="city"
@@ -129,17 +137,27 @@
                  class="form-control"
                  type="text"
                  required
-                 ngModel/>
+                 ngModel
+                 #city="ngModel"/>
+          <div class="validation-message"
+          *ngIf="city.invalid && (city.dirty || city.touched)">
+              Need to fill
+          </div>
         </div>
         <div class="form-row">
-            <label for="street" class="label text-muted"> Street </label>
-            <input name="street"
-                   id="street"
-                   autocomplete="off"
-                   class="form-control"
-                   type="text"
-                   required
-                   ngModel/>
+          <label for="street" class="label text-muted"> Street </label>
+          <input name="street"
+                  id="street"
+                  autocomplete="off"
+                  class="form-control"
+                  type="text"
+                  required
+                  ngModel
+                  #street="ngModel"/>
+            <div class="validation-message"
+            *ngIf="street.invalid && (street.dirty || street.touched)">
+                Need to fill
+            </div>
           </div>
           <div class="form-row">
             <label for="houseNumber" class="label text-muted"> House Number </label>
@@ -150,8 +168,13 @@
                    type="number"
                    required
                    pattern="^[1-9]+[0-9]*$"
-                   ngModel/>
+                   ngModel
+                   #houseNumber="ngModel"/>
 
+            <div class="validation-message"
+            *ngIf="houseNumber.invalid && (houseNumber.dirty || houseNumber.touched)">
+                Need to fill
+            </div>
           </div>
           <div class="form-row">
             <label for="postCode" class="label text-muted"> Post Code </label>
@@ -161,10 +184,15 @@
                    class="form-control"
                    type="text"
                    required
-                   ngModel/>
+                   ngModel
+                   #postCode="ngModel"/>
+            <div class="validation-message"
+            *ngIf="postCode.invalid && (postCode.dirty || postCode.touched)">
+                Need to fill
+            </div>
           </div>
        </div>
-       <div class="form-group" *ngIf="secondAddress">
+       <div class="form-group" *ngIf="secondAddress" style="margin-top: 25px;">
         <div class="form-row">
           <label for="city" class="label text-muted"> City </label>
           <input name="city1"
@@ -208,7 +236,7 @@
                 <button 
                     type="button"   
                     class="btn btn-outline-dark"
-                    style="margin-top: 10px;"
+                    style="margin-top: 25px;"
                     (click)="onAddAddress()">+Address</button>
             </div>
         </div>
