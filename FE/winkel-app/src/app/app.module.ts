@@ -15,13 +15,15 @@ import { LoginComponent } from './login/login.component';
 import { ShoppingListComponent } from './shopping-list/shopping-list.component';
 import { HeaderComponent } from './header/header.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
     ProductsComponent,
     AlertComponent,
     UserComponent,
-    HeaderComponent
+    HeaderComponent,
+    LoginComponent
 
   ],
   imports: [
@@ -31,9 +33,8 @@ import { HeaderComponent } from './header/header.component';
     NgxSpinnerModule,
     BrowserAnimationsModule,
     FormsModule,
-    LoginComponent,
     ShoppingListComponent,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   providers: [ProductsService],
   bootstrap: [AppComponent]
