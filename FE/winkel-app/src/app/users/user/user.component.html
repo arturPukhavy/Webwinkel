@@ -110,44 +110,44 @@
           </div> -->
         </div>
       </div>
-      <div class="form-group" formArrayName="address" style="margin-top: 25px;"
+      <div formArrayName="address">
+      <div class="form-group" style="margin-top: 25px;"
            *ngFor="let addressItem of controls; let i = index"
            [formGroupName] = "i">
         <div class="col-xs-12">
             <button 
-                [disabled]="controls.length < 2"
                 type="button"   
                 class="btn btn-outline-danger"
                 (click)="onCancelAddress(i)">X</button>
         </div>
         <div class="form-row">
-          <label for="city" class="label text-muted"> City </label>
+          <label [for]="'city' + i" class="label text-muted"> City </label>
           <input formControlName="city"
-                id="city"
-                autocomplete="off"
-                class="form-control"
-                type="text"/>
+                 [id]="'city' + i"
+                 autocomplete="off"
+                 class="form-control"
+                 type="text"/>
           <!-- <div class="validation-message"
           *ngIf="city.invalid && (city.dirty || city.touched)">
               Need to fill
           </div> -->
         </div>
         <div class="form-row">
-          <label for="street" class="label text-muted"> Street </label>
+          <label [for]="'street' + i" class="label text-muted"> Street </label>
           <input formControlName="street"
-                  id="street"
-                  autocomplete="off"
-                  class="form-control"
-                  type="text"/>
+                 [id]="'street' + i"
+                 autocomplete="off"
+                 class="form-control"
+                 type="text"/>
             <!-- <div class="validation-message"
             *ngIf="street.invalid && (street.dirty || street.touched)">
                 Need to fill
             </div> -->
           </div>
           <div class="form-row">
-            <label for="houseNumber" class="label text-muted"> House Number </label>
+            <label [for]="'houseNumber' + i" class="label text-muted"> House Number </label>
             <input formControlName="houseNumber"
-                   id="houseNumber"
+                   [id]="'houseNumber' + i"
                    autocomplete="off"
                    class="form-control"
                    type="number"
@@ -158,9 +158,9 @@
             </div> -->
           </div>
           <div class="form-row">
-            <label for="postCode" class="label text-muted"> Post Code </label>
+            <label [for]="'postCode' + i" class="label text-muted"> Post Code </label>
             <input formControlName="postCode"
-                   id="postCode"
+                   [id]="'postCode' + i"
                    autocomplete="off"
                    class="form-control"
                    type="text"/>
@@ -170,6 +170,7 @@
             </div> -->
           </div>
        </div>
+      </div>
        <div class="row" >
             <div class="col-xs-12">
                 <button 

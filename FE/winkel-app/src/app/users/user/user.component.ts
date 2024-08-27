@@ -1,4 +1,3 @@
-import { Address } from './model/Address.model';
 import { User } from './model/User.model';
 import { Role } from './model/Role.model';
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
@@ -13,21 +12,18 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 
 
 
-
-
 @Component({
   // standalone: true,
   selector: 'app-user',
   templateUrl: './user.component.html',
   styleUrl: './user.component.css',
 })
-export class UserComponent implements OnInit, OnDestroy{
+
+export class UserComponent implements OnInit, OnDestroy {
   userForm: FormGroup;
   subscription: Subscription;
-  id: number;
   users: User[] = [];
   viewForm = false; 
-  secondAddress = false;
   editMode = false;
   editedUser: User;
   errorHandlingMode = false;
@@ -39,24 +35,10 @@ export class UserComponent implements OnInit, OnDestroy{
                private route: ActivatedRoute, 
                private router: Router) {}
 
+
   ngOnInit(): void {
     this.onFetchUsers();
-    this.route.params
-      .subscribe(
-        (params: Params) => {
-          this.id = +params['id'];
-          this.editMode = params['id'] != null;
-          this.initForm();
-          // console.log(this.editMode);
-        }
-      )
-  }
-  
-  get controls() {
-    return (<FormArray>this.userForm.get('address')).controls;
-  }
-    
-  private initForm() {
+
     let firstName = '';
     let lastName = '';
     let role = 'enum'; 
@@ -64,7 +46,7 @@ export class UserComponent implements OnInit, OnDestroy{
     let birthDate: Date;
     birthDate = new Date(Date.now());
     let userName = ''; 
-    let userAddress = new FormArray([]);
+    let userAddress:any = new FormArray([]);
 
     this.userForm = new FormGroup({
       'firstName': new FormControl(firstName, Validators.required),
@@ -73,63 +55,47 @@ export class UserComponent implements OnInit, OnDestroy{
       'email': new FormControl(email, [Validators.required, Validators.email]),
       'birthDate': new FormControl(birthDate, Validators.required),
       'userName': new FormControl(userName, Validators.required),
-      'address': userAddress 
+      'address': userAddress
     })
-
-    // if (this.editMode) {
-    //   const user = this.getUser(this.id);
-    //   firstName = user.firstName;
-    //   lastName = user.lastName;
-    //   role = user.role;
-    //   email = user.email;
-    //   birthDate = user.birthDate;
-    //   userName = user.userName;
-    //   if (user['address']) {
-    //     for (let item of user.address) {
-    //       userAddress.push(
-    //         new FormGroup({
-    //           city: new FormControl(item.city, Validators.required),
-    //           street: new FormControl(item.street, Validators.required),
-    //           houseNumber: new FormControl(item.houseNumber, [
-    //             Validators.required,
-    //             Validators.pattern(/^[1-9]+[0-9]*$/)
-    //           ]),
-    //           postCode: new FormControl(item.postCode, Validators.required)
-    //         })
-    //       )
-    //     }
-    //   }
-    // }
-  }  
-
-
-    // this.subscription = this.userService.startedEditing
-    //   .subscribe(
-    //     (index: number) => {
-    //       console.log('User to edit: ' + JSON.stringify(this.getUser(index)));
-    //       this.editMode = true;
-    //       this.editedUser = this.getUser(index);
-    //       setTimeout(() => {
-    //       this.userForm.patchValue({
-    //         firstName: this.editedUser.firstName,
-    //         lastName: this.editedUser.lastName,
-    //         role: this.editedUser.role,
-    //         email: this.editedUser.email,
-    //         birthDate: this.editedUser.birthDate,
-    //         userName: this.editedUser.userName,
-    //         city: this.editedUser.address[0].city,
-    //         street: this.editedUser.address[0].street,
-    //         houseNumber: this.editedUser.address[0].houseNumber,
-    //         postCode: this.editedUser.address[0].postCode,
-    //         city1: this.editedUser.address[1].city,
-    //         street1: this.editedUser.address[1].street,
-    //         houseNumber1: this.editedUser.address[1].houseNumber,
-    //         postCode1: this.editedUser.address[1].postCode
-    //       })
-    //     }, 10);
-    //     }
-    //   ) 
+   
+    this.subscription = this.userService.startedEditing
+      .subscribe(
+        (index: number) => {
+          console.log('User to edit: ' + JSON.stringify(this.getUser(index)));
+          this.editMode = true;
+          this.editedUser = this.getUser(index);
+          setTimeout(() => {
+          this.userForm.patchValue({
+            firstName: this.editedUser.firstName,
+            lastName: this.editedUser.lastName,
+            role: this.editedUser.role,
+            email: this.editedUser.email,
+            birthDate: this.editedUser.birthDate,
+            userName: this.editedUser.userName
+          })
+          if (this.editedUser['address']) {
+            for (let item of this.editedUser.address) {
+              userAddress.push(
+                new FormGroup({
+                  city: new FormControl(item.city, Validators.required),
+                  street: new FormControl(item.street, Validators.required),
+                  houseNumber: new FormControl(item.houseNumber, [
+                    Validators.required,
+                    Validators.pattern(/^[1-9]+[0-9]*$/)
+                  ]),
+                  postCode: new FormControl(item.postCode, Validators.required)
+                })
+              )
+            }
+          } 
+        }, 10);
+        }
+      ) 
+  }
   
+  get controls() {
+    return (<FormArray>this.userForm.get('address')).controls;
+  }
 
   onAddAddress() {
     (<FormArray>this.userForm.get('address')).push(
@@ -154,6 +120,7 @@ export class UserComponent implements OnInit, OnDestroy{
         this.onFetchUsers();
       },
       error: (error: HttpErrorResponse) => {
+        this.spinnerService.hide();
         this.errorHandlingMode = true;
         this.error = error.error.error;
         console.error('There was an error: ', error.error.error);
@@ -163,7 +130,6 @@ export class UserComponent implements OnInit, OnDestroy{
 
   onAdd() {
     this.viewForm = true;
-    this.secondAddress = false;
   }
   onFetchUsers() {
     this.userService.fetchUsers().subscribe({
@@ -222,13 +188,13 @@ export class UserComponent implements OnInit, OnDestroy{
 
   }
   onEditUser(index: number) {
+    (<FormArray>this.userForm.get('address')).clear();
     this.viewForm = true;
-    this.editMode = true;
-    this.secondAddress = true;
     this.userService.startedEditing.next(index);
   }
   onCancel() {
     this.userForm.reset();
+    (<FormArray>this.userForm.get('address')).clear();  
     this.viewForm = false;
     this.editMode = false;
   }
