@@ -13,7 +13,9 @@ This is a simple web-shop application. It includes two parts - Angular front-end
 * Observable
 * Services
 * Dependency injection
-* Forms
+* Forms:
+  * Template-driven Forms
+  * Reactive Forms
 * Pipes
 
 ## Diagram
