@@ -1,4 +1,4 @@
-<form #form="ngForm" (ngSubmit)="onAddUser()">
+<form [formGroup]="userForm" (ngSubmit)="onAddUser()">
     <div class="col-md-6">
       <app-alert
       [message]="error"
@@ -27,211 +27,151 @@
     <div class="form-control" *ngIf="viewForm">
       <div class="form-section">
         <label for="firstName" class="label text-muted"> First Name </label>
-        <input name="firstName"
+        <input formControlName="firstName"
                id="firstName"
                autocomplete="off"
                class="form-control"
-               type="text"
-               required
-               ngModel
-               #firstName="ngModel"/>
-        <div >
+               type="text"/>
+        <!-- <div >
           <div class="validation-message"
-          *ngIf="firstName.invalid && (firstName.dirty || firstName.touched)">
+          *ngIf="userForm.get('userName').hasError('required') && userForm.get('name').touched">
             Need to fill
           </div>
-        </div>
+        </div> -->
       </div>
       <div class="form-section">
         <label for="lastName" class="label text-muted"> Last Name </label>
-        <input name="lastName"
+        <input formControlName="lastName"
                id="lastName"
                autocomplete="off"
                class="form-control"
-               type="text"
-               required
-               ngModel
-               #lastName="ngModel"/>
+               type="text"/>
         <div>
-          <div class="validation-message"
+          <!-- <div class="validation-message"
           *ngIf="lastName.invalid && (lastName.dirty || lastName.touched)">
             Need to fill
-          </div>
+          </div> -->
         </div>
       </div>
       <div class="form-section">
         <label for="role" class="label text-muted"> Role </label>
-        <select name="role"
+        <select formControlName="role"
                 id="role"
                 autocomplete="off"
-                class="form-control"
-                required
-                ngModel
-                #role="ngModel">
+                class="form-control">
                 <option *ngFor="let role of roles ">
                   {{ role }}
                 </option>                  
         </select>
-          <div class="validation-message"
+          <!-- <div class="validation-message"
           *ngIf="role.invalid && role.touched">
             Need to choose
-          </div>
+          </div> -->
       </div>
       <div class="form-section" style="margin-top: 25px;">
         <label for="email" class="label text-muted"> Email </label>
-        <input name="email"
+        <input formControlName="email"
                id="email"
                autocomplete="on"
                class="form-control"
-               type="email"
-               required
-               ngModel
-               #email="ngModel"/>
-        <div>
+               type="email"/>
+        <!-- <div>
           <div class="validation-message"
           *ngIf="email.invalid && (email.dirty || email.touched)">
             Incorrect Email
           </div>
-        </div>
+        </div> -->
       </div>
       <div class="form-section">
         <label for="userName" class="label text-muted"> Username </label>
-        <input name="userName"
+        <input formControlName="userName"
                id="userName"
                autocomplete="off"
                class="form-control"
-               type="text"
-               required
-               ngModel
-               #userName="ngModel"/>
-        <div>
+               type="text"/>
+        <!-- <div>
           <div class="validation-message"
           *ngIf="userName.invalid && (userName.dirty || userName.touched)">
             Incorrect Username
           </div>
-        </div>
+        </div> -->
       </div>
       <div class="form-section">
         <label for="birthDate" class="label text-muted"> Birth Date </label>
-        <input name="birthDate"
+        <input formControlName="birthDate"
                id="birthDate"
                autocomplete="off"
                class="form-control"
-               type="date"
-               required
-               ngModel
-               #birthDate="ngModel"/>
+               type="date"/>
         <div>
-          <div class="validation-message"
+          <!-- <div class="validation-message"
           *ngIf="birthDate.invalid && (birthDate.dirty || birthDate.touched)">
             Need to fill
-          </div>
+          </div> -->
         </div>
       </div>
-      <div class="form-group" style="margin-top: 25px;">
+      <div formArrayName="address">
+      <div class="form-group" style="margin-top: 25px;"
+           *ngFor="let addressItem of controls; let i = index"
+           [formGroupName] = "i">
+        <div class="col-xs-12">
+            <button 
+                type="button"   
+                class="btn btn-outline-danger"
+                (click)="onCancelAddress(i)">X</button>
+        </div>
         <div class="form-row">
-          <label for="city" class="label text-muted"> City </label>
-          <input name="city"
-                 id="city"
+          <label [for]="'city' + i" class="label text-muted"> City </label>
+          <input formControlName="city"
+                 [id]="'city' + i"
                  autocomplete="off"
                  class="form-control"
-                 type="text"
-                 required
-                 ngModel
-                 #city="ngModel"/>
-          <div class="validation-message"
+                 type="text"/>
+          <!-- <div class="validation-message"
           *ngIf="city.invalid && (city.dirty || city.touched)">
               Need to fill
-          </div>
+          </div> -->
         </div>
         <div class="form-row">
-          <label for="street" class="label text-muted"> Street </label>
-          <input name="street"
-                  id="street"
-                  autocomplete="off"
-                  class="form-control"
-                  type="text"
-                  required
-                  ngModel
-                  #street="ngModel"/>
-            <div class="validation-message"
-            *ngIf="street.invalid && (street.dirty || street.touched)">
-                Need to fill
-            </div>
-          </div>
-          <div class="form-row">
-            <label for="houseNumber" class="label text-muted"> House Number </label>
-            <input name="houseNumber"
-                   id="houseNumber"
-                   autocomplete="off"
-                   class="form-control"
-                   type="number"
-                   required
-                   pattern="^[1-9]+[0-9]*$"
-                   ngModel
-                   #houseNumber="ngModel"/>
-
-            <div class="validation-message"
-            *ngIf="houseNumber.invalid && (houseNumber.dirty || houseNumber.touched)">
-                Need to fill
-            </div>
-          </div>
-          <div class="form-row">
-            <label for="postCode" class="label text-muted"> Post Code </label>
-            <input name="postCode"
-                   id="postCode"
-                   autocomplete="off"
-                   class="form-control"
-                   type="text"
-                   required
-                   ngModel
-                   #postCode="ngModel"/>
-            <div class="validation-message"
-            *ngIf="postCode.invalid && (postCode.dirty || postCode.touched)">
-                Need to fill
-            </div>
-          </div>
-       </div>
-       <div class="form-group" *ngIf="secondAddress" style="margin-top: 25px;">
-        <div class="form-row">
-          <label for="city" class="label text-muted"> City </label>
-          <input name="city1"
-                 id="city"
+          <label [for]="'street' + i" class="label text-muted"> Street </label>
+          <input formControlName="street"
+                 [id]="'street' + i"
                  autocomplete="off"
                  class="form-control"
-                 type="text"
-                 ngModel/>
-        </div>
-        <div class="form-row">
-            <label for="street" class="label text-muted"> Street </label>
-            <input name="street1"
-                   id="street"
-                   autocomplete="off"
-                   class="form-control"
-                   type="text"
-                   ngModel/>
+                 type="text"/>
+            <!-- <div class="validation-message"
+            *ngIf="street.invalid && (street.dirty || street.touched)">
+                Need to fill
+            </div> -->
           </div>
           <div class="form-row">
-            <label for="houseNumber" class="label text-muted"> House Number </label>
-            <input name="houseNumber1"
-                   id="houseNumber"
+            <label [for]="'houseNumber' + i" class="label text-muted"> House Number </label>
+            <input formControlName="houseNumber"
+                   [id]="'houseNumber' + i"
                    autocomplete="off"
                    class="form-control"
                    type="number"
-                   pattern="^[1-9]+[0-9]*$"
-                   ngModel/>
+                   pattern="^[1-9]+[0-9]*$"/>
+            <!-- <div class="validation-message"
+            *ngIf="houseNumber.invalid && (houseNumber.dirty || houseNumber.touched)">
+                Need to fill
+            </div> -->
           </div>
           <div class="form-row">
-            <label for="postCode" class="label text-muted"> Post Code </label>
-            <input name="postCode1"
-                   id="postCode"
+            <label [for]="'postCode' + i" class="label text-muted"> Post Code </label>
+            <input formControlName="postCode"
+                   [id]="'postCode' + i"
                    autocomplete="off"
                    class="form-control"
-                   type="text"
-                   ngModel/>
+                   type="text"/>
+            <!-- <div class="validation-message"
+            *ngIf="postCode.invalid && (postCode.dirty || postCode.touched)">
+                Need to fill
+            </div> -->
           </div>
        </div>
-       <div class="row" *ngIf="!secondAddress">
+      </div>
+       <div class="row" >
             <div class="col-xs-12">
                 <button 
                     type="button"   

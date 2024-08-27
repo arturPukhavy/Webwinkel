@@ -8,20 +8,19 @@
           <li role="presentation"  class="nav-item">
             <a a routerLink="/user" class="nav-link" routerLinkActive="active">Users</a>
           </li>
-  
           <!-- TODO: implement "Shopping" and "Login" -->
           <li role="presentation"  class="nav-item">
-            <a a routerLink="shoppinglist" class="nav-link" routerLinkActive="active">ShoppingList</a>
+            <a a routerLink="/shoppinglist" class="nav-link" routerLinkActive="active">ShoppingList</a>
           </li>
           <li role="presentation"  class="nav-item">
             <a a routerLink="/login" class="nav-link" routerLinkActive="active">Login</a>
           </li>
-  
-          <!-- This is just an example of a disabled tab -->
-          <li class="nav-item">
-            <a class="nav-link disabled" aria-disabled="true">Disabled</a>
-          </li>
           
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li *ngIf="isAuthenticated">
+            <a style="cursor: pointer;" (click)="onLogout()">Logout</a>
+          </li>
         </ul>
     </div>
     

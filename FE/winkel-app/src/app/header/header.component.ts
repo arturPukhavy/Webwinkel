@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { LoginService } from '../login/login.service';
 
 @Component({
   selector: 'app-header',
@@ -6,5 +7,13 @@ import { Component } from '@angular/core';
   styleUrl: './header.component.css'
 })
 export class HeaderComponent {
+  isAuthenticated = false;
+  
+  constructor( private loginService: LoginService ) {}
+
+  onLogout() {
+    this.loginService.logout();
+  }
+
 
 }
