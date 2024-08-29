@@ -1,5 +1,6 @@
 [
     {
+        "id": 1,
         "firstName": "Maxim",
         "lastName": "Petrov",
         "birthDate": "2000-03-30",
@@ -23,6 +24,7 @@
         "email": "max@dd.com"
       },
       {
+        "id": 2,
         "firstName": "Anna",
         "lastName": "Petrova",
         "birthDate": "1995-02-27",
