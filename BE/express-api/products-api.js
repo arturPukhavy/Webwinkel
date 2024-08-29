@@ -8,6 +8,9 @@ app.use(express.urlencoded({ extended: true })) // for parsing application/x-www
 const products = require('./data/products.json');
 const users = require('./data/users.json');
 
+app.listen(port, () => {
+  console.log(`Example app listening on port ${port}`)
+})
 
 //*************************** Products ************** */
 //--- HTTP GET: Fetch list of products
@@ -67,9 +70,6 @@ app.put('/api/v1/products', (req, res) => {
   console.log(`Product has been updated: ${JSON.stringify(productToUpdate)}`)
   res.json({id: productToUpdate.id});
 });
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
-})
 
 //--- HTTP DELETE: Delete all products
 app.delete('/api/v1/products', (req, res) => {
@@ -127,6 +127,23 @@ app.get('/api/v1/users', (req, res) => {
 
   console.log(`List of products: ${JSON.stringify(products)}`)
   res.json(users)
+})
+
+//--- HTTP POST: Add a new user
+app.post('/api/v1/users', (req, res) => {
+  const user = req.body;
+
+  // TODO: Perform any necessary validation if necessary
+  // const maxId = findMaxId(products);
+  // product.id = maxId+1;
+
+  users.push(user)
+  console.log(`New user has been added: ${JSON.stringify(user)}`)
+
+  //Add intentional latency
+  setTimeout((() => { 
+    res.json({userName: user.userName});
+  }), 2000)
 })
 
 
