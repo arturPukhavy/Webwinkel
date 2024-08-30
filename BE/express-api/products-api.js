@@ -8,6 +8,9 @@ app.use(express.urlencoded({ extended: true })) // for parsing application/x-www
 const products = require('./data/products.json');
 const users = require('./data/users.json');
 
+app.listen(port, () => {
+  console.log(`Example app listening on port ${port}`)
+})
 
 //*************************** Products ************** */
 //--- HTTP GET: Fetch list of products
@@ -67,9 +70,6 @@ app.put('/api/v1/products', (req, res) => {
   console.log(`Product has been updated: ${JSON.stringify(productToUpdate)}`)
   res.json({id: productToUpdate.id});
 });
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
-})
 
 //--- HTTP DELETE: Delete all products
 app.delete('/api/v1/products', (req, res) => {
@@ -123,17 +123,81 @@ const findMaxId = (array) => {
 //**************************************** Users API **************************************/
 //--- HTTP GET: Fetch all users
 app.get('/api/v1/users', (req, res) => {
-  //Get all products from DB
-
-  console.log(`List of products: ${JSON.stringify(products)}`)
+  console.log(`List of users: ${JSON.stringify(users)}`)
   res.json(users)
 })
 
+//--- HTTP POST: Add a new user
+app.post('/api/v1/users', (req, res) => {
+  const user = req.body;
 
+  const existingUser = findUserByEmail(users, user.email);
+  console.log(`ExistingUser: ` + (existingUser === undefined));
+  if(existingUser === undefined) {
+    //Add a new user
+    const maxId = findMaxId(users);
+    user.id = maxId+1;
+    users.push(user)
+    console.log(`New user has been added: ${JSON.stringify(user)}`)
+    res.json({userName: user.id});
+  } else {
+    //User with such e-mail already exsis
+    console.log('User with such e-mail already exists');
+    return res.status(400).json({error: 'User with such e-mail already exists'});
+  }
+})
+
+//--- HTTP PUT: Add a new user
+app.put('/api/v1/users', (req, res) => {
+  const user = req.body;
+  const existingUser = findUserByEmail(users, user.email);
+  if(existingUser === undefined) {
+    //User not found
+    console.log('User with such e-mail not found');
+    return res.status(404).json({error: 'User with such e-mail not found'});
+  } else {
+    //Update an existing user
+    existingUser.firstName = user.firstName
+    existingUser.lastName = user.lastName
+    existingUser.birthDate = user.birthDate
+    existingUser.role = user.role
+    existingUser.userName = user.userName
+    existingUser.email = user.email //?
+    existingUser.address = user.address
+    console.log(`User has been updated: ${JSON.stringify(existingUser)}`)
+    res.json({userName: user.id});
+   }
+})
+
+//--- HTTP Delete: Delete user by id
+app.delete('/api/v1/user', (req, res) => {
+  const id = req.body.id;
+  console.log(`Delete user with id=${id}`)
+
+  const  userToDelete= findObjectById(users, id);
+  if (userToDelete) {
+    const index = users.indexOf(userToDelete);
+    users.splice(index, 1);
+  } 
+  else {
+    //TODO return an error
+    console.log('User not found');
+    return res.status(400).json({error: 'User not found'});
+  }
+  console.log(`Deleted user: ${JSON.stringify(userToDelete)}`)
+  res.json(users);
+});
+
+//--- HTTP DELETE: Delete all users
+app.delete('/api/v1/users', (req, res) => {
+  users.length=0;
+  console.log(`All users have been deleted`)
+  res.json(users);
+});
 
 //**************************************** Login API **************************************/
 
-//--- HTTP POST: Add a new product
+//--- HTTP POST: Add a new account
 app.post('/api/v1/login', (req, res) => {
   const login = req.body;
   const  user= findUserByUserName(users, login.userName);
@@ -157,4 +221,8 @@ app.post('/api/v1/login', (req, res) => {
 
 const findUserByUserName = (array, uName) => {
   return array.find(user => user.userName === uName);
+};
+
+const findUserByEmail = (array, email) => {
+  return array.find(user => user.email === email);
 };
