@@ -41,17 +41,16 @@ export class UserComponent implements OnInit, OnDestroy {
 
     let firstName = '';
     let lastName = '';
-    let role = 'enum'; 
+    let role = ''; 
     let email = '';
-    let birthDate: Date;
-    birthDate = new Date(Date.now());
+    let birthDate = '';
     let userName = ''; 
     let userAddress:any = new FormArray([]);
 
     this.userForm = new FormGroup({
       'firstName': new FormControl(firstName, Validators.required),
       'lastName': new FormControl(lastName, Validators.required),
-      'role': new FormControl(role, Validators.required),
+      'role': new FormControl(role),
       'email': new FormControl(email, [Validators.required, Validators.email]),
       'birthDate': new FormControl(birthDate, Validators.required),
       'userName': new FormControl(userName, Validators.required),
