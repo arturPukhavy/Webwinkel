@@ -29,19 +29,20 @@ export class UserComponent implements OnInit, OnDestroy {
   errorHandlingMode = false;
   error: string;
   roles: string[] = Object.values(Role);
+  sortDirection: { [key: string]: boolean } = {};
 
   constructor( private userService: UsersService, 
                private spinnerService: NgxSpinnerService,
                private route: ActivatedRoute, 
                private router: Router) {}
 
-
+  
   ngOnInit(): void {
     this.onFetchUsers();
 
     let firstName = '';
     let lastName = '';
-    let role = ''; 
+    let role = 'Admin'; 
     let email = '';
     let birthDate = '';
     let userName = ''; 
@@ -91,11 +92,26 @@ export class UserComponent implements OnInit, OnDestroy {
         }
       ) 
   }
-  
+
+  sortUsers(property: keyof User) {
+    console.log(`Sorting by: ${property}`);
+    if (this.users.length === 0) {
+      console.log('No users to sort.');
+      return;
+    }
+    this.sortDirection[property] = !this.sortDirection[property];
+    const direction = this.sortDirection[property] ? 1 : -1; 
+    this.users.sort((a, b) => {
+      if (a[property] < b[property]) return -1 * direction;
+      if (a[property] > b[property]) return 1 * direction;
+      return 0;
+    });
+  }
+
   get controls() {
     return (<FormArray>this.userForm.get('address')).controls;
   }
-
+ 
   onAddAddress() {
     (<FormArray>this.userForm.get('address')).push(
       new FormGroup({

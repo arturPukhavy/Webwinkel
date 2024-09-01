@@ -14,17 +14,19 @@ import { HttpErrorResponse } from '@angular/common/http';
 export class ProductsComponent implements OnInit, OnDestroy{
   @ViewChild('postForm') productForm: NgForm; 
   subscription: Subscription;
-  loadedPosts: Product[] = [];
+  products: Product[] = [];
+  filteredProducts: Product[] = [];
+  searchTerm: string = '';
   editMode = false;
   editedItem: Product;
   errorHandlingMode = false;
   error: string;
+  
 
   constructor(private prService: ProductsService, private spinnerService: NgxSpinnerService ) {
     console.log('Create ProductsComponent')
   }
   
-
   ngOnInit() {
     this.onFetchPosts();
     this.subscription = this.prService.startedEditing
@@ -43,6 +45,15 @@ export class ProductsComponent implements OnInit, OnDestroy{
         }
     ) 
   };
+
+  filterProducts() {
+    console.log('Search term:', this.searchTerm);
+    this.filteredProducts = this.products.filter(product =>
+      product.naam.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+      product.merk.toLowerCase().includes(this.searchTerm.toLowerCase()) 
+    );
+    console.log('Filtered products:', this.products);
+  }
 
   onCreatePost() {
     this.spinnerService.show();
@@ -80,7 +91,8 @@ export class ProductsComponent implements OnInit, OnDestroy{
         data.forEach(element => {
           console.log('Item: ' + element.naam)
         });
-        this.loadedPosts = data;
+        this.products = data;
+        this.filteredProducts = [...this.products];
       },
       error: (error: HttpErrorResponse) => {
         this.errorHandlingMode = true;
@@ -92,7 +104,7 @@ export class ProductsComponent implements OnInit, OnDestroy{
   onDeleteProduct(id: number) {
     this.prService.deleteProduct(id).subscribe({
       next: data => {
-        this.loadedPosts = this.loadedPosts.filter(item => item.id !== id);
+        this.filteredProducts = this.filteredProducts.filter(item => item.id !== id);
         console.log('Delete successful, id: ' + id);
       },
       error: (error: HttpErrorResponse) => {
@@ -107,7 +119,7 @@ export class ProductsComponent implements OnInit, OnDestroy{
     this.prService.clearPosts().subscribe({
       next: data => {
         console.log('All products deleted');
-        this.loadedPosts = [];
+        this.products = [];
       },
       error: (error: HttpErrorResponse) => {
         this.errorHandlingMode = true;
@@ -131,7 +143,7 @@ export class ProductsComponent implements OnInit, OnDestroy{
   }
 
   getProduct(index: number) {
-    return this.loadedPosts[index];
+    return this.products[index];
   }
 
   ngOnDestroy() {

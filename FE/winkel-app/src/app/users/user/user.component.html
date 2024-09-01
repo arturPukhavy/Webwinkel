@@ -210,13 +210,13 @@
       class="table table-success table-striped-columns"
       *ngIf="users.length >=1 ">
       <tr>
-        <th scope="col">First Name</th>
-        <th scope="col">Last Name</th>
-        <th scope="col">Role</th>
-        <th scope="col">Email</th>
-        <th scope="col">Usrername</th>
-        <th scope="col">Birth Date</th>
-        <th scope="col">Address</th>
+        <th scope="col" (click)="sortUsers('firstName')" style="cursor: pointer;">First Name</th>
+        <th scope="col" (click)="sortUsers('lastName')" style="cursor: pointer;">Last Name</th>
+        <th scope="col" (click)="sortUsers('role')" style="cursor: pointer;">Role</th>
+        <th scope="col" (click)="sortUsers('email')" style="cursor: pointer;">Email</th>
+        <th scope="col" (click)="sortUsers('userName')" style="cursor: pointer;">Usrername</th>
+        <th scope="col" (click)="sortUsers('birthDate')" style="cursor: pointer;">Birth Date</th>
+        <th scope="col" (click)="sortUsers('address')" style="cursor: pointer;">Address</th>
       </tr>
       <tbody >
           <tr *ngFor="let item of users; let i = index">
