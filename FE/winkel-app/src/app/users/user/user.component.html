@@ -32,12 +32,12 @@
                autocomplete="off"
                class="form-control"
                type="text"/>
-        <!-- <div >
+        <div >
           <div class="validation-message"
-          *ngIf="userForm.get('userName').hasError('required') && userForm.get('name').touched">
+          *ngIf="userForm.get('firstName')?.invalid && userForm.get('firstName')?.touched">
             Need to fill
           </div>
-        </div> -->
+        </div>
       </div>
       <div class="form-section">
         <label for="lastName" class="label text-muted"> Last Name </label>
@@ -47,10 +47,10 @@
                class="form-control"
                type="text"/>
         <div>
-          <!-- <div class="validation-message"
-          *ngIf="lastName.invalid && (lastName.dirty || lastName.touched)">
+          <div class="validation-message"
+          *ngIf="userForm.get('lastName')?.invalid && userForm.get('lastName')?.touched">
             Need to fill
-          </div> -->
+          </div>
         </div>
       </div>
       <div class="form-section">
@@ -63,10 +63,6 @@
                   {{ role }}
                 </option>                  
         </select>
-          <!-- <div class="validation-message"
-          *ngIf="role.invalid && role.touched">
-            Need to choose
-          </div> -->
       </div>
       <div class="form-section" style="margin-top: 25px;">
         <label for="email" class="label text-muted"> Email </label>
@@ -75,12 +71,12 @@
                autocomplete="on"
                class="form-control"
                type="email"/>
-        <!-- <div>
+        <div>
           <div class="validation-message"
-          *ngIf="email.invalid && (email.dirty || email.touched)">
+          *ngIf="userForm.get('email')?.invalid && userForm.get('email')?.touched">
             Incorrect Email
           </div>
-        </div> -->
+        </div>
       </div>
       <div class="form-section">
         <label for="userName" class="label text-muted"> Username </label>
@@ -89,12 +85,12 @@
                autocomplete="off"
                class="form-control"
                type="text"/>
-        <!-- <div>
+        <div>
           <div class="validation-message"
-          *ngIf="userName.invalid && (userName.dirty || userName.touched)">
+          *ngIf="userForm.get('userName')?.invalid && userForm.get('userName')?.touched">
             Incorrect Username
           </div>
-        </div> -->
+        </div>
       </div>
       <div class="form-section">
         <label for="birthDate" class="label text-muted"> Birth Date </label>
@@ -104,10 +100,10 @@
                class="form-control"
                type="date"/>
         <div>
-          <!-- <div class="validation-message"
-          *ngIf="birthDate.invalid && (birthDate.dirty || birthDate.touched)">
-            Need to fill
-          </div> -->
+          <div class="validation-message"
+          *ngIf="userForm.get('birthDate')?.invalid && userForm.get('birthDate')?.touched">
+            Need to choose
+          </div>
         </div>
       </div>
       <div formArrayName="address">
@@ -127,10 +123,10 @@
                  autocomplete="off"
                  class="form-control"
                  type="text"/>
-          <!-- <div class="validation-message"
-          *ngIf="city.invalid && (city.dirty || city.touched)">
+          <div class="validation-message"
+          *ngIf="addressItem.get('city')?.invalid && addressItem.get('city')?.touched">
               Need to fill
-          </div> -->
+          </div>
         </div>
         <div class="form-row">
           <label [for]="'street' + i" class="label text-muted"> Street </label>
@@ -139,10 +135,10 @@
                  autocomplete="off"
                  class="form-control"
                  type="text"/>
-            <!-- <div class="validation-message"
-            *ngIf="street.invalid && (street.dirty || street.touched)">
+            <div class="validation-message"
+            *ngIf="addressItem.get('street')?.invalid && addressItem.get('street')?.touched">
                 Need to fill
-            </div> -->
+            </div>
           </div>
           <div class="form-row">
             <label [for]="'houseNumber' + i" class="label text-muted"> House Number </label>
@@ -152,10 +148,10 @@
                    class="form-control"
                    type="number"
                    pattern="^[1-9]+[0-9]*$"/>
-            <!-- <div class="validation-message"
-            *ngIf="houseNumber.invalid && (houseNumber.dirty || houseNumber.touched)">
+            <div class="validation-message"
+            *ngIf="addressItem.get('houseNumber')?.invalid && addressItem.get('houseNumber')?.touched">
                 Need to fill
-            </div> -->
+            </div>
           </div>
           <div class="form-row">
             <label [for]="'postCode' + i" class="label text-muted"> Post Code </label>
@@ -164,10 +160,10 @@
                    autocomplete="off"
                    class="form-control"
                    type="text"/>
-            <!-- <div class="validation-message"
-            *ngIf="postCode.invalid && (postCode.dirty || postCode.touched)">
+            <div class="validation-message"
+            *ngIf="addressItem.get('postCode')?.invalid && addressItem.get('postCode')?.touched">
                 Need to fill
-            </div> -->
+            </div>
           </div>
        </div>
       </div>
@@ -214,13 +210,13 @@
       class="table table-success table-striped-columns"
       *ngIf="users.length >=1 ">
       <tr>
-        <th scope="col">First Name</th>
-        <th scope="col">Last Name</th>
-        <th scope="col">Role</th>
-        <th scope="col">Email</th>
-        <th scope="col">Usrername</th>
-        <th scope="col">Birth Date</th>
-        <th scope="col">Address</th>
+        <th scope="col" (click)="sortUsers('firstName')" style="cursor: pointer;">First Name</th>
+        <th scope="col" (click)="sortUsers('lastName')" style="cursor: pointer;">Last Name</th>
+        <th scope="col" (click)="sortUsers('role')" style="cursor: pointer;">Role</th>
+        <th scope="col" (click)="sortUsers('email')" style="cursor: pointer;">Email</th>
+        <th scope="col" (click)="sortUsers('userName')" style="cursor: pointer;">Usrername</th>
+        <th scope="col" (click)="sortUsers('birthDate')" style="cursor: pointer;">Birth Date</th>
+        <th scope="col" (click)="sortUsers('address')" style="cursor: pointer;">Address</th>
       </tr>
       <tbody >
           <tr *ngFor="let item of users; let i = index">

@@ -36,7 +36,7 @@ export class UsersService {
         id:id
       },
     };
-    return this.http.delete('/api/v1/users', options)
+    return this.http.delete('/api/v1/user', options)
   }
 
   clearUsers() {

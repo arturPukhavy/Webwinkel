@@ -89,6 +89,16 @@
             Cancel
           </button>
         </form>
+        <div class="search-container">
+          <input 
+            type="text" 
+            name="search"
+            class="search-input"
+            placeholder="Search by Name, Brand" 
+            [(ngModel)]="searchTerm" 
+            (input)="filterProducts()"
+          />
+        </div>
       </div>
     </div>
     <ngx-spinner>
@@ -105,10 +115,10 @@
         <th scope="col">Stock</th>
         <th scope="col">Price</th>
         <th scope="col">
-          <div class="col-xs-12 col-md-6 col-md-offset-3">
+          <div class="col-xs-12">
             <button
               class="btn btn-danger"
-              [disabled]="loadedPosts.length < 1"
+              [disabled]="products.length < 1"
               (click)="onClearPosts()"
             >
               Clear Posts
@@ -117,9 +127,9 @@
         </th>
       </tr>
       <tbody>
-        <tbody *ngIf="loadedPosts.length < 1">No posts available!</tbody>
-        <tbody *ngIf="loadedPosts.length >=1 ">
-          <tr *ngFor="let item of loadedPosts; let i = index">
+        <tbody *ngIf="products.length < 1">No posts available!</tbody>
+        <tbody *ngIf="products.length >=1 ">
+          <tr *ngFor="let item of filteredProducts; let i = index">
             <th scope="row">{{item.id}}</th>
             <td>{{item.naam}}</td>
             <td>{{item.merk}}</td>
