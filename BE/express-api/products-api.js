@@ -207,7 +207,11 @@ app.post('/api/v1/login', (req, res) => {
     if(user.password === login.password){
       const user_clone = structuredClone(user);
       user_clone.password = '******' //Replace a pass on a clone, not on an original object
-      res.json(user_clone);
+      res.json({
+        idToken: 'jwt_token_string',
+        email: user.email,
+        expiresIn: 3600
+      });
     } else {
       return res.status(401).json({error: 'Password is not correct'});
     }
