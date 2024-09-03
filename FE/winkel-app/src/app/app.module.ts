@@ -12,7 +12,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProductsService } from './products/products.service';
 import { UserComponent } from './users/user/user.component';
 import { LoginComponent } from './login/login.component';
-import { ShoppingListComponent } from './shopping-list/shopping-list.component';
+import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 import { HeaderComponent } from './header/header.component';
 
 
@@ -23,7 +23,8 @@ import { HeaderComponent } from './header/header.component';
     AlertComponent,
     UserComponent,
     HeaderComponent,
-    LoginComponent
+    LoginComponent,
+    ShoppingCartComponent
 
   ],
   imports: [
@@ -33,8 +34,7 @@ import { HeaderComponent } from './header/header.component';
     NgxSpinnerModule,
     BrowserAnimationsModule,
     FormsModule,
-    ShoppingListComponent,
-    ReactiveFormsModule,
+    ReactiveFormsModule
   ],
   providers: [ProductsService],
   bootstrap: [AppComponent]

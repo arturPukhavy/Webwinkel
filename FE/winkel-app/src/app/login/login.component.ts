@@ -30,7 +30,7 @@ export class LoginComponent {
       resData => {
         console.log(resData);
         this.isLoading = false;
-        this.router.navigate(['/products']);
+        this.router.navigate(['/login']);
       },
       errorMessage => {
         console.log(errorMessage);

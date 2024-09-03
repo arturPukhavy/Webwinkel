@@ -29,7 +29,15 @@ export class UserComponent implements OnInit, OnDestroy {
   errorHandlingMode = false;
   error: string;
   roles: string[] = Object.values(Role);
-  sortDirection: { [key: string]: boolean } = {};
+  sortDirection: { [key: string]: boolean } = {
+    firstName: true, 
+    email: true, 
+    lastName: true,
+    role: true,
+    birthDate: true,
+    userName: true,
+    address: true
+  };
 
   constructor( private userService: UsersService, 
                private spinnerService: NgxSpinnerService,
@@ -38,7 +46,9 @@ export class UserComponent implements OnInit, OnDestroy {
 
   
   ngOnInit(): void {
-    this.onFetchUsers();
+    this.onFetchUsers()
+    
+    setTimeout(() => {this.sortUsers('firstName')}, 10);
 
     let firstName = '';
     let lastName = '';
@@ -146,20 +156,23 @@ export class UserComponent implements OnInit, OnDestroy {
   onAdd() {
     this.viewForm = true;
   }
-  onFetchUsers() {
-    this.userService.fetchUsers().subscribe({
-      next: data => {
-        data.forEach(element => {
-          console.log('Item: ' + element.lastName)
-        });
-        this.users = data;
-      },
-      error: (error: HttpErrorResponse) => {
-        this.errorHandlingMode = true;
-        this.error = error.error.error;
-        console.error('There was an error: ', error.error.error);
-      }
-    })
+  onFetchUsers(): Promise<void> {
+    return new Promise((resolve) => {
+      this.userService.fetchUsers().subscribe({
+        next: data => {
+          data.forEach(element => {
+            console.log('Item: ' + element.lastName)
+          });
+          this.users = data;
+        },
+        error: (error: HttpErrorResponse) => {
+          this.errorHandlingMode = true;
+          this.error = error.error.error;
+          console.error('There was an error: ', error.error.error);
+        }
+      })
+      resolve();
+    })  
   };
   onUpdateUser() {
     this.userService.updateUser(this.userForm.value).subscribe({

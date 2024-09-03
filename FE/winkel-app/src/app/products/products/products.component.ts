@@ -1,10 +1,11 @@
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, EventEmitter, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { NgForm } from '@angular/forms';
 import { ProductsService } from '../products.service';
 import { Product } from '../product.model';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { HttpErrorResponse } from '@angular/common/http';
+import { CartService } from '../../shopping-cart/shopping-cart.service';
 
 @Component({
   selector: 'app-products',
@@ -21,14 +22,20 @@ export class ProductsComponent implements OnInit, OnDestroy{
   editedItem: Product;
   errorHandlingMode = false;
   error: string;
+
   
 
-  constructor(private prService: ProductsService, private spinnerService: NgxSpinnerService ) {
+  constructor(private prService: ProductsService, private cartService: CartService, private spinnerService: NgxSpinnerService ) {
     console.log('Create ProductsComponent')
   }
   
   ngOnInit() {
     this.onFetchPosts();
+    
+    this.cartService.products$.subscribe((product) => {
+      this.products = product;
+    });
+
     this.subscription = this.prService.startedEditing
       .subscribe(
         (index: number) => {
@@ -144,6 +151,10 @@ export class ProductsComponent implements OnInit, OnDestroy{
 
   getProduct(index: number) {
     return this.products[index];
+  }
+
+  onAddToCart(product: Product) {
+    this.cartService.addToCart(product);
   }
 
   ngOnDestroy() {
