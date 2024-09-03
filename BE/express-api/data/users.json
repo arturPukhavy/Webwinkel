@@ -20,7 +20,7 @@
           }
         ],
         "userName": "max",
-        "password": "12345",
+        "password": "qwerty11",
         "email": "max@dd.com"
       },
       {
@@ -44,7 +44,32 @@
           }
         ],
         "userName": "anna",
-        "password": "12345",
+        "password": "qwerty12",
         "email": "anna@dd.com"
+      },
+      {
+        "id": 3,
+        "firstName": "Admin",
+        "lastName": "Adminov",
+        "birthDate": "1995-02-27",
+        "role": "Admin",
+        "address": [
+          {
+            "street": "Street_2",
+            "houseNumber": "3",
+            "postCode": "2124lq",
+            "city": "Rijswijk"
+          },
+          {
+            "street": "Street_21",
+            "houseNumber": "12",
+            "postCode": "1124hh",
+            "city": "Rotterdam"
+          }
+        ],
+        "userName": "admin",
+        "password": "admin123",
+        "email": "admin@dd.com"
       }      
+
 ]
