@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { CommonModule } from '@angular/common';
 
 import { LoginService, LoginResponseData } from './login.service';
+import { Login } from './user-login.model';
 
 @Component({
   // standalone: true,
@@ -30,7 +31,7 @@ export class LoginComponent {
       resData => {
         console.log(resData);
         this.isLoading = false;
-        this.router.navigate(['/login']);
+        this.router.navigate(['/products']);
       },
       errorMessage => {
         console.log(errorMessage);

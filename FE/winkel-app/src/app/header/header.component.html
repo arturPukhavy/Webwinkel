@@ -1,26 +1,21 @@
 <h3>CRUD app-example</h3>
-    <div class="row">
-        <ul class="nav nav-tabs">
-  
-          <li role="presentation" class="nav-item">
+<div class="header">
+    <ul class="nav nav-tabs">
+        <li role="presentation" class="nav-item" *ngIf="isAuthenticated">
             <a routerLink="/products" class="nav-link active" routerLinkActive="active" aria-current="page">Products</a>
-          </li>
-          <li role="presentation"  class="nav-item">
-            <a a routerLink="/user" class="nav-link" routerLinkActive="active">Users</a>
-          </li>
-          <!-- TODO: implement "Shopping" and "Login" -->
-          <li role="presentation"  class="nav-item">
-            <a a routerLink="/shoppingcart" class="nav-link" routerLinkActive="active">Shopping Cart</a>
-          </li>
-          <li role="presentation"  class="nav-item">
-            <a a routerLink="/login" class="nav-link" routerLinkActive="active">Login</a>
-          </li>
-          
-        </ul>
-        <ul class="nav navbar-nav navbar-right">
-          <li *ngIf="isAuthenticated">
-            <a style="cursor: pointer;" (click)="onLogout()">Logout</a>
-          </li>
-        </ul>
+        </li>
+        <li role="presentation" class="nav-item" *ngIf="isAuthenticated && user?.role === role.Admin">
+            <a routerLink="/user" class="nav-link" routerLinkActive="active">Users</a>
+        </li>
+        <li role="presentation" class="nav-item" *ngIf="isAuthenticated && user?.role === role.Custm">
+            <a routerLink="/shoppingcart" class="nav-link" routerLinkActive="active">Shopping Cart</a>
+        </li>
+        <li role="presentation" class="nav-item" *ngIf="!isAuthenticated">
+            <a routerLink="/login" class="nav-link" routerLinkActive="active">Login</a>
+        </li>
+    </ul>
+    <div class="logout-container" *ngIf="isAuthenticated">
+        <a class="logout-button" (click)="onLogout()">Logout</a>
     </div>
+</div>
     

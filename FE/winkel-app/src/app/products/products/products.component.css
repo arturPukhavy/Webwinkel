@@ -158,9 +158,9 @@
 .search-container {
   display: flex;
   align-items: center;
-  position: absolute;
-  margin-left: 930px;
-  margin-top: -260px;
+  position:relative;
+  margin-left: -5px;
+  margin-top: 5px;
 }
 .search-input {
   padding: 10px;

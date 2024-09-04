@@ -6,6 +6,9 @@ import { Product } from '../product.model';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { HttpErrorResponse } from '@angular/common/http';
 import { CartService } from '../../shopping-cart/shopping-cart.service';
+import { Role } from '../../users/user/model/Role.model';
+import { Login } from '../../login/user-login.model';
+import { LoginService } from '../../login/login.service';
 
 @Component({
   selector: 'app-products',
@@ -22,17 +25,24 @@ export class ProductsComponent implements OnInit, OnDestroy{
   editedItem: Product;
   errorHandlingMode = false;
   error: string;
+  role = Role
+  user: Login | null = null;
 
   
 
-  constructor(private prService: ProductsService, private cartService: CartService, private spinnerService: NgxSpinnerService ) {
-    console.log('Create ProductsComponent')
-  }
+  constructor(private prService: ProductsService, 
+              private cartService: CartService,
+              private loginService: LoginService, 
+              private spinnerService: NgxSpinnerService ) {}
   
   ngOnInit() {
     this.onFetchPosts();
+
+    this.subscription = this.loginService.user.subscribe(user => {
+      this.user = user;
+    });  
     
-    this.cartService.products$.subscribe((product) => {
+    this.subscription = this.cartService.products$.subscribe((product) => {
       this.products = product;
     });
 
