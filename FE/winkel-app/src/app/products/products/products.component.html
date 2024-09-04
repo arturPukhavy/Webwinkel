@@ -118,7 +118,7 @@
           
             <button
               class="btn btn-danger"
-              [disabled]="products.length < 1"
+              [disabled]="products != undefined && products.length < 1"
               (click)="onClearPosts()"
               *ngIf="user?.role !== role.Custm"
             >
@@ -128,8 +128,8 @@
         </th>
       </tr>
       <tbody>
-        <tbody *ngIf="products.length < 1">No posts available!</tbody>
-        <tbody *ngIf="products.length >= 1">
+        <tbody *ngIf="products != undefined && products.length < 1">No posts available!</tbody>
+        <tbody *ngIf="products != undefined && products.length >= 1">
           <tr *ngFor="let item of filteredProducts; let i = index">
             <th scope="row">{{item.id}}</th>
             <td>{{item.naam}}</td>
