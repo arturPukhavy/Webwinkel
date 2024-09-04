@@ -4,10 +4,51 @@
 h3 {
     text-align: center;
 }
-li {
-margin-left: 105px;
-margin-right: 105px;
-font-family: 'Gill Sans', 'Gill Sans MT', 'Trebuchet MS', sans-serif;
-box-sizing: border-box;
-font-size: 16px;
+
+.nav {
+  display: flex; /* Use flexbox for nav links */
+  flex-grow: 1; /* Allow nav to grow */
 }
+
+.nav-item {
+  margin-right: 15px; /* Spacing between nav items */
+}
+
+.logout-container {
+  margin-left: auto; /* Push the logout button to the right */
+}
+
+.logout-button {
+  background-color: #e93947; /* Bright red color */
+  color: azure; /* Text color */
+  border: none; /* No border */
+  border-radius: 25px; /* Rounded corners */
+  padding: 10px 20px; /* Padding for the button */
+  font-size: 16px; /* Font size */
+  font-weight: bold; /* Bold text */
+  cursor: pointer; /* Pointer cursor on hover */
+  transition: background-color 0.3s, transform 0.3s; /* Smooth transition */
+  
+}
+
+.logout-button:hover {
+  background-color: #c03614; /* Darker shade on hover */
+  transform: translateY(-2px); /* Slight lift effect */
+}
+
+.logout-button:focus {
+  outline: none; /* Remove outline on focus */
+  
+}
+
+.header {
+  display: flex; /* Use flexbox for layout */
+  justify-content: space-between;
+  align-items: center; /* Center items vertically */
+  padding: 10px; /* Add some padding around the header */
+  background-color: #f8f9fa; /* Light background for the header */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+
+

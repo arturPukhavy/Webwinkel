@@ -6,7 +6,7 @@
       (close)="onHandleError()"
       ></app-alert>
       <div class="col-xs-12 col-md-6 col-md-offset-3">
-        <form #postForm="ngForm" (ngSubmit)="onCreatePost()">
+        <form #postForm="ngForm" (ngSubmit)="onCreatePost()" *ngIf="user?.role !== role.Custm">
           <div class="form-group invisible">
             <label for="id">Id</label>
             <input
@@ -69,7 +69,7 @@
             type="submit"
             [disabled]="editMode || !postForm.valid"
           >
-            Send Post
+            Add Product
           </button>
           |
           <button
@@ -78,7 +78,7 @@
           [disabled]="!editMode || !postForm.valid"
           (click)="onUpdatePost()"
           >
-            Update Post
+            Update Product
           </button>
           |
           <button
@@ -94,7 +94,7 @@
             type="text" 
             name="search"
             class="search-input"
-            placeholder="Search by Name, Brand" 
+            placeholder="Search by Name or Brand" 
             [(ngModel)]="searchTerm" 
             (input)="filterProducts()"
           />
@@ -115,15 +115,16 @@
         <th scope="col">Stock</th>
         <th scope="col">Price</th>
         <th scope="col">
-          <div class="col-xs-12">
+          
             <button
               class="btn btn-danger"
               [disabled]="products.length < 1"
               (click)="onClearPosts()"
+              *ngIf="user?.role !== role.Custm"
             >
-              Clear Posts
+              Clear All Products
             </button>
-          </div>
+          
         </th>
       </tr>
       <tbody>
@@ -136,11 +137,21 @@
             <td>{{item.voorraad}}</td>
             <td>{{item.price}}</td>
             <td>
-              <button class="btn btn-danger" (click)="onDeleteProduct(item.id)">Delete</button>
-              |
-              <button class="btn btn-success" (click)="onEditProduct(i)">Edit</button>
-              |
-              <button class="btn btn-primary" (click)="onAddToCart(item)">Add to Cart</button>
+              <button 
+                *ngIf="user?.role !== role.Custm" 
+                class="btn btn-danger" 
+                (click)="onDeleteProduct(item.id)"
+                style="margin-right: 2px;">
+                Delete
+              </button>
+              <button 
+                *ngIf="user?.role !== role.Custm" 
+                class="btn btn-success" 
+                (click)="onEditProduct(i)"
+                style="margin-left: 2px;">
+                Edit
+              </button>
+              <button *ngIf="user?.role === role.Custm" class="btn btn-primary" (click)="onAddToCart(item)">Add to Cart</button>
             </td>
           </tr>
       </tbody> 
