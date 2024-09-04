@@ -44,11 +44,7 @@
             style="margin-top: 10px;"
             [disabled]="!authForm.valid"
           >
-            {{ isLoginMode ? 'Login' : 'Sign Up' }}
-          </button>
-          |
-          <button class="btn btn-warning" style="margin-top: 10px;" (click)="onSwitchMode()" type="button">
-            Switch to {{ isLoginMode ? 'Sign Up' : 'Login' }}
+            Login
           </button>
         </div>
       </form>

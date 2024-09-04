@@ -200,7 +200,7 @@ app.delete('/api/v1/users', (req, res) => {
 //--- HTTP POST: Add a new account
 app.post('/api/v1/login', (req, res) => {
   const login = req.body;
-  const  user= findUserByUserName(users, login.userName);
+  const  user= findUserByEmail(users, login.email);
   
   if (user) {
     console.log(`User: ${JSON.stringify(user)}`)
@@ -209,7 +209,8 @@ app.post('/api/v1/login', (req, res) => {
       user_clone.password = '******' //Replace a pass on a clone, not on an original object
       res.json({
         idToken: 'jwt_token_string',
-        email: user.email,
+        userName: user.userName,
+        role: user.role,
         expiresIn: 3600
       });
     } else {
@@ -222,10 +223,6 @@ app.post('/api/v1/login', (req, res) => {
   }
 });
 
-
-const findUserByUserName = (array, uName) => {
-  return array.find(user => user.userName === uName);
-};
 
 const findUserByEmail = (array, email) => {
   return array.find(user => user.email === email);

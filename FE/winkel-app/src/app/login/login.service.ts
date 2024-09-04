@@ -8,13 +8,9 @@ import { Login } from './user-login.model';
 import { __values } from 'tslib';
 
 export interface LoginResponseData {
-  kind: string;
   idToken: string;
   email: string;
-  refreshToken: string;
-  expiresIn: string;
-  localId: string;
-  registered?: boolean;
+  expiresIn: number;
 }
 
 @Injectable({ providedIn: 'root' })
@@ -23,33 +19,9 @@ export class LoginService {
 
   constructor(private http: HttpClient, private router: Router) {}
 
-  signup(email: string, password: string) {
-    return this.http
-      .post<LoginResponseData>(
-        '',
-        {
-          email: email,
-          password: password,
-          returnSecureToken: true
-        }
-      )
-      .pipe(
-        catchError(this.handleError),
-        tap(resData => {
-          this.handleAuthentication(
-            resData.email,
-            resData.localId,
-            resData.idToken,
-            +resData.expiresIn
-          );
-        })
-      );
-  }
-
   login(email: string, password: string) {
-    return this.http
-      .post<LoginResponseData>(
-        '',
+    return this.http.post<LoginResponseData>(
+        '/api/v1/login',
         {
           email: email,
           password: password,
@@ -61,7 +33,6 @@ export class LoginService {
         tap(resData => {
           this.handleAuthentication(
             resData.email,
-            resData.localId,
             resData.idToken,
             +resData.expiresIn
           );
@@ -76,12 +47,11 @@ export class LoginService {
 
   private handleAuthentication(
     email: string,
-    userId: string,
     token: string,
     expiresIn: number
   ) {
     const expirationDate = new Date(new Date().getTime() + expiresIn * 1000);
-    const user = new Login(email, userId, token, expirationDate);
+    const user = new Login(email, token, expirationDate);
     // this.user.next(user);
   }
 
@@ -91,9 +61,6 @@ export class LoginService {
       return throwError(errorMessage);
     }
     switch (errorRes.error.error.message) {
-      case 'EMAIL_EXISTS':
-        errorMessage = 'This email exists already';
-        break;
       case 'EMAIL_NOT_FOUND':
         errorMessage = 'This email does not exist.';
         break;

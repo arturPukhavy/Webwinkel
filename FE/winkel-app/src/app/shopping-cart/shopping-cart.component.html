@@ -1,0 +1,24 @@
+<app-alert
+      [message]="error"
+      *ngIf="errorHandlingMode"
+      (close)="onHandleError()"
+      >
+</app-alert>
+<div class="cart-container">
+    <h2>Shopping Cart</h2>
+    <div class="cart-items" *ngIf="cartItems.length > 0; else emptyCart">
+      <div class="cart-item" *ngFor="let item of cartItems">
+        <div class="item-info">
+          <h4>{{ item.product.naam }}</h4>
+          <p>Price: {{ item.product.price | currency: 'EUR' }}</p>
+          <p>Quantity: {{ item.quantity }}</p>
+        </div>
+        <button class="remove-button" (click)="removeFromCart(item.product.id)">Remove</button>
+      </div>
+      <h3 class="total">Total: {{ total | currency: 'EUR' }}</h3>
+      <button class="buy-button" (click)="buy()">BUY</button>
+    </div>
+    <ng-template #emptyCart>
+      <p>Your cart is empty. Add some products!</p>
+    </ng-template>
+  </div>
