@@ -1,0 +1,58 @@
+<div class="payment-container">
+  <div class="header-container">
+    <h2>Payment Information</h2>
+    <button class="cancel-button" (click)="onCancel()">✖</button>
+  </div>
+  <hr>
+  <div class="total-price">
+    <strong>Total Price: {{ totalPrice | currency: 'EUR' }}</strong>
+  </div>
+  <hr>
+    <form (ngSubmit)="onSubmit()" class="payment-form" #payForm="ngForm">
+      <div class="form-group">
+        <label for="cardNumber">Card Number</label>
+        <input
+          type="text"
+          id="cardNumber"
+          [(ngModel)]="cardNumber"
+          name="cardNumber"
+          required
+          placeholder="1234 5678 9012 3456"
+        />
+      </div>
+      <div class="form-group">
+        <label for="cardHolder">Card Holder's Name</label>
+        <input
+          type="text"
+          id="cardHolder"
+          [(ngModel)]="cardHolder"
+          name="cardHolder"
+          required
+          placeholder="John Doe"
+        />
+      </div>
+      <div class="form-group">
+        <label for="expiryDate">Expiry Date</label>
+        <input
+          type="text"
+          id="expiryDate"
+          [(ngModel)]="expiryDate"
+          name="expiryDate"
+          required
+          placeholder="MM/YY"
+        />
+      </div> 
+      <div class="form-group">
+        <label for="cvv">CVV</label>
+        <input
+          type="text"
+          id="cvv"
+          [(ngModel)]="cvv"
+          name="cvv"
+          required
+          placeholder="123"
+        />
+      </div>
+      <button type="submit" class="submit-button" [disabled]="!payForm.valid">Pay Now</button>
+    </form>
+</div>
