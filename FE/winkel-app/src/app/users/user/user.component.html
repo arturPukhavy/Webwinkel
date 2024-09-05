@@ -206,47 +206,59 @@
       </div>
     </div>
     <h4 class="dark" *ngIf="users.length < 1">No Users available!</h4>
-    <table 
-      class="table table-success table-striped-columns"
-      *ngIf="users.length >=1 ">
+    <table class="table table-success table-striped-columns" *ngIf="users.length >= 1">
       <tr>
         <th scope="col" (click)="sortUsers('firstName')" style="cursor: pointer;">
-          First Name
-          <span *ngIf="sortDirection['firstName']">↑</span>
-          <span *ngIf="!sortDirection['firstName'] && sortDirection['firstName'] !== undefined">↓</span>
+          <div class="header-content">
+            First Name 
+            <span class="sort-indicator" *ngIf="sortDirection['firstName']">↑</span>
+            <span class="sort-indicator" *ngIf="!sortDirection['firstName'] && sortDirection['firstName'] !== undefined">↓</span>
+          </div>
         </th>
         <th scope="col" (click)="sortUsers('lastName')" style="cursor: pointer;">
-          Last Name
-          <span *ngIf="sortDirection['lastName']">↑</span>
-          <span *ngIf="!sortDirection['lastName'] && sortDirection['lastName'] !== undefined">↓</span>
+          <div class="header-content">
+            Last Name
+            <span class="sort-indicator" *ngIf="sortDirection['lastName']">↑</span>
+            <span class="sort-indicator" *ngIf="!sortDirection['lastName'] && sortDirection['lastName'] !== undefined">↓</span>
+          </div>
         </th>
         <th scope="col" (click)="sortUsers('role')" style="cursor: pointer;">
-          Role
-          <span *ngIf="sortDirection['role']">↑</span>
-          <span *ngIf="!sortDirection['role'] && sortDirection['role'] !== undefined">↓</span>
+          <div class="header-content">
+            Role
+            <span class="sort-indicator" *ngIf="sortDirection['role']">↑</span>
+            <span class="sort-indicator" *ngIf="!sortDirection['role'] && sortDirection['role'] !== undefined">↓</span>
+          </div>
         </th>
         <th scope="col" (click)="sortUsers('email')" style="cursor: pointer;">
-          Email
-          <span *ngIf="sortDirection['email']">↑</span>
-          <span *ngIf="!sortDirection['email'] && sortDirection['email'] !== undefined">↓</span>
+          <div class="header-content">
+            Email
+            <span class="sort-indicator" *ngIf="sortDirection['email']">↑</span>
+            <span class="sort-indicator" *ngIf="!sortDirection['email'] && sortDirection['email'] !== undefined">↓</span>
+          </div>
         </th>
         <th scope="col" (click)="sortUsers('userName')" style="cursor: pointer;">
-          Usrername
-          <span *ngIf="sortDirection['userName']">↑</span>
-          <span *ngIf="!sortDirection['userName'] && sortDirection['userName'] !== undefined">↓</span>
+          <div class="header-content">
+            Username
+            <span class="sort-indicator" *ngIf="sortDirection['userName']">↑</span>
+            <span class="sort-indicator" *ngIf="!sortDirection['userName'] && sortDirection['userName'] !== undefined">↓</span>
+          </div>
         </th>
         <th scope="col" (click)="sortUsers('birthDate')" style="cursor: pointer;">
-          Birth Date
-          <span *ngIf="sortDirection['birthDate']">↑</span>
-          <span *ngIf="!sortDirection['birthDate'] && sortDirection['birthDate'] !== undefined">↓</span>
+          <div class="header-content">
+            Birth Date
+            <span class="sort-indicator" *ngIf="sortDirection['birthDate']">↑</span>
+            <span class="sort-indicator" *ngIf="!sortDirection['birthDate'] && sortDirection['birthDate'] !== undefined">↓</span>
+          </div>
         </th>
         <th scope="col" (click)="sortUsers('address')" style="cursor: pointer;">
-          Address
-          <span *ngIf="sortDirection['address']">↑</span>
-          <span *ngIf="!sortDirection['address'] && sortDirection['address'] !== undefined">↓</span>
+          <div class="header-content">
+            Address
+            <span class="sort-indicator" *ngIf="sortDirection['address']">↑</span>
+            <span class="sort-indicator" *ngIf="!sortDirection['address'] && sortDirection['address'] !== undefined">↓</span>
+          </div>
         </th>
       </tr>
-      <tbody >
+      <tbody>
           <tr *ngFor="let item of users; let i = index">
             <td>{{item.firstName}}</td>
             <td>{{item.lastName}}</td>
@@ -260,9 +272,8 @@
               </tr>
             </td>
             <td>
-              <button class="btn btn-success" type="button" (click)="onEditUser(i)">Edit</button>
-              |
-              <button class="btn btn-danger" type="button" (click)="onDeleteUser(item.id)" >Delete</button>
+              <button class="btn btn-success" type="button" style="margin: 2px;" (click)="onEditUser(i)">Edit</button>
+              <button class="btn btn-danger" type="button" style="margin: 2px;" (click)="onDeleteUser(item.id)" >Delete</button>
             </td>
           </tr>
       </tbody> 
