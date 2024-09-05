@@ -15,6 +15,7 @@ export class ShoppingCartComponent implements OnInit, OnDestroy{
   cartItems: CartItem[] = [];
   errorHandlingMode = false;
   error: string;
+  payment = false
 
   constructor(private cartService: CartService) {}
 
@@ -29,21 +30,12 @@ export class ShoppingCartComponent implements OnInit, OnDestroy{
   }
 
   buy() {
-    this.cartService.buyProducts(this.cartItems).subscribe({
-      next: data => {
-        console.log('Products bought: ' + JSON.stringify(data));
-        alert("Thank you for your purchase!");
-        this.cartItems = [];
-      },
-      error: (error: HttpErrorResponse) => {
-        this.errorHandlingMode = true;
-        this.error = error.error.error;
-        console.error('There was an error: ', error.error.error);
-      }
-    })
-
+    this.payment = true;
   }
 
+  onClose() {
+    this.payment = false;
+  }
   onHandleError() {
     this.errorHandlingMode = false;
   }

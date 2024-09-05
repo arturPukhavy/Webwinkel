@@ -49,6 +49,10 @@ h3 {
   background-color: #f8f9fa; /* Light background for the header */
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
 }
-
+.user-name {
+  margin-right: 10px; /* Space between the name and the logout button */
+  color: #333; /* Text color */
+  font-weight: bold; /* Bold text for emphasis */
+}
 
 
