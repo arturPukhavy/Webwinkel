@@ -8,14 +8,17 @@
             <a routerLink="/user" class="nav-link" routerLinkActive="active">Users</a>
         </li>
         <li role="presentation" class="nav-item" *ngIf="isAuthenticated && user?.role === role.Custm">
-            <a routerLink="/shoppingcart" class="nav-link" routerLinkActive="active">Shopping Cart ({{ cartItemCount }})</a>
+            <a routerLink="/shoppingcart" class="nav-link" routerLinkActive="active">
+                Shopping Cart 
+                <span class="badge" *ngIf="cartItemCount > 0">{{ cartItemCount }}</span>
+            </a>
         </li>
         <li role="presentation" class="nav-item" *ngIf="!isAuthenticated">
             <a routerLink="/login" class="nav-link" routerLinkActive="active">Login</a>
         </li>
     </ul>
     <div class="logout-container" *ngIf="isAuthenticated">
-        <span class="user-name">{{ fullName }}</span>
+        <span class="user-name">Hello, {{ fullName }} !</span>
         <a class="logout-button" (click)="onLogout()">Logout</a>
     </div>
 </div>

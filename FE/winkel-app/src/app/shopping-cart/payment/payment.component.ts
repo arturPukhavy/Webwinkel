@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Output, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { CartService } from '../shopping-cart.service';
+import { CartItem } from '../shopping-cart.model';
 
 @Component({
   selector: 'app-payment',
@@ -8,19 +9,24 @@ import { CartService } from '../shopping-cart.service';
   styleUrls: ['./payment.component.css']
 })
 export class PaymentComponent {
-  @ViewChild('payForm') payForm!: NgForm;
+  @ViewChild('payForm') payForm: NgForm;
   @Output() close = new EventEmitter<void>(); 
   cardNumber: string = '';
   cardHolder: string = '';
   expiryDate: string = '';
   cvv: string = '';
   totalPrice: number = 0;
+  cartItems: CartItem[] = [];
 
 
   constructor(private cartService: CartService) {}
 
   ngOnInit() {
     this.totalPrice = this.cartService.getTotal(); // Get the total price
+
+    this.cartService.getCartItems().subscribe((items: CartItem[]) => {
+      this.cartItems = items;
+    });
   }
 
   onSubmit() {
