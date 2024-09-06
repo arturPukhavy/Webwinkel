@@ -1,6 +1,6 @@
-<div class="row">
+  <div class="row">
     <div class="col-xs-12 col-md-6 col-md-offset-3">
-        <app-alert
+      <app-alert
         [message]="error"
         *ngIf="error"
         (close)="onHandleError()"
@@ -12,41 +12,55 @@
             </div>
           </ngx-spinner>
       </div>
-      <form #authForm="ngForm" (ngSubmit)="onSubmit(authForm)" *ngIf="!isLoading">
-        <div class="form-group">
-          <label for="email">E-Mail</label>
-          <input
-            type="email"
-            id="email"
-            class="form-control"
-            ngModel
-            name="email"
-            required
-            email
-          />
-        </div>
-        <div class="form-group">
-          <label for="password">Password</label>
-          <input
-            type="password"
-            id="password"
-            class="form-control"
-            ngModel
-            name="password"
-            required
-            minlength="6"
-          />
-        </div>
-        <div>
-          <button
-            class="btn btn-primary"
-            type="submit"
-            style="margin-top: 10px;"
-            [disabled]="!authForm.valid"
-          >
-            Login
-          </button>
-        </div>
-      </form>
+      <div class="login-container">
+        <h2>Welcome Back!</h2>
+        <form #authForm="ngForm" (ngSubmit)="onSubmit(authForm)" *ngIf="!isLoading">
+          <div class="form-group">
+            <label for="email">E-Mail</label>
+            <div class="input-group">
+              <span class="input-group-addon"><i class="fas fa-envelope"></i></span>
+              <input
+                type="email"
+                id="email"
+                class="form-control"
+                ngModel
+                name="email"
+                required
+                email
+                placeholder="Enter your email"
+              />
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="password">Password</label>
+            <div class="input-group">
+              <span class="input-group-addon"><i class="fas fa-lock"></i></span>
+              <input
+                type="password"
+                id="password"
+                class="form-control"
+                ngModel
+                name="password"
+                required
+                minlength="6"
+                placeholder="Enter your password"
+              />
+            </div>
+          </div>
+          <div>
+            <button
+              class="btn btn-primary"
+              type="submit"
+              style="margin-top: 10px;"
+              [disabled]="!authForm.valid"
+            >
+              Login
+            </button>
+          </div>
+          <!-- <div class="text-center">
+            <a href="/forgot-password" class="forgot-password">Forgot Password?</a>
+          </div> -->
+        </form>
+      </div>
     </div>
-  </div>
+  </div>  

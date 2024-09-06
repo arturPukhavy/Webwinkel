@@ -54,5 +54,21 @@ h3 {
   color: #333; /* Text color */
   font-weight: bold; /* Bold text for emphasis */
 }
+.nav-link {
+  position: relative; /* Position relative for badge positioning */
+}
+
+.badge {
+  position: absolute; /* Position badge absolutely */
+  top: -5px; /* Adjust vertical position */
+  right: -10px; /* Adjust horizontal position */
+  background-color: red; /* Badge background color */
+  color: white; /* Badge text color */
+  border-radius: 50%; /* Make it circular */
+  padding: 3px 6px; /* Padding for the badge */
+  font-size: 12px; /* Adjust font size */
+  min-width: 20px; /* Minimum width for the badge */
+  text-align: center; /* Center text in badge */
+}
 
 

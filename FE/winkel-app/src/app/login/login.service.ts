@@ -7,15 +7,13 @@ import { throwError, BehaviorSubject, Subject } from 'rxjs';
 import { Login } from './user-login.model';
 import { __values } from 'tslib';
 import { Role } from '../users/user/model/Role.model';
-import { User } from '../users/user/model/User.model';
 
 
 export interface LoginResponseData {
   idToken: string;
-  email: string;
   expiresIn: number;
   role: Role;
-  name: User
+  userName: string
 }
 
 @Injectable({ providedIn: 'root' })
@@ -38,11 +36,10 @@ private tokenExpirationTimer: any;
         catchError(this.handleError),
         tap(resData => {
           this.handleAuthentication(
-            resData.email,
             resData.idToken,
             +resData.expiresIn,
             resData.role,
-            resData.name
+            resData.userName
           );
         })
       );
@@ -53,19 +50,17 @@ private tokenExpirationTimer: any;
       return;
     }
     const userData: {
-      email: string;
       _token: string;
       _tokenExpirationDate: string;
       role: Role;
-      name: User
+      userName: string
     } = JSON.parse(userDataString);
    
     const loadedUser = new Login(
-      userData.email,
       userData._token,
       new Date(userData._tokenExpirationDate),
       userData.role,
-      userData.name
+      userData.userName
     );
 
     if (loadedUser.token) {
@@ -93,14 +88,13 @@ private tokenExpirationTimer: any;
   }
 
   private handleAuthentication(
-    email: string,
     token: string,
     expiresIn: number,
     role: Role,
-    name: User
+    userName: string
   ) {
     const expirationDate = new Date(new Date().getTime() + expiresIn * 1000);
-    const user = new Login(email, token, expirationDate, role, name );
+    const user = new Login(token, expirationDate, role, userName );
     this.user.next(user);
     this.autoLogout(expiresIn * 1000);
     localStorage.setItem('userData', JSON.stringify(user));
