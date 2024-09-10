@@ -222,8 +222,35 @@ app.post('/api/v1/login', (req, res) => {
     return res.status(404).json({error: 'User not found'});
   }
 });
-
-
 const findUserByEmail = (array, email) => {
   return array.find(user => user.email === email);
 };
+
+//**************************************** Paymants API **************************************/
+app.get('/api/v1/order/init', (req, res) => {
+  res.json({orderId: 'ascf-257-xl'});
+});
+app.post('/api/v1/order/pay', (req, res) => {
+  //TODO
+  const order = req.body;
+  console.log(`Order to pay: ${JSON.stringify(order)}`)
+  res.json({paymentStatus: 'payed'});
+
+});
+app.post('/api/v1/order/complete', (req, res) => {
+  const order = req.body;
+  console.log(`Order to complete: ${JSON.stringify(order)}`)
+  res.json({orderStatus: 'completed'});
+});
+
+//**************************************** Invoice API **************************************/
+app.post('/api/v1/invoice/create', (req, res) => {
+  const order = req.body;
+  console.log(`Create invoice for order: ${JSON.stringify(order)}`)
+  res.json({invoiceForOrder: order.orderId});
+});
+app.post('/api/v1/invoice/send', (req, res) => {
+  const order = req.body;
+  console.log(`Send invoice for order: ${JSON.stringify(order)}`)
+  res.json({invoiceStatus: 'sent'});
+});
