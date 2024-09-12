@@ -175,5 +175,14 @@
   outline: none; 
   border-color: #dad711; 
 }
+.table-header {
+  text-align: center; /* Center the header */
+  margin-bottom: 20px; /* Space below the header */
+  color:  #F9C941;
+  font-size: 28px; /* Font size */
+  padding: 15px; /* Padding */
+  background-color: #56433D; /* Background color matching table header */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
 
   
