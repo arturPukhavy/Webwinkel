@@ -107,6 +107,7 @@
       </div>
     </ngx-spinner>
     <div class="row">
+    <h2 class="table-header">Product List</h2>
     <table class="table table-striped">
       <tr>
         <th scope="col">#</th>
@@ -114,8 +115,7 @@
         <th scope="col">Brand</th>
         <th scope="col">Stock</th>
         <th scope="col">Price</th>
-        <th scope="col">
-          
+        <th scope="col"> 
             <button
               class="btn btn-danger"
               [disabled]="products != undefined && products.length < 1"
@@ -123,8 +123,7 @@
               *ngIf="user?.role !== role.Custm"
             >
               Clear All Products
-            </button>
-          
+            </button>   
         </th>
       </tr>
       <tbody>

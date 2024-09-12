@@ -4,9 +4,6 @@
     <button class="cancel-button" (click)="onCancel()">✖</button>
   </div>
   <hr>
-  <div class="total-price">
-    <strong>Total Price: {{ totalPrice | currency: 'EUR' }}</strong>
-  </div>
   <hr>
   <div class="cart-items">
     <div class="item-info" *ngFor="let item of cartItems">
@@ -16,6 +13,9 @@
     </div>
   </div>
   <hr>
+  <div class="total-price">
+    <strong>Total Price: {{ totalPrice | currency: 'EUR' }}</strong>
+  </div>
   <form (ngSubmit)="onSubmit()" class="payment-form" #payForm="ngForm">
     <div class="form-group">
       <label for="cardNumber">Card Number</label>
