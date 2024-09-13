@@ -18,6 +18,11 @@ The application is being deployed and running in Glitch-platform: https://winkel
   * Template-driven Forms
   * Reactive Forms
 * Pipes
+## Use cases
+TODO
+
+## CI/CD
+TODO
 
 ## Dev-environment
 ### Diagram
