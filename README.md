@@ -1,5 +1,5 @@
 # Webwinkel App
-This is a simple web-shop application. It includes two parts - Angular front-end application and node-based back-end API server.
+This is a simple web-shop application. The main goal is to delve into frontend, backend and CI/CD technologies while constructing a web based end-to-end application. The application is deployed to Glitch-platform which provides the hosting service.
 
 ## Used technology
 * Angular: FE application
