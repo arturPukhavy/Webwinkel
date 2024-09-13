@@ -1,6 +1,6 @@
 # Webwinkel App
 This is a simple web-shop application. The main goal is to delve into frontend, backend and CI/CD technologies while constructing a web based end-to-end application. <br>
-The application is deployed to Glitch-platform which provides the hosting service: https://winkel-app.glitch.me
+The application is deployed to Glitch-platform: https://winkel-app.glitch.me
 
 ## Used technology
 * Angular: FE application
