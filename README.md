@@ -4,7 +4,7 @@ The application is being deployed and running in Glitch-platform: https://winkel
 
 ## Used technology
 * FE: Angular (18.1.3)
-* BE: Expressjs (Nodejs-based API server)
+* BE: Expressjs (Nodejs-based mock API server)
 
 #### Used Angular fetures
 * Components (both modules and standalone)
