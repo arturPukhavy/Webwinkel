@@ -19,10 +19,11 @@ The application is being deployed and running in Glitch-platform: https://winkel
   * Reactive Forms
 * Pipes
 
-## Diagram
+## Dev-environment
+### Diagram
 <img src="img/web-winkel-diagram.png" width="100%">
 
-## Use Angular dev-server proxy
+### Use Angular dev-server proxy
 Angular allows to configure CLI dev-server proxy. This is an example of `proxy.conf.json` configuration:
 ```
 {
@@ -38,7 +39,7 @@ ng serve --proxy-config proxy.conf.json
 ```
 This configuration is ONLY for a development purpose, it should not be used in a production environment.
 
-## How to start
+### How to start
 The project includes two parts: back-end and front-end. Back-end is an API-server based on Expressjs
 #### API server
 First the API server should be started
