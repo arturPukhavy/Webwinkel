@@ -9,6 +9,7 @@ The application is being deployed and running in Glitch-platform: https://winkel
 #### Used Angular fetures
 * Components (both modules and standalone)
 * HTTP Client
+* Interceptors
 * Routing
 * Authentication and route protection
 * Observable
