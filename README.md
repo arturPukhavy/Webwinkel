@@ -3,8 +3,8 @@ This is a simple web-shop application. The main goal is to delve into frontend, 
 The application is deployed to Glitch-platform: https://winkel-app.glitch.me
 
 ## Used technology
-* Angular: FE application
-* Expressjs: Nodejs-based API server
+* FE: Angular (18.1.3)
+* BE: Expressjs (Nodejs-based API server)
 
 #### Used Angular fetures
 * Components (both modules and standalone)
