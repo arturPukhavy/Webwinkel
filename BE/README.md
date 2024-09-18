@@ -38,6 +38,7 @@ curl 'http://localhost:3000/api/v1/login' \
 }'
 ```
 ## Payment API
+The following APIs are used to create and pay an order
 
 #### Init Order
 ```
