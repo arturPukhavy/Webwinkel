@@ -40,11 +40,28 @@ curl 'http://localhost:3000/api/v1/login' \
 ## Payment API
 
 #### Init Order
+```
+curl 'http://localhost:3000/api/v1/order/init'
+```
 
 #### Pay Order
+```
+curl 'http://localhost:3000/api/v1/order/pay' \
+--header 'Content-Type: application/json' \
+--data '{
+    "orderId": "ascf-257-xl",
+    "accountNumber": "123456"
+}'
+```
 
 #### Complete Order
-
+```
+curl 'http://localhost:3000/api/v1/order/complete' \
+--header 'Content-Type: application/json' \
+--data '{
+    "orderId": "ascf-257-xl"
+}'
+```
 
 ## Invoice API
 
