@@ -66,6 +66,13 @@ curl 'http://localhost:3000/api/v1/order/complete' \
 ## Invoice API
 
 #### Create Invoice
+```
+curl --location 'http://localhost:3000/api/v1/invoice/create' \
+--header 'Content-Type: application/json' \
+--data '{
+    "orderId": "ascf-257-xl"
+}'
+```
 
 #### Send Invoice
 TODO
