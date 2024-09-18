@@ -64,7 +64,7 @@ curl 'http://localhost:3000/api/v1/order/complete' \
 ```
 
 ## Invoice API
-
+These APIs are used to create and send an invoice to a client
 #### Create Invoice
 ```
 curl --location 'http://localhost:3000/api/v1/invoice/create' \
@@ -75,7 +75,12 @@ curl --location 'http://localhost:3000/api/v1/invoice/create' \
 ```
 
 #### Send Invoice
-TODO
-
+```
+curl 'http://localhost:3000/api/v1/invoice/send' \
+--header 'Content-Type: application/json' \
+--data '{
+    "invoiceForOrder": "ascf-257-xl"
+}'
+```
 ## Resources
 * [Install express](https://expressjs.com/en/starter/installing.html)
