@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { switchMap, catchError } from 'rxjs/operators';
@@ -11,28 +11,32 @@ export class PaymentService {
 
   constructor(private http: HttpClient) {}
 
+  private headers = new HttpHeaders({
+    'Content-Type': 'application/json',
+  });
+
   getOrder(orderId: string): Observable<any> {
-    return this.http.get('http://localhost:3000/api/v1/order/init');
+    return this.http.get('http://localhost:3000/api/v1/order/init', { headers: this.headers });
   }
 
   payOrder(orderData: any): Observable<any> {
     const taskData = {
-      "orderId": "ascf-257-xl",
-      "cardNumber": "123456",
-      "name": "Anna",
-      "expirityDate": "12/26",
-      "cvv": "123",
-      "totalPrice": "1234.5"
+        orderId: orderData.orderId, 
+        cardNumber: orderData.cardNumber,
+        name: orderData.cardHolder,
+        expirityDate: orderData.expiryDate,
+        cvv: orderData.cvv,
+        totalPrice: orderData.totalPrice
     };
-    return this.http.post('http://localhost:3000/api/v1/order/pay', taskData);
+    return this.http.post('http://localhost:3000/api/v1/order/pay', taskData, { headers: this.headers });
   }
 
   // API 3: Mark the task as completed
   completeOrder(orderData: any): Observable<any> {
     const completeData = {
-      "orderId": "ascf-257-xl"
+        orderId: orderData.orderId
     };
-    return this.http.post('http://localhost:3000/api/v1/order/complete', completeData);
+    return this.http.post('http://localhost:3000/api/v1/order/complete', completeData, { headers: this.headers });
   }
 
   // Function to chain all three API calls
@@ -42,9 +46,9 @@ export class PaymentService {
         // First POST request using the result from the GET request
         return this.payOrder(orderData);
       }),
-      switchMap((orderData) => {
+      switchMap((paymentResult) => {
         // Second POST request using the result from the first POST request
-        return this.completeOrder(orderData);
+        return this.completeOrder(paymentResult);
       }),
       catchError((error) => {
         console.error('Error during API calls:', error);

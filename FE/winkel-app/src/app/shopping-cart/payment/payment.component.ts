@@ -2,6 +2,7 @@ import { Component, EventEmitter, Output, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { CartService } from '../shopping-cart.service';
 import { CartItem } from '../shopping-cart.model';
+import { PaymentService } from './payment.service';
 
 @Component({
   selector: 'app-payment',
@@ -19,7 +20,7 @@ export class PaymentComponent {
   cartItems: CartItem[] = [];
 
 
-  constructor(private cartService: CartService) {}
+  constructor(private cartService: CartService, private paymentService: PaymentService) {}
 
   ngOnInit() {
     this.totalPrice = this.cartService.getTotal(); // Get the total price
@@ -30,6 +31,17 @@ export class PaymentComponent {
   }
 
   onSubmit() {
+    const orderId = 'ascf-257-xl';
+
+    // Call the chained API function
+    this.paymentService.getChainedApiCalls(orderId).subscribe(
+      (finalResult) => {
+        console.log('Final result:', finalResult);
+      },
+      (error) => {
+        console.error('Error in chained API calls:', error);
+      }
+    );
     // this.cartService.buyProducts(this.cartItems).subscribe({
     //   next: data => {
     //     console.log('Products bought: ' + JSON.stringify(data));
