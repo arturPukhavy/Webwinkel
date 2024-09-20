@@ -23,7 +23,9 @@ The application is being deployed and running in Glitch-platform: https://winkel
 TODO
 
 ## CI/CD
-GitHib Actions feature is used for CI/CD. CI is triggered each time when a "feature" branch is updated, it builds apps and run tests. CD is triggered by any commit to `main` branch, normally after mergninfg `feature` branch into `main` (when completing pull requests).
+GitHib Actions feature is used for CI/CD. <br>
+CI is triggered each time when a `feature` branch is updated - it builds apps and run tests.<br>
+CD is triggered by any commit to `main` branch, normally after mergninfg `feature` branch into `main` when completing pull requests. CD deploys both FE and BE (API) into Glitch-platform.
 <img src="img/web-winkel-diagram_deploy.png" width="100%">
 
 ## Dev-environment
