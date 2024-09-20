@@ -28,19 +28,19 @@ A user is authorised depending on a `role`, three roles are supported by the app
 Customre - a user who wants to make purchase
 Login e-mail | Password
 --- | --- 
-anna | 301 
+anna@dd.com | secret1 
 
 ### Employee
 Employee - an internal users who can manage list of products available online
 Login e-mail | Password
 --- | --- 
-anna | 301 
+max@dd.com | secret2 
 
 ### Admin
 Admin - an interan user who can manage customers and products
 Login e-mail | Password
 --- | --- 
-anna | 301 
+admin@dd.com | secret3 
 
 ## CI/CD
 `GitHib Actions` feature is used for CI/CD. <br>
