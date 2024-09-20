@@ -20,7 +20,7 @@ The application is being deployed and running in Glitch-platform: https://winkel
   * Reactive Forms
 * Pipes
 ## Roles and Use cases
-A user is authorised depending on a `role`, the app supports three roles:
+A user is authorised depending on a `role`, three roles are supported by the app
   * Customre
   * Employee
   * Admin
