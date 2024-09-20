@@ -21,7 +21,7 @@ The application is being deployed and running in Glitch-platform: https://winkel
 * Pipes
 ## Roles and Use cases
 A user is authorised depending on a `role`, three roles are supported by the app
-  * Customre
+  * Customer
   * Employee
   * Admin
 ### Customer
