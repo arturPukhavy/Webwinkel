@@ -23,7 +23,7 @@ The application is being deployed and running in Glitch-platform: https://winkel
 TODO
 
 ## CI/CD
-TODO
+<img src="img/web-winkel-diagram_deploy.png" width="100%">
 
 ## Dev-environment
 ### Diagram
