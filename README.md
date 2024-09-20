@@ -19,8 +19,19 @@ The application is being deployed and running in Glitch-platform: https://winkel
   * Template-driven Forms
   * Reactive Forms
 * Pipes
-## Use cases
+## Roles and Use cases
+Depending on roles and uses cases three different types of users are supported in the app:
+  * Customre - a user who wants to make purchase
+  * Employee - an internal users who can manage list of products available online
+  * Admin - an interan user who can manage customers and products
+#### Customer
 TODO
+#### Employee
+TODO
+#### Admin
+TODO
+
+
 
 ## CI/CD
 `GitHib Actions` feature is used for CI/CD. <br>
