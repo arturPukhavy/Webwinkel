@@ -24,19 +24,19 @@ Depending on roles and uses cases three different types of users are supported i
   * Customre
   * Employee
   * Admin
-#### Customer
+### Customer
 Customre - a user who wants to make purchase
 Login e-mail | Password
 --- | --- 
 anna | 301 
 
-#### Employee
+### Employee
 Employee - an internal users who can manage list of products available online
 Login e-mail | Password
 --- | --- 
 anna | 301 
 
-#### Admin
+### Admin
 Admin - an interan user who can manage customers and products
 Login e-mail | Password
 --- | --- 
