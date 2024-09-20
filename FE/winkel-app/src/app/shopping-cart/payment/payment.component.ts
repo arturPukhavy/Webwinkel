@@ -34,7 +34,7 @@ export class PaymentComponent {
     
 
     // Call the chained API function
-    this.paymentService.getChainedApiCalls('').subscribe(
+    this.paymentService.getChainedApiCalls().subscribe(
       (finalResult) => {
         console.log('Final result:', finalResult);
       },
@@ -42,7 +42,8 @@ export class PaymentComponent {
         console.error('Error in chained API calls:', error);
       }
     );
-    this.paymentService.getChainedInvoiceCalls('').subscribe(
+
+    this.paymentService.getChainedInvoiceCalls('ascf-257-xl').subscribe(
       (finalResult) => {
         console.log('Final result1:', finalResult);
       },

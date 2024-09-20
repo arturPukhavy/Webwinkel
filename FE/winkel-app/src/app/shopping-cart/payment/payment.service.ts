@@ -7,14 +7,17 @@ import { of } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
+
 export class PaymentService {
     private headers = new HttpHeaders({
       'Content-Type': 'application/json',
     });
 
+ 
+
   constructor(private http: HttpClient) {}
 
-  getOrder(orderId: string): Observable<any> {
+  getOrder(): Observable<any> {
     return this.http.get('/api/v1/order/init', { headers: this.headers }).pipe(
         map((response: any) => {
             if (response && response.orderId) {
@@ -49,7 +52,8 @@ export class PaymentService {
     return this.http.post('/api/v1/order/pay', taskData, { headers: this.headers }).pipe(
         map((response: any) => {
             console.log('Response from payOrder:', response); // Log the response
-            if (response && response.orderId) {
+            if (response /*&& response.orderId*/) {
+                console.log('Pay-response:', response);
                 return response;
             } else {
                 console.error('Payment response does not include orderId:', response);
@@ -66,7 +70,7 @@ export class PaymentService {
   // API 3: Mark the task as completed
   completeOrder(orderData: any): Observable<any> {
     console.log('Received orderData in completeOrder:', orderData);
-    if (!orderData || !orderData.orderId) {
+    if (!orderData /*|| !orderData.orderId*/) {
         console.error('Invalid orderData in completeOrder:', orderData);
         return of(null); // Return null if orderData is invalid
     }
@@ -83,6 +87,7 @@ export class PaymentService {
             //     console.error('Invalid response from completeOrder:', response);
             //     return null; // Handle the case where the response is not as expected
             // }
+            return response;
         }),
         catchError((error: HttpErrorResponse) => {
             console.error('Error in completeOrder:', error);
@@ -92,8 +97,9 @@ export class PaymentService {
   }
 
   // Function to chain all three API calls
-  getChainedApiCalls(orderId: string): Observable<any> {
-    return this.getOrder(orderId).pipe(
+  getChainedApiCalls(): Observable<any> {
+    
+    const res = this.getOrder().pipe(
         switchMap((orderData) => {
             console.log('Order Data:', orderData);
             // if (!orderData || !orderData.orderId) {
@@ -104,7 +110,7 @@ export class PaymentService {
         }),
         switchMap((paymentResult) => {
             console.log('Payment Result:', paymentResult);
-            if (!paymentResult || !paymentResult.orderId) {
+            if (!paymentResult /*|| !paymentResult.orderId*/) {
                 console.error('Invalid paymentResult received from payOrder:', paymentResult);
                 return of(null); // Handle case where orderId is missing
             }
@@ -115,9 +121,12 @@ export class PaymentService {
             return of(null); // Return fallback value if any error occurs
         })
     );
+
+    return res;
   }
 
   createInvoice(orderData: any): Observable<any> {
+    console.log('--- Invoice, orderData:', orderData);
     const invoiceData = {
         orderId: orderData.orderId
     };
@@ -128,10 +137,11 @@ export class PaymentService {
         })
     );
   }
-  sendInvoice(orderData: any): Observable<any> {
+  sendInvoice(invoiceData: any): Observable<any> {
     const invoiceInfo = {
-      invoiceForOrder: orderData.orderId
+      invoiceForOrder: invoiceData.invoiceForOrder
     };
+    console.log('--->> InvoiceInfo, orderData:', invoiceInfo);
     return this.http.post('/api/v1/invoice/send', invoiceInfo, { headers: this.headers }).pipe(
         catchError((error: HttpErrorResponse) => {
           console.error('Error in invoiceInfo:', error);
@@ -140,14 +150,21 @@ export class PaymentService {
     );
   }
   getChainedInvoiceCalls(invoiceForOrder: string): Observable<any> {
-    return this.createInvoice(invoiceForOrder).pipe(
-        switchMap((orderData) => {
-            console.log('Order Data:', orderData);
+    console.log('--->Order Data:', invoiceForOrder);
+
+    const orderIdData = {
+        orderId: invoiceForOrder
+    };
+  
+
+    return this.createInvoice(orderIdData).pipe(
+        switchMap((inviceData) => {
+            console.log('-Order Data-11:', inviceData);
             // if (!orderData || !orderData.orderId) {
             //     console.error('Invalid orderData received from getOrder:', orderData);
             //     return of(null); // Stop the chain if getOrder returns invalid data
             // }
-            return this.sendInvoice(orderData);
+            return this.sendInvoice(inviceData);
         })
     );
   }
