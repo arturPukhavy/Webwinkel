@@ -29,6 +29,7 @@ CD is triggered by any commit to `main` branch, normally after mergninfg `featur
 <img src="img/web-winkel-diagram_deploy.png" width="100%">
 
 ## Dev-environment
+In the dev-env both FE-app and BE-API can be started up on the same computer.
 ### Diagram
 <img src="img/web-winkel-diagram.png" width="100%">
 
