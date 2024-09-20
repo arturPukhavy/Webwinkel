@@ -43,7 +43,7 @@ Login e-mail | Password
 admin@dd.com | secret3 
 
 ## CI/CD
-*GitHib Actions* feature is used for CI/CD. <br>
+**GitHib Actions** feature is used for CI/CD. <br>
 CI is triggered each time when a `feature` branch is updated - it builds apps and run tests.<br>
 CD is triggered by any commit to `main` branch, normally after mergninfg `feature` branch into `main` when completing pull requests. CD deploys both FE and BE (API) into Glitch-platform.
 <img src="img/web-winkel-diagram_deploy.png" width="100%">
