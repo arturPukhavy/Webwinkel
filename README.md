@@ -25,7 +25,7 @@ A user is authorised depending on a `role`, three roles are supported by the app
   * Employee
   * Admin
 ### Customer
-Customre - a user who wants to make purchase
+Customre - a user who wants to make a purchase
 Login e-mail | Password
 --- | --- 
 anna@dd.com | secret1 
