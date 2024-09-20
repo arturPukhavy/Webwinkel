@@ -25,9 +25,10 @@ Depending on roles and uses cases three different types of users are supported i
   * Employee - an internal users who can manage list of products available online
   * Admin - an interan user who can manage customers and products
 #### Customer
-|Login e-mail|Password|
-|Login e-mail|Password|
-TODO
+Login e-mail | Password
+--- | --- 
+anna | 301 
+
 #### Employee
 TODO
 #### Admin
