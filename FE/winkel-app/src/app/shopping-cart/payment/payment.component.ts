@@ -31,12 +31,20 @@ export class PaymentComponent {
   }
 
   onSubmit() {
-    const orderId = 'ascf-257-xl';
+    
 
     // Call the chained API function
-    this.paymentService.getChainedApiCalls(orderId).subscribe(
+    this.paymentService.getChainedApiCalls('').subscribe(
       (finalResult) => {
         console.log('Final result:', finalResult);
+      },
+      (error) => {
+        console.error('Error in chained API calls:', error);
+      }
+    );
+    this.paymentService.getChainedInvoiceCalls('').subscribe(
+      (finalResult) => {
+        console.log('Final result1:', finalResult);
       },
       (error) => {
         console.error('Error in chained API calls:', error);
