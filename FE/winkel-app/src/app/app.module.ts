@@ -19,6 +19,7 @@ import { UsersService } from './users/users.service';
 import { CartService } from './shopping-cart/shopping-cart.service';
 import { LoginService } from './login/login.service';
 import { AuthInterceptor } from './intercepter/auth.interceptor';
+import { PaymentService } from './shopping-cart/payment/payment.service';
 
 
 @NgModule({
@@ -42,7 +43,7 @@ import { AuthInterceptor } from './intercepter/auth.interceptor';
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [ProductsService, UsersService, CartService, LoginService, 
+  providers: [ProductsService, UsersService, CartService, LoginService, PaymentService,
     {
     provide: HTTP_INTERCEPTORS,
     useClass: AuthInterceptor,
