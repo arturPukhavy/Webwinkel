@@ -37,8 +37,51 @@ curl 'http://localhost:3000/api/v1/login' \
     "password": "*******"
 }'
 ```
+## Payment API
+The following APIs are used to create and pay an order
 
-TODO
+#### Init Order
+```
+curl 'http://localhost:3000/api/v1/order/init'
+```
 
+#### Pay Order
+```
+curl 'http://localhost:3000/api/v1/order/pay' \
+--header 'Content-Type: application/json' \
+--data '{
+    "orderId": "ascf-257-xl",
+    "accountNumber": "123456"
+}'
+```
+
+#### Complete Order
+```
+curl 'http://localhost:3000/api/v1/order/complete' \
+--header 'Content-Type: application/json' \
+--data '{
+    "orderId": "ascf-257-xl"
+}'
+```
+
+## Invoice API
+These APIs are used to create and send an invoice to a client
+#### Create Invoice
+```
+curl --location 'http://localhost:3000/api/v1/invoice/create' \
+--header 'Content-Type: application/json' \
+--data '{
+    "orderId": "ascf-257-xl"
+}'
+```
+
+#### Send Invoice
+```
+curl 'http://localhost:3000/api/v1/invoice/send' \
+--header 'Content-Type: application/json' \
+--data '{
+    "invoiceForOrder": "ascf-257-xl"
+}'
+```
 ## Resources
 * [Install express](https://expressjs.com/en/starter/installing.html)

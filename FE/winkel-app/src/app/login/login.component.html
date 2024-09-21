@@ -1,4 +1,5 @@
   <div class="row">
+    <div class="space"></div>
     <div class="col-xs-12 col-md-6 col-md-offset-3">
       <app-alert
         [message]="error"
@@ -13,7 +14,7 @@
           </ngx-spinner>
       </div>
       <div class="login-container">
-        <h2>Welcome Back!</h2>
+        <h4>Welcome!</h4>
         <form #authForm="ngForm" (ngSubmit)="onSubmit(authForm)" *ngIf="!isLoading">
           <div class="form-group">
             <label for="email">E-Mail</label>
@@ -62,5 +63,21 @@
           </div> -->
         </form>
       </div>
+
+      <div class="space"></div>
+      <div class="alert alert-info" role="alert">
+        <h4 class="alert-heading">Disclaimer</h4>
+        <p>The website is a demo (POC) created by <a href="https://www.linkedin.com/in/artur-pukhavoi-7b104b302/" class="alert-link">Artur Pukhavoi</a>. It is intended for demonstration purposes only.</p>
+        <p>Please note the following:</p>
+        <ul>
+          <li><b>Security</b>: Security aspects are not implemented. It should NOT be used for real data or sensitive information.</li>
+          <li><b>API</b>: The site uses a mock-APIs with no real back-end functionality</li>
+        </ul>  
+        <hr>
+        <p class="mb-0">More details on a project can be found in Github: 
+          <a href="https://github.com/arturPukhavy/Webwinkel" class="alert-link">https://github.com/arturPukhavy/Webwinkel</a>
+        </p>
+      </div>
+        
     </div>
   </div>  
