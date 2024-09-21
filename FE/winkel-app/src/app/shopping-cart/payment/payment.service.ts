@@ -9,11 +9,9 @@ import { of } from 'rxjs';
 })
 
 export class PaymentService {
-    private headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-    });
-
- 
+  private headers = new HttpHeaders({
+    'Content-Type': 'application/json',
+  });
 
   constructor(private http: HttpClient) {}
 
@@ -32,7 +30,7 @@ export class PaymentService {
             return of(null); // Return null in case of error
         })
     );
-}
+  }  
 
   payOrder(orderData: any): Observable<any> {
     console.log('Received orderData in payOrder:', orderData);
@@ -52,7 +50,7 @@ export class PaymentService {
     return this.http.post('/api/v1/order/pay', taskData, { headers: this.headers }).pipe(
         map((response: any) => {
             console.log('Response from payOrder:', response); // Log the response
-            if (response /*&& response.orderId*/) {
+            if (response) {
                 console.log('Pay-response:', response);
                 return response;
             } else {
@@ -70,7 +68,7 @@ export class PaymentService {
   // API 3: Mark the task as completed
   completeOrder(orderData: any): Observable<any> {
     console.log('Received orderData in completeOrder:', orderData);
-    if (!orderData /*|| !orderData.orderId*/) {
+    if (!orderData) {
         console.error('Invalid orderData in completeOrder:', orderData);
         return of(null); // Return null if orderData is invalid
     }
@@ -81,12 +79,6 @@ export class PaymentService {
     return this.http.post('/api/v1/order/complete', completeData, { headers: this.headers }).pipe(
         map((response: any) => {
             console.log('Response from completeOrder:', response); // Log the response
-            // if (response && response.status) {
-            //     return response; // Return the response containing status
-            // } else {
-            //     console.error('Invalid response from completeOrder:', response);
-            //     return null; // Handle the case where the response is not as expected
-            // }
             return response;
         }),
         catchError((error: HttpErrorResponse) => {
@@ -98,74 +90,44 @@ export class PaymentService {
 
   // Function to chain all three API calls
   getChainedApiCalls(): Observable<any> {
-    
-    const res = this.getOrder().pipe(
-        switchMap((orderData) => {
-            console.log('Order Data:', orderData);
-            // if (!orderData || !orderData.orderId) {
-            //     console.error('Invalid orderData received from getOrder:', orderData);
-            //     return of(null); // Stop the chain if getOrder returns invalid data
-            // }
-            return this.payOrder(orderData);
-        }),
-        switchMap((paymentResult) => {
-            console.log('Payment Result:', paymentResult);
-            if (!paymentResult /*|| !paymentResult.orderId*/) {
-                console.error('Invalid paymentResult received from payOrder:', paymentResult);
-                return of(null); // Handle case where orderId is missing
-            }
-            return this.completeOrder(paymentResult); // This now expects the simplified response
-        }),
-        catchError((error) => {
-            console.error('Error during API calls:', error);
-            return of(null); // Return fallback value if any error occurs
-        })
-    );
-
-    return res;
-  }
-
-  createInvoice(orderData: any): Observable<any> {
-    console.log('--- Invoice, orderData:', orderData);
-    const invoiceData = {
-        orderId: orderData.orderId
-    };
-    return this.http.post('/api/v1/invoice/create', invoiceData, { headers: this.headers }).pipe(
-        catchError((error: HttpErrorResponse) => {
-          console.error('Error in invoiceData:', error);
-          return of(null); // Return null in case of error
-        })
-    );
-  }
-  sendInvoice(invoiceData: any): Observable<any> {
-    const invoiceInfo = {
-      invoiceForOrder: invoiceData.invoiceForOrder
-    };
-    console.log('--->> InvoiceInfo, orderData:', invoiceInfo);
-    return this.http.post('/api/v1/invoice/send', invoiceInfo, { headers: this.headers }).pipe(
-        catchError((error: HttpErrorResponse) => {
-          console.error('Error in invoiceInfo:', error);
-          return of(null); // Return null in case of error
-        })
-    );
-  }
-  getChainedInvoiceCalls(invoiceForOrder: string): Observable<any> {
-    console.log('--->Order Data:', invoiceForOrder);
-
-    const orderIdData = {
-        orderId: invoiceForOrder
-    };
+    return this.getOrder().pipe(
+      switchMap((orderData) => {
+        console.log('Order Data from getOrder:', orderData);
   
-
-    return this.createInvoice(orderIdData).pipe(
-        switchMap((inviceData) => {
-            console.log('-Order Data-11:', inviceData);
-            // if (!orderData || !orderData.orderId) {
-            //     console.error('Invalid orderData received from getOrder:', orderData);
-            //     return of(null); // Stop the chain if getOrder returns invalid data
-            // }
-            return this.sendInvoice(inviceData);
-        })
+        // Return null if orderData or orderId is invalid
+        if (!orderData || !orderData.orderId) {
+          console.error('Invalid orderData or orderId:', orderData);
+          return of(null);
+        }
+  
+        // Save the orderId to reuse it later in the invoice call
+        const orderId = orderData.orderId;
+  
+        // Proceed to payOrder with the orderData
+        return this.payOrder(orderData).pipe(
+          switchMap((paymentResult) => {
+            console.log('Payment Result from payOrder:', paymentResult);
+  
+            // Return null if paymentResult is invalid
+            if (!paymentResult) {
+              console.error('Invalid paymentResult:', paymentResult);
+              return of(null);
+            }
+  
+            // Proceed to completeOrder with the paymentResult
+            return this.completeOrder(paymentResult).pipe(
+              map((completeResult) => {
+                // Attach the original orderId to the completeResult
+                return { ...completeResult, orderId };  // Merge orderId with completeResult
+              })
+            );
+          })
+        );
+      }),
+      catchError((error) => {
+        console.error('Error during chained API calls:', error);
+        return of(null); // Return fallback value if any error occurs
+      })
     );
   }
 }

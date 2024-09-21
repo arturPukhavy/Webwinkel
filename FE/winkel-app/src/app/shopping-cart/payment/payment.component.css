@@ -105,4 +105,13 @@
     margin-right: 7px;
     font-size: 10px; /* Reduce font size */
   }
+
+  .invoice-checkbox {
+    display: flex; /* Use flexbox to align items horizontally */
+    align-items: center; /* Center align items vertically */
+  }  
+  .invoice-checkbox span {
+    white-space: nowrap; /* Prevent text wrapping */
+    padding-right: 120px;
+  }
   
