@@ -3,6 +3,7 @@ import { NgForm } from '@angular/forms';
 import { CartService } from '../shopping-cart.service';
 import { CartItem } from '../shopping-cart.model';
 import { PaymentService } from './payment.service';
+import { InvoiceService } from './payment.invoice.service';
 
 @Component({
   selector: 'app-payment',
@@ -21,7 +22,9 @@ export class PaymentComponent {
   cartItems: CartItem[] = [];
 
 
-  constructor(private cartService: CartService, private paymentService: PaymentService) {}
+  constructor(private cartService: CartService, 
+              private paymentService: PaymentService,
+              private invoiceService: InvoiceService) {}
 
   ngOnInit() {
     this.totalPrice = this.cartService.getTotal(); // Get the total price
@@ -32,25 +35,34 @@ export class PaymentComponent {
   }
 
   onSubmit() {
-    // Call the chained API function
+    // Call the chained API function to handle the main order
     this.paymentService.getChainedApiCalls().subscribe(
       (finalResult) => {
-        console.log('Final result:', finalResult);
+        console.log('Final result from getChainedApiCalls:', finalResult);
+  
+        // Make sure the result has a valid orderId
+        if (finalResult && finalResult.orderId) {
+          console.log('Order ID retrieved:', finalResult.orderId);
+  
+          // If the checkbox is checked, call the getChainedInvoiceCalls function with the dynamic orderId 
+          if (this.isChecked) {
+            this.invoiceService.getChainedInvoiceCalls(finalResult.orderId).subscribe(
+              (invoiceResult) => {
+                console.log('Final invoice result:', invoiceResult);
+              },
+              (error) => {
+                console.error('Error in chained invoice API calls:', error);
+              }
+            );
+          }
+        } else {
+          console.error('No valid orderId received from getChainedApiCalls:', finalResult);
+        }
       },
       (error) => {
         console.error('Error in chained API calls:', error);
       }
     );
-    if (this.isChecked) {
-      this.paymentService.getChainedInvoiceCalls('ascf-257-xl').subscribe(
-        (finalResult) => {
-          console.log('Final result1:', finalResult);
-        },
-        (error) => {
-          console.error('Error in chained API calls:', error);
-        }
-      );
-    }  
     // this.cartService.buyProducts(this.cartItems).subscribe({
     //   next: data => {
     //     console.log('Products bought: ' + JSON.stringify(data));

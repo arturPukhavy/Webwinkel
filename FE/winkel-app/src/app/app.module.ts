@@ -20,6 +20,7 @@ import { CartService } from './shopping-cart/shopping-cart.service';
 import { LoginService } from './login/login.service';
 import { AuthInterceptor } from './intercepter/auth.interceptor';
 import { PaymentService } from './shopping-cart/payment/payment.service';
+import { InvoiceService } from './shopping-cart/payment/payment.invoice.service';
 
 
 @NgModule({
@@ -43,7 +44,7 @@ import { PaymentService } from './shopping-cart/payment/payment.service';
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [ProductsService, UsersService, CartService, LoginService, PaymentService,
+  providers: [ProductsService, UsersService, CartService, LoginService, PaymentService, InvoiceService,
     {
     provide: HTTP_INTERCEPTORS,
     useClass: AuthInterceptor,
