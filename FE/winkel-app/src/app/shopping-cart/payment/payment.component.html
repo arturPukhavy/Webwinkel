@@ -61,6 +61,16 @@
         placeholder="123"
       />
     </div>
+    <div class="form-group">
+      <label class="invoice-checkbox">
+        <input
+          type="checkbox"
+          [(ngModel)]="isChecked"
+          name="isChecked"
+        />
+        <span>I want to receive an invoice</span>
+      </label>
+    </div>
     <button type="submit" class="submit-button" [disabled]="!payForm.valid">Pay Now</button>
   </form>
 </div>

@@ -17,6 +17,7 @@ export class PaymentComponent {
   expiryDate: string = '';
   cvv: string = '';
   totalPrice: number = 0;
+  isChecked: boolean = false;
   cartItems: CartItem[] = [];
 
 
@@ -31,8 +32,6 @@ export class PaymentComponent {
   }
 
   onSubmit() {
-    
-
     // Call the chained API function
     this.paymentService.getChainedApiCalls().subscribe(
       (finalResult) => {
@@ -42,15 +41,16 @@ export class PaymentComponent {
         console.error('Error in chained API calls:', error);
       }
     );
-
-    this.paymentService.getChainedInvoiceCalls('ascf-257-xl').subscribe(
-      (finalResult) => {
-        console.log('Final result1:', finalResult);
-      },
-      (error) => {
-        console.error('Error in chained API calls:', error);
-      }
-    );
+    if (this.isChecked) {
+      this.paymentService.getChainedInvoiceCalls('ascf-257-xl').subscribe(
+        (finalResult) => {
+          console.log('Final result1:', finalResult);
+        },
+        (error) => {
+          console.error('Error in chained API calls:', error);
+        }
+      );
+    }  
     // this.cartService.buyProducts(this.cartItems).subscribe({
     //   next: data => {
     //     console.log('Products bought: ' + JSON.stringify(data));
