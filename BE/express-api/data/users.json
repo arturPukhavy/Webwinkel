@@ -20,7 +20,7 @@
           }
         ],
         "userName": "max",
-        "password": "qwerty11",
+        "password": "secret2",
         "email": "max@dd.com"
       },
       {
@@ -44,7 +44,7 @@
           }
         ],
         "userName": "anna",
-        "password": "qwerty12",
+        "password": "secret1",
         "email": "anna@dd.com"
       },
       {
@@ -68,7 +68,7 @@
           }
         ],
         "userName": "admin",
-        "password": "admin123",
+        "password": "secret3",
         "email": "admin@dd.com"
       }      
 
