@@ -22,4 +22,5 @@ jobs:
 
     - name: Build
       run: |
-        echo "CI-test run!"
+        cd FE/winkel-app
+        ls -l
