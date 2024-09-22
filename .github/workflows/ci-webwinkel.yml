@@ -20,8 +20,18 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
 
-    - name: Build
+    - name: Switch folder
       run: |
         cd FE/winkel-app
+        ls -l
+
+    - name: Install Angular CLI
+      run: npm install -g @angular/cli
+
+    - name: Install dependencies
+      run: npm install    
+      
+    - name: Build
+      run: |
         ls -l
         ng build --configuration=production
