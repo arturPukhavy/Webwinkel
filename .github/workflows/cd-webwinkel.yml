@@ -22,7 +22,21 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
 
+    - name: Install Angular CLI
+      run: | 
+        npm install -g @angular/cli
+        pwd
+        ls -l
+
+    - name: Install dependencies
+      run: | 
+        cd FE/winkel-app
+        npm install
+        ls -l
+      
     - name: Build
       run: |
-        npm install
+        cd FE/winkel-app        
+        ng build --configuration=production
+        ls -l
       
