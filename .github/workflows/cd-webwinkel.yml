@@ -1,4 +1,4 @@
-name: NodeJS with Webpack
+name: (CD) Webwinkel
 
 on:
   push:
