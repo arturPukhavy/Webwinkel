@@ -10,7 +10,7 @@ import { InvoiceService } from './payment.invoice.service';
   templateUrl: './payment.component.html',
   styleUrls: ['./payment.component.css']
 })
-export clas PaymentComponent {
+export class PaymentComponent {
   @ViewChild('payForm') payForm: NgForm;
   @Output() close = new EventEmitter<void>(); 
   cardNumber: string = '';
