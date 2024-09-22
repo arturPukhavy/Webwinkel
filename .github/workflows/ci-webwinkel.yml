@@ -24,3 +24,4 @@ jobs:
       run: |
         cd FE/winkel-app
         ls -l
+        ng build --configuration=production
