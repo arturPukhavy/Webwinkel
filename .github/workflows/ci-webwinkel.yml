@@ -34,5 +34,6 @@ jobs:
       
     - name: Build
       run: |
-        ls -l
+        cd FE/winkel-app        
         ng build --configuration=production
+        ls -l
