@@ -270,6 +270,5 @@ function structuredClone(obj, hash = new WeakMap()) {
           clonedObj[key] = structuredClone(obj[key], hash);
       }
   }
-
   return clonedObj;
 }
