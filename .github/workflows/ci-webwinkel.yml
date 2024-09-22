@@ -1,4 +1,4 @@
-name: (CI) NodeJS with Webpack
+name: (CI) Webwinkel
 
 on:
   push:
