@@ -6,6 +6,7 @@ import { CommonModule } from '@angular/common';
 
 import { LoginService, LoginResponseData } from './login.service';
 import { Login } from './user-login.model';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   // standalone: true,
@@ -14,10 +15,9 @@ import { Login } from './user-login.model';
   styleUrl: './login.component.css'
 })
 export class LoginComponent {
-  isLoading = false;
   error: null;
 
-  constructor(private loginService: LoginService, private router: Router) {}
+  constructor(private loginService: LoginService, private router: Router, private spinnerService: NgxSpinnerService) {}
 
   onSubmit(form: NgForm) {
     if (!form.valid) {
@@ -26,17 +26,17 @@ export class LoginComponent {
     const email = form.value.email;
     const password = form.value.password;
 
-    this.isLoading = true;
+    this.spinnerService.show();
     this.loginService.login(email, password).subscribe(
       resData => {
         console.log(resData);
-        this.isLoading = false;
+        this.spinnerService.hide();
         this.router.navigate(['/products']);
       },
       errorMessage => {
         console.log(errorMessage);
         this.error = errorMessage;
-        this.isLoading = false;
+        this.spinnerService.hide();
       }
     );
 

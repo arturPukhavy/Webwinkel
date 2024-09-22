@@ -1,4 +1,4 @@
-<div class="payment-container">
+<div class="payment-container" *ngIf="!orderCompleted">
   <div class="header-container">
     <h2>Payment Information</h2>
     <button class="cancel-button" (click)="onCancel()">✖</button>
@@ -74,3 +74,35 @@
     <button type="submit" class="submit-button" [disabled]="!payForm.valid">Pay Now</button>
   </form>
 </div>
+<body *ngIf="orderCompleted">
+  <div class="invoice-container">
+    <div class="invoice-header">
+      <h1>Thank You for Purchase!</h1>
+    </div>
+    <div class="invoice-body">
+      <span class="success-icon">✔</span>
+      <h2>Order Completed Successfully</h2>
+      <p>We have received Your payment and Your order has been processed successfully.</p>
+      <div class="invoice-details">
+        <h3>Invoice Details</h3>
+        <table>
+          <tr>
+            <th>Order ID</th>
+            <td id="orderId">{{ orderId }}</td>
+          </tr>
+          <tr>
+            <th>Payment Status</th>
+            <td id="paymentStatus">Completed</td>
+          </tr>
+          <tr>
+            <th>Total Amount</th>
+            <td id="totalAmount">{{ totalPrice | currency: 'EUR' }}</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+    <div class="invoice-footer">
+      <p><a href="/products">Return to Products</a></p>
+    </div>
+  </div>
+</body>
