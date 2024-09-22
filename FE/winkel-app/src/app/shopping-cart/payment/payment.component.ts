@@ -19,6 +19,8 @@ export class PaymentComponent {
   cvv: string = '';
   totalPrice: number = 0;
   isChecked: boolean = false;
+  orderCompleted = false;
+  orderId: string = '';
   cartItems: CartItem[] = [];
 
 
@@ -43,6 +45,8 @@ export class PaymentComponent {
         // Make sure the result has a valid orderId
         if (finalResult && finalResult.orderId) {
           console.log('Order ID retrieved:', finalResult.orderId);
+          this.orderCompleted = true;
+          this.orderId = finalResult.orderId;
   
           // If the checkbox is checked, call the getChainedInvoiceCalls function with the dynamic orderId 
           if (this.isChecked) {
