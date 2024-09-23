@@ -83,6 +83,10 @@
   .submit-button:hover {
     background-color: #0056b3; /* Darker green on hover */
   }
+  .submit-button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
   
   @media (max-width: 480px) {
     .payment-container {
@@ -123,7 +127,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
   }
 
   .invoice-container {
@@ -207,5 +210,11 @@
     font-size: 50px;
     color: #4CAF50;
     margin-bottom: 20px;
+  }
+
+  .error-message {
+    color: red;
+    font-size: 12px;
+    margin-top: 5px;
   }
   
