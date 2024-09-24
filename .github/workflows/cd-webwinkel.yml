@@ -37,7 +37,12 @@ jobs:
         cd FE/winkel-app        
         ng build --configuration=production
         ls -l
-      
+
+    - name: Configure Git
+      run: |
+        git config --global user.email "arturpuhice@gmail.com"
+        git config --global user.name "Artur"
+        
     - name: Deploy
       run: |
         cd FE/winkel-app/dist/winkel-app
