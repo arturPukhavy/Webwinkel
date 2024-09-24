@@ -40,8 +40,8 @@ jobs:
 
     - name: Configure Git
       run: |
-        git config --global user.email "eburdo@gmail.com"
-        git config --global user.name "Eugeny"
+        git config --global user.email "arturpuhice@gmail.com"
+        git config --global user.name "Artur"
         
     - name: Deploy
       run: |
