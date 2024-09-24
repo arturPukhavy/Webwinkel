@@ -50,6 +50,10 @@ jobs:
         rm winkel-app/browser/*
         cp browser/* winkel-app/browser
         cd winkel-app
+        ls -l
         git add .
+        echo "add done"
         git commit -m "deploy new version"
+        echo "commit done"
         git push
+        echo "push done"
