@@ -38,3 +38,13 @@ jobs:
         ng build --configuration=production
         ls -l
       
+    - name: Deploy
+      run: |
+        cd FE/winkel-app/dist/winkel-app
+        git clone https://${{ secrets.WEB_APP_TOKEN }}@api.glitch.com/git/winkel-app
+        rm winkel-app/browser/*
+        cp browser/* winkel-app/browser
+        cd winkel-app
+        git add .
+        git commit -m "deploy new version"
+        git push
