@@ -3,6 +3,8 @@ name: (CI) NodeJS with Webpack
 on:
   push:
     branches: [ "feature/*" ]
+  pull_request:
+    branches: [ "main" ]  
 
 jobs:
   build:
