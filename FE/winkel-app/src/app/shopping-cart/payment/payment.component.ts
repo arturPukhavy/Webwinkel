@@ -37,18 +37,15 @@ export class PaymentComponent {
   }
 
   onSubmit() {
-    // Call the chained API function to handle the main order
     this.paymentService.getChainedApiCalls().subscribe(
       (finalResult) => {
         console.log('Final result from getChainedApiCalls:', finalResult);
   
-        // Make sure the result has a valid orderId
         if (finalResult && finalResult.orderId) {
           console.log('Order ID retrieved:', finalResult.orderId);
           this.orderCompleted = true;
           this.orderId = finalResult.orderId;
   
-          // If the checkbox is checked, call the getChainedInvoiceCalls function with the dynamic orderId 
           if (this.isChecked) {
             this.invoiceService.getChainedInvoiceCalls(finalResult.orderId).subscribe(
               (invoiceResult) => {
@@ -67,18 +64,6 @@ export class PaymentComponent {
         console.error('Error in chained API calls:', error);
       }
     );
-    // this.cartService.buyProducts(this.cartItems).subscribe({
-    //   next: data => {
-    //     console.log('Products bought: ' + JSON.stringify(data));
-    //     alert("Thank you for your purchase!");
-    //     this.cartItems = [];
-    //   },
-    //   error: (error: HttpErrorResponse) => {
-    //     this.errorHandlingMode = true;
-    //     this.error = error.error.error;
-    //     console.error('There was an error: ', error.error.error);
-    //   }
-    // })
   }
 
   onCancel() {

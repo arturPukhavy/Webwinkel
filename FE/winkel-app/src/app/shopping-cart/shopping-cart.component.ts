@@ -1,9 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CartItem } from './shopping-cart.model';
-import { Product } from '../products/product.model';
 import { CartService } from './shopping-cart.service';
-import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   // standalone: true,
@@ -11,7 +8,7 @@ import { HttpErrorResponse } from '@angular/common/http';
   templateUrl: './shopping-cart.component.html',
   styleUrl: './shopping-cart.component.css'
 })
-export class ShoppingCartComponent implements OnInit, OnDestroy{
+export class ShoppingCartComponent implements OnInit {
   cartItems: CartItem[] = [];
   errorHandlingMode = false;
   error: string;
@@ -44,7 +41,4 @@ export class ShoppingCartComponent implements OnInit, OnDestroy{
     return this.cartService.getTotal();
   }
   
-  ngOnDestroy() {
-
-  }
 }

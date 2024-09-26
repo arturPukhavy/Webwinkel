@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { LoginService } from './login/login.service';
 
 @Component({
@@ -7,7 +7,6 @@ import { LoginService } from './login/login.service';
   styleUrl: './app.component.css'
 })
 export class AppComponent implements OnInit {
-  title = 'winkel-app';
 
   constructor( private loginService: LoginService) {}
  

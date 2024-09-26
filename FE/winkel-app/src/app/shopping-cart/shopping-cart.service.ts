@@ -55,7 +55,4 @@ export class CartService {
     return this.cartItems.reduce((sum, item) => sum + item.product.price * item.quantity, 0);
   }
 
-  // buyProducts(cartItems: CartItem[]) {
-  //   return this.http.post('/api/v1/shoppingcart', { items: cartItems })
-  // }
 }
