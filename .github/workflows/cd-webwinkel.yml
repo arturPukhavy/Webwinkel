@@ -52,7 +52,7 @@ jobs:
         cp browser/* winkel-app/browser
         cd winkel-app
         ls -l
-        # touch readme.tmp
+        touch readme.tmp
         pwd
         STATUS=$(git status --porcelain)
         echo "status=$STATUS" >> $GITHUB_OUTPUT
@@ -60,8 +60,16 @@ jobs:
     - name: Deploy to Glitch
       if: steps.git-status.outputs.status != ''
       run: |
-        echo "There are uncommitted changes. Running Step A..."
+        echo "There are uncommitted changes. Running Deploy to glitch"
+        cd FE/winkel-app/dist/winkel-app/winkel-app
+        git add .
+        echo "add done"
+        git commit -m "deploy new version"
+        echo "commit done"
+        git push
+        echo "push done"
         # Add commands for Step A here
+        
     - name: Nothing to deploy
       if: steps.git-status.outputs.status == ''
       run: |
