@@ -1,11 +1,8 @@
 import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
-import { CommonModule } from '@angular/common';
 
-import { LoginService, LoginResponseData } from './login.service';
-import { Login } from './user-login.model';
+import { LoginService } from './login.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
@@ -15,7 +12,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
   styleUrl: './login.component.css'
 })
 export class LoginComponent {
-  error: null;
+  error: string | null = null;
 
   constructor(private loginService: LoginService, private router: Router, private spinnerService: NgxSpinnerService) {}
 

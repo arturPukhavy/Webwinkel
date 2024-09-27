@@ -1,101 +1,111 @@
-// import { ComponentFixture, TestBed } from '@angular/core/testing';
-// import { ProductsComponent } from './products.component';
-// import { ProductsService } from '../products.service';
-// import { CartService } from '../../shopping-cart/shopping-cart.service';
-// import { NgxSpinnerModule, NgxSpinnerService } from 'ngx-spinner';
-// import { LoginService } from '../../login/login.service';
-// import { of, BehaviorSubject, throwError, Subject } from 'rxjs';
-// import { Product } from '../product.model';
-// import { HttpErrorResponse } from '@angular/common/http';
-// import { Login } from '../../login/user-login.model';
-// import { NgForm } from '@angular/forms';
-// import { UserComponent } from './user.component';
-// import { UsersService } from '../users.service';
-// import { User } from './model/User.model';
-// import { Role } from './model/Role.model';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { NgxSpinnerModule, NgxSpinnerService } from 'ngx-spinner';
+import { of, throwError, Subject } from 'rxjs';
+import { HttpErrorResponse } from '@angular/common/http';
+import { UserComponent } from './user.component';
+import { UsersService } from '../users.service';
+import { User } from './model/User.model';
+import { Role } from './model/Role.model';
+import { FormGroup, FormControl, FormArray, Validators } from '@angular/forms';
 
-// describe('ProductsComponent', () => {
-//   let component: UserComponent;
-//   let fixture: ComponentFixture<UserComponent>;
-//   let usersServiceSpy: jasmine.SpyObj<UsersService>;
-//   let spinnerServiceSpy: jasmine.SpyObj<NgxSpinnerService>;
+describe('UserComponent', () => {
+  let component: UserComponent;
+  let fixture: ComponentFixture<UserComponent>;
+  let usersServiceSpy: jasmine.SpyObj<UsersService>;
+  let spinnerServiceSpy: jasmine.SpyObj<NgxSpinnerService>;
 
-//   const mockUser: User = { id: 1, firstName: 'Test', lastName: 'Test Brand', userName: 'test', address: [], role: 'employee', 
-//                            email: 'test', birthDate:  };
-//   const mockUserArray: User[] = [mockUser];
+  const mockUser: User = { 
+    id: 1, 
+    firstName: 'Test', 
+    lastName: 'Test Brand', 
+    userName: 'test', 
+    address: [], 
+    role: Role.Empl, 
+    email: 'test@test.com', 
+    password: 'test', 
+    birthDate: new Date('2000-01-01') 
+  };
+  const mockUserArray: User[] = [mockUser];
 
-//   beforeEach(async () => {
-//     usersServiceSpy = jasmine.createSpyObj('UsersService', ['fetchUsers', 'createUser', 'deleteUser']);
-  
-//     // Mock for NgxSpinnerService
-//     spinnerServiceSpy = jasmine.createSpyObj('NgxSpinnerService', ['show', 'hide']);
+  beforeEach(async () => {
+    usersServiceSpy = jasmine.createSpyObj('UsersService', ['fetchUsers', 'createUser', 'deleteUser']);
+    usersServiceSpy.startedEditing = new Subject<number>(); // Subject for startedEditing
 
-//     await TestBed.configureTestingModule({
-//       imports: [NgxSpinnerModule],
-//       declarations: [ProductsComponent],
-//       providers: [
-//         { provide: UsersService, useValue: usersServiceSpy },
-//         { provide: NgxSpinnerService, useValue: spinnerServiceSpy },
-//       ],
-//     }).compileComponents();
+    spinnerServiceSpy = jasmine.createSpyObj('NgxSpinnerService', ['show', 'hide']);
 
-//     fixture = TestBed.createComponent(UserComponent);
-//     component = fixture.componentInstance;
-//   });
+    await TestBed.configureTestingModule({
+      imports: [NgxSpinnerModule],
+      declarations: [UserComponent],
+      providers: [
+        { provide: UsersService, useValue: usersServiceSpy },
+        { provide: NgxSpinnerService, useValue: spinnerServiceSpy },
+      ],
+    }).compileComponents();
 
-//   it('should create the component', () => {
-//     expect(component).toBeTruthy();
-//   });
+    fixture = TestBed.createComponent(UserComponent);
+    component = fixture.componentInstance;
 
-//   it('should fetch users on init', () => {
-//     usersServiceSpy.fetchUsers.and.returnValue(of(mockUserArray));
+    component.userForm = new FormGroup({
+      firstName: new FormControl(null, Validators.required),
+      lastName: new FormControl(null, Validators.required),
+      role: new FormControl('Admin'),
+      email: new FormControl(null, [Validators.required, Validators.email]),
+      birthDate: new FormControl(null, Validators.required),
+      userName: new FormControl(null, Validators.required),
+      address: new FormArray([])
+    });
+  });
+
+  it('should create the component', () => {
+    expect(component).toBeTruthy();
+  });
+
+  it('should fetch users on init', () => {
+    usersServiceSpy.fetchUsers.and.returnValue(of(mockUserArray));
     
-//     component.ngOnInit();
+    component.ngOnInit();
     
-//     expect(usersServiceSpy.fetchUsers).toHaveBeenCalled();
-//     expect(component.users.length).toBe(1);
-//   });
+    expect(usersServiceSpy.fetchUsers).toHaveBeenCalled();
+    expect(component.users.length).toBe(1);
+  });
 
-//   it('should handle errors during fetchPosts', () => {
-//     const errorResponse = new HttpErrorResponse({
-//       error: { error: 'Test error' },
-//       status: 500
-//     });
+  it('should handle errors during fetchUsers', () => {
+    const errorResponse = new HttpErrorResponse({
+      error: { error: 'Test error' },
+      status: 500
+    });
 
-//     usersServiceSpy.fetchUsers.and.returnValue(throwError(() => errorResponse));
+    usersServiceSpy.fetchUsers.and.returnValue(throwError(() => errorResponse));
 
-//     component.onFetchUsers(); // Call the method directly
-//     expect(component.errorHandlingMode).toBeTrue();
-//     expect(component.error).toEqual('Test error');
-//   });
+    component.onFetchUsers(); // Call the method directly
+    expect(component.errorHandlingMode).toBeTrue();
+    expect(component.error).toEqual('Test error');
+  });
 
-//   it('should create a new product', () => {
-//     component.userForm = {
-//       value: { naam: 'New Product', merk: 'Brand', voorraad: 10, price: 200 },
-//       reset: () => {}
-//     } as NgForm;
+  it('should create a new user', () => {
+    component.userForm.setValue({
+      firstName: 'John',
+      lastName: 'Doe',
+      role: 'Admin',
+      email: 'johndoe@test.com',
+      birthDate: new Date('2000-01-01'),
+      userName: 'johndoe',
+      address: []
+    });
 
-//     usersServiceSpy.createUser.and.returnValue(of(mockUserArray));
-//     component.onAddUser();
+    usersServiceSpy.createUser.and.returnValue(of(mockUserArray)); // Return an array
+    component.onAddUser();
 
-//     expect(spinnerServiceSpy.show).toHaveBeenCalled();
-//     expect(usersServiceSpy.createUser).toHaveBeenCalledWith(component.userForm.value);
-//   });
+    expect(spinnerServiceSpy.show).toHaveBeenCalled();
+    expect(usersServiceSpy.createUser).toHaveBeenCalledWith(component.userForm.value);
+  });
 
-//   it('should unsubscribe from subscriptions on destroy', () => {
-//     // Create a mock subscription
-//     const subscription1 = jasmine.createSpyObj('Subscription', ['unsubscribe']);
-//     const subscription2 = jasmine.createSpyObj('Subscription', ['unsubscribe']);
-  
-//     // Add mock subscriptions to the component's subscriptions array
-//     component['subscriptions'].push(subscription1);
-//     component['subscriptions'].push(subscription2);
-  
-//     // Call ngOnDestroy to trigger the unsubscribe logic
-//     component.ngOnDestroy();
-  
-//     // Verify that unsubscribe was called for each subscription
-//     expect(subscription1.unsubscribe).toHaveBeenCalled();
-//     expect(subscription2.unsubscribe).toHaveBeenCalled();
-//   });
-// });
+  it('should unsubscribe from subscription on destroy', () => {
+    const subscription = jasmine.createSpyObj('Subscription', ['unsubscribe']);
+    component.subscription = subscription; // Assign the mock subscription
+
+    component.ngOnDestroy();
+
+    expect(subscription.unsubscribe).toHaveBeenCalled();
+  });
+});

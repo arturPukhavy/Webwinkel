@@ -24,10 +24,12 @@ describe('ProductsComponent', () => {
   beforeEach(async () => {
     productsServiceSpy = jasmine.createSpyObj('ProductsService', ['fetchPosts', 'createPost', 'deleteProduct']);
     productsServiceSpy.startedEditing = new Subject<number>(); // Mock startedEditing as a Subject
+
     cartServiceSpy = jasmine.createSpyObj('CartService', ['addToCart']);
-    cartServiceSpy.products$ = new BehaviorSubject<Product[]>(mockProductArray);
-    loginServiceSpy = jasmine.createSpyObj('LoginService', [], { user: new BehaviorSubject<Login | null>(null) });
-    
+    cartServiceSpy.products$ = new BehaviorSubject<Product[]>(mockProductArray); // Mock cart products
+
+    loginServiceSpy = jasmine.createSpyObj('LoginService', ['user'], { user: new BehaviorSubject<Login | null>(null) }); // Mock user
+
     // Mock for NgxSpinnerService
     spinnerServiceSpy = jasmine.createSpyObj('NgxSpinnerService', ['show', 'hide']);
 
