@@ -52,7 +52,7 @@ jobs:
         cp browser/* winkel-app/browser
         cd winkel-app
         ls -l
-        touch readme.tmp
+        # touch readme.tmp
         pwd
         STATUS=$(git status --porcelain)
         echo "status=$STATUS" >> $GITHUB_OUTPUT
