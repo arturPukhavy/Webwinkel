@@ -68,27 +68,9 @@ jobs:
         echo "commit done"
         git push
         echo "push done"
-        # Add commands for Step A here
+        echo "Deploy to glitch complete"
         
     - name: Nothing to deploy
       if: steps.git-status.outputs.status == ''
       run: |
-        cd FE/winkel-app/dist/winkel-app
-        cd winkel-app
-        ls -l
         echo "No changes, there is nothing to deploy"
-    
-    - name: Deploy
-      run: |
-        cd FE/winkel-app/dist/winkel-app
-        # git clone https://${{ secrets.WEB_APP_TOKEN }}@api.glitch.com/git/winkel-app
-        # rm winkel-app/browser/*
-        # cp browser/* winkel-app/browser
-        # cd winkel-app
-        # ls -l
-        # git add .
-        # echo "add done"
-        # git commit -m "deploy new version"
-        # echo "commit done"
-        # git push
-        # echo "push done"
