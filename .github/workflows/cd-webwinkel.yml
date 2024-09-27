@@ -42,8 +42,9 @@ jobs:
       run: |
         git config --global user.email "arturpuhice@gmail.com"
         git config --global user.name "Artur"
-        
-    - name: Deploy
+
+    - name: Run Glitch-git status
+      id: git-status
       run: |
         cd FE/winkel-app/dist/winkel-app
         git clone https://${{ secrets.WEB_APP_TOKEN }}@api.glitch.com/git/winkel-app
@@ -51,9 +52,32 @@ jobs:
         cp browser/* winkel-app/browser
         cd winkel-app
         ls -l
-        git add .
-        echo "add done"
-        git commit -m "deploy new version"
-        echo "commit done"
-        git push
-        echo "push done"
+        #touch readme.tmp
+        pwd
+        STATUS=$(git status --porcelain)
+        echo "status=$STATUS" >> $GITHUB_OUTPUT
+
+    - name: Deploy to Glitch
+      if: steps.git-status.outputs.status != ''
+      run: |
+        echo "There are uncommitted changes. Running Step A..."
+        # Add commands for Step A here
+    - name: Nothing to deploy
+      if: steps.git-status.outputs.status == ''
+      run: |
+        echo "No changes, there is nothing to deploy"
+    
+    - name: Deploy
+      run: |
+        cd FE/winkel-app/dist/winkel-app
+        # git clone https://${{ secrets.WEB_APP_TOKEN }}@api.glitch.com/git/winkel-app
+        # rm winkel-app/browser/*
+        # cp browser/* winkel-app/browser
+        # cd winkel-app
+        # ls -l
+        # git add .
+        # echo "add done"
+        # git commit -m "deploy new version"
+        # echo "commit done"
+        # git push
+        # echo "push done"
