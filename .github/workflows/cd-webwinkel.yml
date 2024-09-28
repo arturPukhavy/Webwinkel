@@ -57,7 +57,8 @@ jobs:
         git status
         echo "git status next"
         git status --porcelain
-        STATUS=$(git status --porcelain)
+        # STATUS=$(git status --porcelain)
+        STATUS="change" 
         echo "status=$STATUS" >> $GITHUB_ENV
 
     - name: Deploy to Glitch
