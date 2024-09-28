@@ -39,3 +39,10 @@ jobs:
         cd FE/winkel-app        
         ng build --configuration=production
         ls -l
+
+    - name: Test
+      run: |
+        cd FE/winkel-app        
+        ng test
+        echo "Test Completed"
+        ls -l
