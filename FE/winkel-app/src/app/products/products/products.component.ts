@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { NgForm } from '@angular/forms';
 import { ProductsService } from '../products.service';
@@ -17,7 +17,7 @@ import { LoginService } from '../../login/login.service';
 })
 export class ProductsComponent implements OnInit, OnDestroy{
   @ViewChild('postForm') productForm: NgForm; 
-  subscription: Subscription;
+  subscriptions: Subscription[] = [];
   products: Product[] = [];
   filteredProducts: Product[] = [];
   searchTerm: string = '';
@@ -27,7 +27,6 @@ export class ProductsComponent implements OnInit, OnDestroy{
   error: string;
   role = Role
   user: Login | null = null;
-
   
 
   constructor(private prService: ProductsService, 
@@ -36,32 +35,32 @@ export class ProductsComponent implements OnInit, OnDestroy{
               private spinnerService: NgxSpinnerService ) {}
   
   ngOnInit() {
-    this.onFetchPosts();
+  this.onFetchPosts(); 
 
-    this.subscription = this.loginService.user.subscribe(user => {
-      this.user = user;
-    });  
-    
-    this.subscription = this.cartService.products$.subscribe((product) => {
-      this.products = product;
-    });
+  this.subscriptions.push(this.loginService.user.subscribe(user => {
+    this.user = user;
+  }));
 
-    this.subscription = this.prService.startedEditing
-      .subscribe(
-        (index: number) => {
-          console.log('Product to edit: ' + JSON.stringify(this.getProduct(index)));
-          this.editMode = true;
-          this.editedItem = this.getProduct(index);
-          this.productForm.setValue({
-            id: this.getProduct(index).id,
-            naam: this.editedItem.naam,
-            merk: this.editedItem.merk,
-            voorraad: this.editedItem.voorraad,
-            price: this.editedItem.price
-          })
-        }
-    ) 
-  };
+  this.subscriptions.push(this.cartService.products$.subscribe((product) => {
+    this.products = product;
+  }));
+
+  this.subscriptions.push(this.prService.startedEditing.subscribe(
+    (index: number) => {
+      this.editMode = true;
+      this.editedItem = this.getProduct(index);
+      if (this.productForm) {
+        this.productForm.setValue({
+          id: this.editedItem.id,
+          naam: this.editedItem.naam,
+          merk: this.editedItem.merk,
+          voorraad: this.editedItem.voorraad,
+          price: this.editedItem.price
+        });
+      }
+    }
+  ));
+}
 
   filterProducts() {
     console.log('Search term:', this.searchTerm);
@@ -168,8 +167,8 @@ export class ProductsComponent implements OnInit, OnDestroy{
   }
 
   ngOnDestroy() {
-    this.subscription.unsubscribe();
-    console.log('Destroy ProductsComponent')
+    this.subscriptions.forEach(sub => sub.unsubscribe());
+    console.log('Destroy ProductsComponent');
   }
 
 }

@@ -1,14 +1,17 @@
 import { Component, EventEmitter, Output, ViewChild } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { FormsModule, NgForm } from '@angular/forms';
 import { CartService } from '../shopping-cart.service';
 import { CartItem } from '../shopping-cart.model';
 import { PaymentService } from './payment.service';
 import { InvoiceService } from './payment.invoice.service';
+import { CommonModule, NgFor, NgIf } from '@angular/common';
 
 @Component({
+  standalone: true,
   selector: 'app-payment',
   templateUrl: './payment.component.html',
-  styleUrls: ['./payment.component.css']
+  styleUrls: ['./payment.component.css'],
+  imports: [FormsModule, NgIf, NgFor, CommonModule]
 })
 export class PaymentComponent {
   @ViewChild('payForm') payForm: NgForm;
@@ -37,18 +40,15 @@ export class PaymentComponent {
   }
 
   onSubmit() {
-    // Call the chained API function to handle the main order
     this.paymentService.getChainedApiCalls().subscribe(
       (finalResult) => {
         console.log('Final result from getChainedApiCalls:', finalResult);
   
-        // Make sure the result has a valid orderId
         if (finalResult && finalResult.orderId) {
           console.log('Order ID retrieved:', finalResult.orderId);
           this.orderCompleted = true;
           this.orderId = finalResult.orderId;
   
-          // If the checkbox is checked, call the getChainedInvoiceCalls function with the dynamic orderId 
           if (this.isChecked) {
             this.invoiceService.getChainedInvoiceCalls(finalResult.orderId).subscribe(
               (invoiceResult) => {
@@ -67,18 +67,6 @@ export class PaymentComponent {
         console.error('Error in chained API calls:', error);
       }
     );
-    // this.cartService.buyProducts(this.cartItems).subscribe({
-    //   next: data => {
-    //     console.log('Products bought: ' + JSON.stringify(data));
-    //     alert("Thank you for your purchase!");
-    //     this.cartItems = [];
-    //   },
-    //   error: (error: HttpErrorResponse) => {
-    //     this.errorHandlingMode = true;
-    //     this.error = error.error.error;
-    //     console.error('There was an error: ', error.error.error);
-    //   }
-    // })
   }
 
   onCancel() {

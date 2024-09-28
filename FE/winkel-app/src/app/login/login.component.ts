@@ -1,21 +1,21 @@
 import { Component } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { FormsModule, NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
-import { CommonModule } from '@angular/common';
 
-import { LoginService, LoginResponseData } from './login.service';
-import { Login } from './user-login.model';
-import { NgxSpinnerService } from 'ngx-spinner';
+import { LoginService } from './login.service';
+import { NgxSpinnerModule, NgxSpinnerService } from 'ngx-spinner';
+import { AlertComponent } from '../alert/alert.component';
+import { NgIf } from '@angular/common';
 
 @Component({
-  // standalone: true,
+  standalone: true,
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrl: './login.component.css'
+  styleUrl: './login.component.css',
+  imports: [FormsModule, NgxSpinnerModule, AlertComponent, NgIf]
 })
 export class LoginComponent {
-  error: null;
+  error: string | null = null;
 
   constructor(private loginService: LoginService, private router: Router, private spinnerService: NgxSpinnerService) {}
 

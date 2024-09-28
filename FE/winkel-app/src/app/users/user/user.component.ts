@@ -6,14 +6,9 @@ import { UsersService } from '../users.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Subscription } from 'rxjs';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
-import { ActivatedRoute, Params, Router } from '@angular/router';
-
-
 
 
 @Component({
-  // standalone: true,
   selector: 'app-user',
   templateUrl: './user.component.html',
   styleUrl: './user.component.css',
@@ -41,8 +36,7 @@ export class UserComponent implements OnInit, OnDestroy {
 
   constructor( private userService: UsersService, 
                private spinnerService: NgxSpinnerService,
-               private route: ActivatedRoute, 
-               private router: Router) {}
+             ) {}
 
   
   ngOnInit(): void {
@@ -237,8 +231,9 @@ export class UserComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.subscription.unsubscribe();
-    
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
   }
 
 }

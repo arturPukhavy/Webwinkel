@@ -39,10 +39,6 @@ export class ProductsService {
   clearPosts() {
     return this.http.delete<Product>('/api/v1/products')
   }
-
-  
-  
-
   
 }
 

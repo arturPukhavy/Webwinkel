@@ -12,7 +12,7 @@ import { CartService } from '../shopping-cart/shopping-cart.service';
 })
 export class HeaderComponent implements OnInit, OnDestroy {
   isAuthenticated = false;
-  private sub: Subscription;
+  private subs: Subscription = new Subscription();
   user: Login | null = null;
   role = Role;
   cartItemCount: number = 0;
@@ -20,16 +20,21 @@ export class HeaderComponent implements OnInit, OnDestroy {
   constructor( private loginService: LoginService, private cartService: CartService ) {}
 
   ngOnInit() {
-    this.sub = this.loginService.user.subscribe(user => {
-      this.user = user;
-      this.isAuthenticated = !!user;
-      console.log('User object:', this.user);
-      console.log(!user);
-      console.log(!!user);
-    });
-    this.sub = this.cartService.getCartItemCount().subscribe(count => {
-      this.cartItemCount = count;
-    });
+    this.subs.add(
+      this.loginService.user.subscribe(user => {
+        this.user = user;
+        this.isAuthenticated = !!user;
+        console.log('User object:', this.user);
+        console.log(!user);
+        console.log(!!user);
+      })
+    );
+
+    this.subs.add(
+      this.cartService.getCartItemCount().subscribe(count => {
+        this.cartItemCount = count;
+      })
+    );
   }
 
   onLogout() {
@@ -42,12 +47,11 @@ export class HeaderComponent implements OnInit, OnDestroy {
   if (userName) {
     return userName; 
     }
-    return ''; // Return empty string if no user or names are not available
+    return ''; 
   }
 
   ngOnDestroy() {
-    this.sub.unsubscribe();
+    this.subs.unsubscribe();
   }
-
 
 }
