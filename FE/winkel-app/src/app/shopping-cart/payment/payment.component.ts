@@ -1,14 +1,17 @@
 import { Component, EventEmitter, Output, ViewChild } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { FormsModule, NgForm } from '@angular/forms';
 import { CartService } from '../shopping-cart.service';
 import { CartItem } from '../shopping-cart.model';
 import { PaymentService } from './payment.service';
 import { InvoiceService } from './payment.invoice.service';
+import { CommonModule, NgFor, NgIf } from '@angular/common';
 
 @Component({
+  standalone: true,
   selector: 'app-payment',
   templateUrl: './payment.component.html',
-  styleUrls: ['./payment.component.css']
+  styleUrls: ['./payment.component.css'],
+  imports: [FormsModule, NgIf, NgFor, CommonModule]
 })
 export class PaymentComponent {
   @ViewChild('payForm') payForm: NgForm;

@@ -27,8 +27,7 @@ describe('LoginComponent', () => {
     const spinnerSpy = jasmine.createSpyObj('NgxSpinnerService', ['show', 'hide']);
 
     await TestBed.configureTestingModule({
-      declarations: [LoginComponent],
-      imports: [FormsModule, NgxSpinnerModule],
+      imports: [LoginComponent, FormsModule, NgxSpinnerModule],
       providers: [
         { provide: LoginService, useValue: loginSpy },
         { provide: Router, useValue: routerSpyObj },

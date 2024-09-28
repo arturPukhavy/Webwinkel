@@ -9,7 +9,6 @@ import { NgxSpinnerService } from 'ngx-spinner';
 
 
 @Component({
-  // standalone: true,
   selector: 'app-user',
   templateUrl: './user.component.html',
   styleUrl: './user.component.css',

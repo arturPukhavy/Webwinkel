@@ -17,7 +17,7 @@ describe('ShoppingCartComponent', () => {
     const spy = jasmine.createSpyObj('CartService', ['getCartItems', 'removeFromCart', 'getTotal']);
 
     TestBed.configureTestingModule({
-      declarations: [ShoppingCartComponent],
+      imports: [ShoppingCartComponent],
       providers: [{ provide: CartService, useValue: spy }]
     }).compileComponents();
 

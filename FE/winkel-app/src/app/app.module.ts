@@ -27,12 +27,9 @@ import { InvoiceService } from './shopping-cart/payment/payment.invoice.service'
   declarations: [
     AppComponent,
     ProductsComponent,
-    AlertComponent,
     UserComponent,
     HeaderComponent,
-    LoginComponent,
-    ShoppingCartComponent,
-    PaymentComponent
+    
 
   ],
   imports: [
@@ -42,7 +39,11 @@ import { InvoiceService } from './shopping-cart/payment/payment.invoice.service'
     NgxSpinnerModule,
     BrowserAnimationsModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    AlertComponent,
+    ShoppingCartComponent,
+    LoginComponent,
+    PaymentComponent
   ],
   providers: [ProductsService, UsersService, CartService, LoginService, PaymentService, InvoiceService,
     {

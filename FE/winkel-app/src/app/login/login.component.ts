@@ -1,15 +1,18 @@
 import { Component } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { FormsModule, NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { LoginService } from './login.service';
-import { NgxSpinnerService } from 'ngx-spinner';
+import { NgxSpinnerModule, NgxSpinnerService } from 'ngx-spinner';
+import { AlertComponent } from '../alert/alert.component';
+import { NgIf } from '@angular/common';
 
 @Component({
-  // standalone: true,
+  standalone: true,
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrl: './login.component.css'
+  styleUrl: './login.component.css',
+  imports: [FormsModule, NgxSpinnerModule, AlertComponent, NgIf]
 })
 export class LoginComponent {
   error: string | null = null;
