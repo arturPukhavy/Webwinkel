@@ -35,32 +35,32 @@ export class ProductsComponent implements OnInit, OnDestroy{
               private spinnerService: NgxSpinnerService ) {}
   
   ngOnInit() {
-    this.onFetchPosts();
+  this.onFetchPosts(); 
 
-    this.subscriptions.push(this.loginService.user.subscribe(user => {
-      this.user = user;
-    }));  
-    
-    this.subscriptions.push(this.cartService.products$.subscribe((product) => {
-      this.products = product;
-    }));
+  this.subscriptions.push(this.loginService.user.subscribe(user => {
+    this.user = user;
+  }));
 
-    this.subscriptions.push(this.prService.startedEditing.subscribe(
-      (index: number) => {
-        this.editMode = true;
-        this.editedItem = this.getProduct(index);
-        if (this.productForm) { 
-          this.productForm.setValue({
-            id: this.editedItem.id,
-            naam: this.editedItem.naam,
-            merk: this.editedItem.merk,
-            voorraad: this.editedItem.voorraad,
-            price: this.editedItem.price
-          });
-        }
+  this.subscriptions.push(this.cartService.products$.subscribe((product) => {
+    this.products = product;
+  }));
+
+  this.subscriptions.push(this.prService.startedEditing.subscribe(
+    (index: number) => {
+      this.editMode = true;
+      this.editedItem = this.getProduct(index);
+      if (this.productForm) {
+        this.productForm.setValue({
+          id: this.editedItem.id,
+          naam: this.editedItem.naam,
+          merk: this.editedItem.merk,
+          voorraad: this.editedItem.voorraad,
+          price: this.editedItem.price
+        });
       }
-    ));
-  }
+    }
+  ));
+}
 
   filterProducts() {
     console.log('Search term:', this.searchTerm);
@@ -167,7 +167,7 @@ export class ProductsComponent implements OnInit, OnDestroy{
   }
 
   ngOnDestroy() {
-    this.subscriptions.forEach(sub => sub.unsubscribe()); // Unsubscribe from all subscriptions
+    this.subscriptions.forEach(sub => sub.unsubscribe());
     console.log('Destroy ProductsComponent');
   }
 

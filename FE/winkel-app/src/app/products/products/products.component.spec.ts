@@ -22,17 +22,16 @@ describe('ProductsComponent', () => {
   const mockProductArray: Product[] = [mockProduct];
 
   beforeEach(async () => {
-    productsServiceSpy = jasmine.createSpyObj('ProductsService', ['fetchPosts', 'createPost', 'deleteProduct']);
+    productsServiceSpy = jasmine.createSpyObj('ProductsService', ['fetchPosts', 'createPost', 'deleteProduct', 'updatePost']);
     productsServiceSpy.startedEditing = new Subject<number>(); // Mock startedEditing as a Subject
-
     cartServiceSpy = jasmine.createSpyObj('CartService', ['addToCart']);
     cartServiceSpy.products$ = new BehaviorSubject<Product[]>(mockProductArray); // Mock cart products
-
-    loginServiceSpy = jasmine.createSpyObj('LoginService', ['user'], { user: new BehaviorSubject<Login | null>(null) }); // Mock user
-
-    // Mock for NgxSpinnerService
+    loginServiceSpy = jasmine.createSpyObj('LoginService', ['user'], { user: new BehaviorSubject<Login | null>(null) });
     spinnerServiceSpy = jasmine.createSpyObj('NgxSpinnerService', ['show', 'hide']);
-
+    
+    // Mock fetchPosts to return an observable with mockProductArray
+    productsServiceSpy.fetchPosts.and.returnValue(of(mockProductArray));
+  
     await TestBed.configureTestingModule({
       imports: [NgxSpinnerModule],
       declarations: [ProductsComponent],
@@ -43,7 +42,7 @@ describe('ProductsComponent', () => {
         { provide: NgxSpinnerService, useValue: spinnerServiceSpy },
       ],
     }).compileComponents();
-
+  
     fixture = TestBed.createComponent(ProductsComponent);
     component = fixture.componentInstance;
   });
@@ -53,30 +52,39 @@ describe('ProductsComponent', () => {
   });
 
   it('should fetch products on init', () => {
+    // Mock fetchPosts to return an observable with mockProductArray
     productsServiceSpy.fetchPosts.and.returnValue(of(mockProductArray));
-    
+  
+    // Call ngOnInit, which will trigger the onFetchPosts() call
     component.ngOnInit();
-    
+  
+    // Verify that fetchPosts was called
     expect(productsServiceSpy.fetchPosts).toHaveBeenCalled();
+  
+    // Check that products were set correctly
     expect(component.products.length).toBe(1);
   });
-
-  it('should add a product to the cart', () => {
-    component.onAddToCart(mockProduct);
-    expect(cartServiceSpy.addToCart).toHaveBeenCalledWith(mockProduct);
-  });
-
+  
   it('should handle errors during fetchPosts', () => {
     const errorResponse = new HttpErrorResponse({
       error: { error: 'Test error' },
       status: 500
     });
-
+  
+    // Mock fetchPosts to return an observable that throws an error
     productsServiceSpy.fetchPosts.and.returnValue(throwError(() => errorResponse));
-
-    component.onFetchPosts(); // Call the method directly
+  
+    // Call onFetchPosts directly to simulate the error
+    component.onFetchPosts();
+  
+    // Check that error handling mode was activated
     expect(component.errorHandlingMode).toBeTrue();
     expect(component.error).toEqual('Test error');
+  });
+
+  it('should add a product to the cart', () => {
+    component.onAddToCart(mockProduct);
+    expect(cartServiceSpy.addToCart).toHaveBeenCalledWith(mockProduct);
   });
 
   it('should create a new product', () => {
@@ -85,6 +93,7 @@ describe('ProductsComponent', () => {
       reset: () => {}
     } as NgForm;
 
+    // Mock createPost to return an observable
     productsServiceSpy.createPost.and.returnValue(of(mockProductArray));
     component.onCreatePost();
 
