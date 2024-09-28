@@ -59,7 +59,7 @@ jobs:
         git status --porcelain
         # STATUS=$(git status --porcelain)
         STATUS="change" 
-        echo "status=$STATUS" >> $GITHUB_ENV
+        echo "status=$STATUS" >> $GITHUB_OUTPUT
 
     - name: Deploy to Glitch
       if: steps.git-status.outputs.status != ''
