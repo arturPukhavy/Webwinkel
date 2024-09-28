@@ -52,9 +52,6 @@ describe('ProductsComponent', () => {
   });
 
   it('should fetch products on init', () => {
-    // Mock fetchPosts to return an observable with mockProductArray
-    productsServiceSpy.fetchPosts.and.returnValue(of(mockProductArray));
-  
     // Call ngOnInit, which will trigger the onFetchPosts() call
     component.ngOnInit();
   
