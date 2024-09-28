@@ -54,8 +54,11 @@ jobs:
         ls -l
         # touch readme.tmp
         pwd
+        git status
+        echo "git status next"
+        git status --porcelain
         STATUS=$(git status --porcelain)
-        echo "status=$STATUS" >> $GITHUB_OUTPUT
+        # echo "status=$STATUS" >> $GITHUB_OUTPUT
 
     - name: Deploy to Glitch
       if: steps.git-status.outputs.status != ''
