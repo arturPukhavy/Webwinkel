@@ -57,9 +57,11 @@ jobs:
         git status
         echo "git status next"
         git status --porcelain
-        # STATUS=$(git status --porcelain)
-        STATUS="change" 
-        echo "status=$STATUS" >> $GITHUB_OUTPUT
+        {
+          echo 'STATUS<<EOF'
+          git status --porcelain
+          echo EOF
+        } >> $GITHUB_OUTPUT
 
     - name: Deploy to Glitch
       if: steps.git-status.outputs.status != ''
