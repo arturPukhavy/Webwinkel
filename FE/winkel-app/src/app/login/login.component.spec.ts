@@ -18,7 +18,8 @@ describe('LoginComponent', () => {
     idToken: 'mock-id-token',
     expiresIn: 3600,
     role: Role.Custm,
-    userName: 'test-user'
+    userName: 'test-user',
+    email: 'test@test.com'
   };
 
   beforeEach(async () => {
