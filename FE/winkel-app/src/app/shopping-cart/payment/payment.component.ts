@@ -2,9 +2,10 @@ import { Component, EventEmitter, Output, ViewChild } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { CartService } from '../shopping-cart.service';
 import { CartItem } from '../shopping-cart.model';
-import { PaymentService } from './payment.service';
-import { InvoiceService } from './payment.invoice.service';
+
+import { InvoiceService } from './payment.services/payment.invoice.service';
 import { CommonModule, NgFor, NgIf } from '@angular/common';
+import { PaymentService } from './payment.services/payment.service';
 
 @Component({
   standalone: true,

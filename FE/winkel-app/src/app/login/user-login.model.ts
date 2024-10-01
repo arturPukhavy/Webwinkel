@@ -6,7 +6,7 @@ export class Login {
       private _token: string,
       private _tokenExpirationDate: Date,
       public role: Role,
-      public userName: string 
+      public userName: string, 
     ) {}
   
     get token() {
