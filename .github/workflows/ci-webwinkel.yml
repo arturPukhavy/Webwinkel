@@ -43,6 +43,6 @@ jobs:
     - name: Test
       run: |
         cd FE/winkel-app        
-        npm run test-headless
+        ng test --watch=false --browsers=ChromeHeadless
         echo "Test Completed"
         ls -l
