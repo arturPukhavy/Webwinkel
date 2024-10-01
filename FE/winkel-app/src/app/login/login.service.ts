@@ -80,7 +80,7 @@ export class LoginService {
 
   logout() {
     this.user.next(null);
-    this.email = null;  // Clear the email on logout
+    this.email = null; 
     this.router.navigate(['/login']);
     localStorage.removeItem('userData');
     if (this.tokenExpirationTimer) {
