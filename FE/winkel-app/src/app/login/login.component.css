@@ -78,40 +78,53 @@ html, body {
     }
   }
 
-  .cssload-container {
+  .centered-box {
     position: fixed;
-    width: 100%;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    background-color: rgba(255, 255, 255, 0.7);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #fff; /* Solid white background */
+    padding: 20px 60px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     z-index: 9999;
+    text-align: center;
+    display: flex;
+    align-items: center;
   }
   
+  /* Container for spinner and text */
+  .cssload-container {
+    display: flex;
+    flex-direction:column; /* Align spinner and text in a row */
+    align-items: center;
+  }
+  
+  /* Spinner styling */
   .cssload-speeding-wheel {
     content: "";
     display: block;
-    position: absolute;
-    left: 48%;
-    top: 40%;
     width: 63px;
     height: 63px;
-    margin: 0 auto;
     border: 4px solid rgb(0, 0, 0);
     border-radius: 50%;
     border-left-color: transparent;
     border-right-color: transparent;
     animation: cssload-spin 500ms infinite linear;
-    -o-animation: cssload-spin 500ms infinite linear;
-    -ms-animation: cssload-spin 500ms infinite linear;
-    -webkit-animation: cssload-spin 500ms infinite linear;
-    -moz-animation: cssload-spin 500ms infinite linear;
+    margin-bottom: 20px; /* Add some space between the spinner and the text */
   }
   
+  /* Loading text */
+  .loading-text {
+    font-size: 18px;
+    font-family: Arial, sans-serif;
+    color: #333;
+    white-space: nowrap; /* Ensure the text stays in one line */
+  }
+  
+  /* Spinner animation */
   @keyframes cssload-spin {
     100% {
-      transform: rotate(360deg);
       transform: rotate(360deg);
     }
   }
@@ -119,27 +132,23 @@ html, body {
   @-o-keyframes cssload-spin {
     100% {
       -o-transform: rotate(360deg);
-      transform: rotate(360deg);
     }
   }
   
   @-ms-keyframes cssload-spin {
     100% {
       -ms-transform: rotate(360deg);
-      transform: rotate(360deg);
     }
   }
   
   @-webkit-keyframes cssload-spin {
     100% {
       -webkit-transform: rotate(360deg);
-      transform: rotate(360deg);
     }
   }
   
   @-moz-keyframes cssload-spin {
     100% {
       -moz-transform: rotate(360deg);
-      transform: rotate(360deg);
     }
   }
