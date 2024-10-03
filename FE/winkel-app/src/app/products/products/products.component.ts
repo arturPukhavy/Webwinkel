@@ -20,6 +20,7 @@ export class ProductsComponent implements OnInit, OnDestroy{
   subscriptions: Subscription[] = [];
   products: Product[] = [];
   filteredProducts: Product[] = [];
+  paginatedProducts: Product[] = [];
   searchTerm: string = '';
   editMode = false;
   editedItem: Product;
@@ -27,6 +28,8 @@ export class ProductsComponent implements OnInit, OnDestroy{
   error: string;
   role = Role
   user: Login | null = null;
+  currentPage: number = 1;
+  itemsPerPage: number = 10;
   
 
   constructor(private prService: ProductsService, 
@@ -35,32 +38,32 @@ export class ProductsComponent implements OnInit, OnDestroy{
               private spinnerService: NgxSpinnerService ) {}
   
   ngOnInit() {
-  this.onFetchPosts(); 
+    this.onFetchPosts(); 
 
-  this.subscriptions.push(this.loginService.user.subscribe(user => {
-    this.user = user;
-  }));
+    this.subscriptions.push(this.loginService.user.subscribe(user => {
+      this.user = user;
+    }));
 
-  this.subscriptions.push(this.cartService.products$.subscribe((product) => {
-    this.products = product;
-  }));
+    this.subscriptions.push(this.cartService.products$.subscribe((product) => {
+      this.products = product;
+    }));
 
-  this.subscriptions.push(this.prService.startedEditing.subscribe(
-    (index: number) => {
-      this.editMode = true;
-      this.editedItem = this.getProduct(index);
-      if (this.productForm) {
-        this.productForm.setValue({
-          id: this.editedItem.id,
-          naam: this.editedItem.naam,
-          merk: this.editedItem.merk,
-          voorraad: this.editedItem.voorraad,
-          price: this.editedItem.price
-        });
+    this.subscriptions.push(this.prService.startedEditing.subscribe(
+      (index: number) => {
+        this.editMode = true;
+        this.editedItem = this.getProduct(index);
+        if (this.productForm) {
+          this.productForm.setValue({
+            id: this.editedItem.id,
+            naam: this.editedItem.naam,
+            merk: this.editedItem.merk,
+            voorraad: this.editedItem.voorraad,
+            price: this.editedItem.price
+          });
+        }
       }
-    }
-  ));
-}
+    ));
+  }
 
   filterProducts() {
     console.log('Search term:', this.searchTerm);
@@ -68,7 +71,26 @@ export class ProductsComponent implements OnInit, OnDestroy{
       product.naam.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
       product.merk.toLowerCase().includes(this.searchTerm.toLowerCase()) 
     );
+    this.currentPage = 1; // Reset to the first page after filtering
+    this.updatePaginatedProducts();
     console.log('Filtered products:', this.products);
+  }
+
+  // Update paginated products based on the current page
+  updatePaginatedProducts() {
+    const start = (this.currentPage - 1) * this.itemsPerPage;
+    const end = start + this.itemsPerPage;
+    this.paginatedProducts = this.filteredProducts.slice(start, end);
+  }
+
+  // Handle page change
+  changePage(page: number) {
+    this.currentPage = page;
+    this.updatePaginatedProducts();
+  }  
+
+  get totalPages(): number {
+    return Math.ceil(this.filteredProducts.length / this.itemsPerPage);
   }
 
   onCreatePost() {
@@ -103,24 +125,22 @@ export class ProductsComponent implements OnInit, OnDestroy{
 
   onFetchPosts() {
     this.prService.fetchPosts().subscribe({
-      next: data => {
-        data.forEach(element => {
-          console.log('Item: ' + element.naam)
-        });
-        this.products = data;
+      next: (products: Product[]) => {
+        this.products = products;
         this.filteredProducts = [...this.products];
+        this.updatePaginatedProducts();
       },
       error: (error: HttpErrorResponse) => {
         this.errorHandlingMode = true;
         this.error = error.error.error;
         console.error('There was an error: ', error.error.error);
       }
-    })
-  };
+    });
+  }
   onDeleteProduct(id: number) {
     this.prService.deleteProduct(id).subscribe({
       next: data => {
-        this.filteredProducts = this.filteredProducts.filter(item => item.id !== id);
+        this.paginatedProducts = this.paginatedProducts.filter(item => item.id !== id);
         console.log('Delete successful, id: ' + id);
       },
       error: (error: HttpErrorResponse) => {
@@ -131,11 +151,11 @@ export class ProductsComponent implements OnInit, OnDestroy{
     })
   };
 
-  onClearPosts() {
+  onClearProducts() {
     this.prService.clearPosts().subscribe({
       next: data => {
         console.log('All products deleted');
-        this.products = [];
+        this.paginatedProducts = [];
       },
       error: (error: HttpErrorResponse) => {
         this.errorHandlingMode = true;
@@ -159,7 +179,7 @@ export class ProductsComponent implements OnInit, OnDestroy{
   }
 
   getProduct(index: number) {
-    return this.products[index];
+    return this.paginatedProducts[index];
   }
 
   onAddToCart(product: Product) {
