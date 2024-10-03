@@ -122,7 +122,7 @@
             <button
               class="btn btn-danger"
               [disabled]="products != undefined && products.length < 1"
-              (click)="onClearPosts()"
+              (click)="onClearProducts()"
               *ngIf="user?.role !== role.Custm"
             >
               Clear All Products
@@ -130,9 +130,9 @@
         </th>
       </tr>
       <tbody>
-        <tbody *ngIf="products != undefined && products.length < 1">No posts available!</tbody>
-        <tbody *ngIf="products != undefined && products.length >= 1">
-          <tr *ngFor="let item of filteredProducts; let i = index">
+        <tbody *ngIf="products != undefined && paginatedProducts.length < 1">No products available!</tbody>
+        <tbody *ngIf="products != undefined && paginatedProducts.length >= 1">
+          <tr *ngFor="let item of paginatedProducts; let i = index">
             <th scope="row">{{item.id}}</th>
             <td>{{item.naam}}</td>
             <td>{{item.merk}}</td>
@@ -158,5 +158,18 @@
           </tr>
       </tbody> 
     </table>
+    <div class="pagination-container">
+      <button class="btn pagination-btn" [disabled]="currentPage === 1" 
+              (click)="changePage(currentPage - 1)">
+        &laquo; Previous
+      </button>
+      <button class="btn pagination-btn" [disabled]="currentPage === totalPages"
+              (click)="changePage(currentPage + 1)">
+        Next &raquo;
+      </button>
     </div>
+    <div class="page-info">
+      <p>Page {{currentPage}} of {{totalPages}}</p>
+    </div>
+  </div>
 </div>

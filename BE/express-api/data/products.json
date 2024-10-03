@@ -26,5 +26,187 @@
   "merk": "Dell",
   "voorraad": 34,
   "price": 1000.255
+  },
+  {
+    "id": 5,
+    "naam": "Laptop",
+    "merk": "HP",
+    "voorraad": 20,
+    "price": 800.99
+  },
+  {
+    "id": 6,
+    "naam": "Smartphone",
+    "merk": "Apple",
+    "voorraad": 50,
+    "price": 999.99
+  },
+  {
+    "id": 7,
+    "naam": "Tablet",
+    "merk": "Samsung",
+    "voorraad": 15,
+    "price": 450.75
+  },
+  {
+    "id": 8,
+    "naam": "Monitor",
+    "merk": "LG",
+    "voorraad": 10,
+    "price": 300.50
+  },
+  {
+    "id": 9,
+    "naam": "Keyboard",
+    "merk": "Logitech",
+    "voorraad": 100,
+    "price": 49.99
+  },
+  {
+    "id": 10,
+    "naam": "Mouse",
+    "merk": "Razer",
+    "voorraad": 80,
+    "price": 69.99
+  },
+  {
+    "id": 11,
+    "naam": "Headphones",
+    "merk": "Sony",
+    "voorraad": 25,
+    "price": 199.99
+  },
+  {
+    "id": 12,
+    "naam": "Smartwatch",
+    "merk": "Fitbit",
+    "voorraad": 30,
+    "price": 149.95
+  },
+  {
+    "id": 13,
+    "naam": "Speaker",
+    "merk": "Bose",
+    "voorraad": 12,
+    "price": 299.00
+  },
+  {
+    "id": 14,
+    "naam": "Camera",
+    "merk": "Canon",
+    "voorraad": 8,
+    "price": 1200.50
+  },
+  {
+    "id": 15,
+    "naam": "Printer",
+    "merk": "Epson",
+    "voorraad": 22,
+    "price": 250.00
+  },
+  {
+    "id": 16,
+    "naam": "External Hard Drive",
+    "merk": "Seagate",
+    "voorraad": 17,
+    "price": 99.99
+  },
+  {
+    "id": 17,
+    "naam": "Graphics Card",
+    "merk": "NVIDIA",
+    "voorraad": 5,
+    "price": 700.00
+  },
+  {
+    "id": 18,
+    "naam": "Motherboard",
+    "merk": "ASUS",
+    "voorraad": 9,
+    "price": 250.75
+  },
+  {
+    "id": 19,
+    "naam": "RAM",
+    "merk": "Corsair",
+    "voorraad": 40,
+    "price": 150.00
+  },
+  {
+    "id": 20,
+    "naam": "SSD",
+    "merk": "Samsung",
+    "voorraad": 30,
+    "price": 120.00
+  },
+  {
+    "id": 21,
+    "naam": "Webcam",
+    "merk": "Logitech",
+    "voorraad": 20,
+    "price": 89.99
+  },
+  {
+    "id": 22,
+    "naam": "Microphone",
+    "merk": "Blue",
+    "voorraad": 15,
+    "price": 129.99
+  },
+  {
+    "id": 23,
+    "naam": "Game Console",
+    "merk": "Sony",
+    "voorraad": 10,
+    "price": 499.99
+  },
+  {
+    "id": 24,
+    "naam": "Smart TV",
+    "merk": "Samsung",
+    "voorraad": 7,
+    "price": 799.00
+  },
+  {
+    "id": 25,
+    "naam": "Router",
+    "merk": "TP-Link",
+    "voorraad": 35,
+    "price": 59.99
+  },
+  {
+    "id": 26,
+    "naam": "Charger",
+    "merk": "Anker",
+    "voorraad": 60,
+    "price": 25.99
+  },
+  {
+    "id": 27,
+    "naam": "Gaming Mouse",
+    "merk": "SteelSeries",
+    "voorraad": 20,
+    "price": 89.99
+  },
+  {
+    "id": 28,
+    "naam": "VR Headset",
+    "merk": "Oculus",
+    "voorraad": 12,
+    "price": 399.99
+  },
+  {
+    "id": 29,
+    "naam": "Smart Speaker",
+    "merk": "Amazon",
+    "voorraad": 40,
+    "price": 99.99
+  },
+  {
+    "id": 30,
+    "naam": "Electric Kettle",
+    "merk": "Philips",
+    "voorraad": 25,
+    "price": 49.99
   }
   ]
