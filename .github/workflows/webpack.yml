@@ -1,17 +1,15 @@
-name: (CD) NodeJS with Webpack 
+name: (CD) Webwinkel - API 
 
 on:
   push:
     branches: [ "main" ]
 
 jobs:
-
   check_changes:
     runs-on: ubuntu-latest
     outputs:
       #[status_result] is used to keep a result of "git status"
       status_result: ${{ steps.git-status.outputs.status_result }}
-
 
     steps:
     - uses: actions/checkout@v4
