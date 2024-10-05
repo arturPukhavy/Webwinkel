@@ -1,0 +1,103 @@
+name: (CD) NodeJS with Webpack 
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+
+  check_changes:
+    runs-on: ubuntu-latest
+    outputs:
+      #[status_result] is used to keep a result of "git status"
+      status_result: ${{ steps.git-status.outputs.status_result }}
+
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Configure Git
+      run: |
+        git config --global user.email "arturpuhice@gmail.com"
+        git config --global user.name "Artur"
+
+    - name: Clone winkel-app-api repo
+      run: |
+        echo "Current path:" 
+        pwd
+        cd BE/express-api
+        echo "cd BE/express-api" 
+        pwd
+        git clone https://${{ secrets.WEB_APP_TOKEN }}@api.glitch.com/git/winkel-app-api
+
+    - name: Copy changes
+      run: |
+        cd BE/express-api
+        ## Copy latest changes from "main" into [winkel-app-api] git-project
+        cp products-api.js winkel-app-api/server.js
+
+        # Remove and copy data/
+        rm winkel-app-api/data/*
+        cp data/* winkel-app-api/data
+        
+        echo "ls -l winkel-app-api" 
+        ls -l winkel-app-api
+
+    - name: Check Glitch-git status
+      id: git-status
+      run: |
+        pwd
+        ls -l
+        cd BE/express-api/winkel-app-api
+        # touch readme.tmp
+        ls -l
+        pwd
+        echo 'Run git-status:'
+        git status --porcelain
+        {
+          echo 'status_result<<EOF'
+          git status --porcelain
+          echo EOF
+        } >> $GITHUB_OUTPUT
+        
+  build:
+    needs: check_changes
+    runs-on: ubuntu-latest
+    if: needs.check_changes.outputs.status_result != ''
+    steps:
+      - uses: actions/checkout@v4
+      - name: Use Node.js 20.x
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'      
+          
+      - name: Run build
+        run: |
+          npm install --prefix ./BE/express-api/
+          echo "ls -l ./express-api/ "
+          ls -l ./BE/express-api/
+          #TODO: here need to start up a server (and tests?) to make sure that it is up and running
+          
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run deploy
+        run: |
+          echo "pwd"
+          pwd
+          echo "ls -l"
+          ls -l
+
+  skip:
+    needs: check_changes
+    runs-on: ubuntu-latest
+    if: needs.check_changes.outputs.status_result == ''
+    steps:
+      - name: skip deployment
+        run: |
+          echo "No changes, skip depoyment"
+          pwd
+          ls -l
+        
