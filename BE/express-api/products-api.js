@@ -1,6 +1,7 @@
 const express = require('express')
 const app = express()
-const port = 3000
+const port = process.env.PORT
+
 
 app.use(express.json()) // for parsing application/json
 app.use(express.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
@@ -254,3 +255,22 @@ app.post('/api/v1/invoice/send', (req, res) => {
   console.log(`Send invoice for order: ${JSON.stringify(order)}`)
   res.json({invoiceStatus: 'sent'});
 });
+
+
+// Function to perform a deep clone with support for cyclic references (use it when deploying Glitch!)
+function structuredClone(obj, hash = new WeakMap()) {
+  if (Object(obj) !== obj) return obj; // primitive value
+  if (hash.has(obj)) return hash.get(obj); // cyclic reference
+
+  let clonedObj = Array.isArray(obj) ? [] : {};
+
+  hash.set(obj, clonedObj);
+
+  for (let key in obj) {
+      if (Object.prototype.hasOwnProperty.call(obj, key)) {
+          clonedObj[key] = structuredClone(obj[key], hash);
+      }
+  }
+
+  return clonedObj;
+}
