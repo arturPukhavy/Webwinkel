@@ -16,7 +16,11 @@
         <div class="item-info">
           <h4>{{ item.product.naam }}</h4>
           <p>Price: {{ item.product.price | currency: 'EUR' }}</p>
-          <p>Quantity: {{ item.quantity }}</p>
+          <div class="quantity-control">
+            <button class="quantity-button" (click)="decreaseQuantity(item)">-</button>
+            <p>Quantity: {{ item.quantity }}</p>
+            <button class="quantity-button" (click)="increaseQuantity(item)">+</button>
+          </div>
         </div>
         <button class="remove-button" (click)="removeFromCart(item.product.id)">Remove</button>
       </div>
