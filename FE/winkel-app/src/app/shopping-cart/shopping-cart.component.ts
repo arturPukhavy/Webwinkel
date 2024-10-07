@@ -32,6 +32,17 @@ export class ShoppingCartComponent implements OnInit {
     this.cartService.removeFromCart(productId);
   }
 
+  increaseQuantity(item: CartItem) {
+    this.cartService.increaseQuantity(item.product.id);
+  }
+  decreaseQuantity(item: CartItem) {
+    if (item.quantity > 1) {
+      this.cartService.decreaseQuantity(item.product.id);
+    } else {
+      this.removeFromCart(item.product.id); // If quantity is 1, remove the item
+    }
+  }
+
   buy() {
     this.payment = true;
   }

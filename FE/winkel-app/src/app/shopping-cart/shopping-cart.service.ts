@@ -51,6 +51,23 @@ export class CartService {
     this.cartItemCountSubject.next(totalCount); // Emit the new count
   }
 
+  increaseQuantity(productId: number) {
+    const item = this.cartItems.find(item => item.product.id === productId);
+    if (item) {
+      item.quantity++;
+      this.cartSubject.next(this.cartItems);
+      this.updateCartItemCount();
+    }
+  }
+  decreaseQuantity(productId: number) {
+    const item = this.cartItems.find(item => item.product.id === productId);
+    if (item && item.quantity > 1) {
+      item.quantity--;
+      this.cartSubject.next(this.cartItems);
+      this.updateCartItemCount();
+    }
+  }
+
   getTotal() {
     return this.cartItems.reduce((sum, item) => sum + item.product.price * item.quantity, 0);
   }
