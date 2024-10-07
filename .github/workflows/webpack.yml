@@ -111,6 +111,9 @@ jobs:
          touch readme.txt
          echo "Git Status"
          git status
+         git add .
+         git commit -m "commit latest changes"
+         git push
   skip:
     needs: check_changes
     runs-on: ubuntu-latest
