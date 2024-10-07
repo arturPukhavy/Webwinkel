@@ -85,7 +85,7 @@ jobs:
         run: |
          git config --global user.email "arturpuhice@gmail.com"
          git config --global user.name "Artur"
-      - name: Clone winkel-app-api repo
+      - name: Clone winkel-app-api repo(D)
         run: |
          echo "Current path:" 
          pwd
@@ -93,7 +93,7 @@ jobs:
          echo "cd BE/express-api" 
          pwd
          git clone https://${{ secrets.WEB_APP_TOKEN }}@api.glitch.com/git/winkel-app-api
-      - name: Copy changes
+      - name: Copy changes(D)
         run: |
          cd BE/express-api
          ## Copy latest changes from "main" into [winkel-app-api] git-project
@@ -104,8 +104,12 @@ jobs:
         
          echo "ls -l winkel-app-api" 
          ls -l winkel-app-api
-
-
+      - name: Deploy API
+        run: |
+         cd BE/express-api/winkel-app-api
+         ls -l
+         echo "Git Status"
+         git status
   skip:
     needs: check_changes
     runs-on: ubuntu-latest
