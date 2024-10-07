@@ -108,6 +108,7 @@ jobs:
         run: |
          cd BE/express-api/winkel-app-api
          ls -l
+         touch readme.txt
          echo "Git Status"
          git status
   skip:
