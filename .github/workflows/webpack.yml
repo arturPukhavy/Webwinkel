@@ -47,7 +47,7 @@ jobs:
         pwd
         ls -l
         cd BE/express-api/winkel-app-api
-        touch readme.tmp
+        # touch readme.tmp
         ls -l
         pwd
         echo 'Run git-status:'
@@ -108,7 +108,7 @@ jobs:
         run: |
          cd BE/express-api/winkel-app-api
          ls -l
-         touch readme.txt
+         # touch readme.txt
          echo "Git Status"
          git status
          git add .
