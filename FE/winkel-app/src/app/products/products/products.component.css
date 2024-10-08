@@ -255,4 +255,9 @@
 .pagination-container button {
   margin: 0 5px;
 }
-  
+
+.validation-message {
+  color: rgb(203, 23, 23);
+  font-size: 16px;
+  margin-top: 5px;
+}

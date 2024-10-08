@@ -26,8 +26,12 @@
               id="naam"
               required
               ngModel
+              #naam="ngModel"
               name="naam"
             />
+            <div *ngIf="naam.invalid && naam.touched" class="validation-message">
+              <small *ngIf="naam.errors?.['required']">Name is required</small>
+            </div>
           </div>
           <div class="custom-field">
             <label for="merk">Brand</label>
@@ -37,8 +41,12 @@
               id="merk"
               required
               ngModel
+              #merk="ngModel"
               name="merk"
             />
+            <div *ngIf="merk.invalid && merk.touched" class="validation-message">
+              <small *ngIf="merk.errors?.['required']">Brand is required</small>
+            </div>
           </div>
           <div class="custom-field">
             <label for="voorraad">Stock</label>
@@ -49,8 +57,13 @@
               required
               pattern="^[1-9]+[0-9]*$"
               ngModel
+              #voorraad="ngModel"
               name="voorraad"
             />
+            <div *ngIf="voorraad.invalid && voorraad.touched" class="validation-message">
+              <small *ngIf="voorraad.errors?.['required']">Stock is required</small>
+              <small *ngIf="voorraad.errors?.['pattern']">Stock must contain only digits</small>
+            </div>
           </div>
           <div class="custom-field">
             <label for="price">Price, €</label>
@@ -61,8 +74,13 @@
               required
               pattern="^\d*.?\d{1,2}?$"
               ngModel
+              #price="ngModel"
               name="price"
             />
+            <div *ngIf="price.invalid && price.touched" class="validation-message">
+              <small *ngIf="price.errors?.['required']">Price is required</small>
+              <small *ngIf="price.errors?.['pattern']">Price must contain only digits</small>
+            </div>
           </div>
           <button
             class="btn btn-primary"
