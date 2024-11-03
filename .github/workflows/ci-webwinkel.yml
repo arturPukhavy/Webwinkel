@@ -1,5 +1,5 @@
 
-name: (CI) NodeJS with Webpack
+name: (CI) Webwinkel - FE
 
 on:
   push:
