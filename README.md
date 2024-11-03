@@ -1,6 +1,7 @@
 # Webwinkel App
 [![(CI) Webwinkel - FE](https://github.com/arturPukhavy/Webwinkel/actions/workflows/ci-webwinkel.yml/badge.svg)](https://github.com/arturPukhavy/Webwinkel/actions/workflows/ci-webwinkel.yml)
 [![(CD) Webwinkel - FE](https://github.com/arturPukhavy/Webwinkel/actions/workflows/cd-webwinkel.yml/badge.svg)](https://github.com/arturPukhavy/Webwinkel/actions/workflows/cd-webwinkel.yml)
+[![(CD) Webwinkel - API](https://github.com/arturPukhavy/Webwinkel/actions/workflows/webpack.yml/badge.svg)](https://github.com/arturPukhavy/Webwinkel/actions/workflows/webpack.yml)
 
 This is a simple web-shop application. The main goal is to delve into frontend, backend and CI/CD technologies while constructing a web based end-to-end application. <br>
 The application is being deployed and running in Glitch-platform: https://winkel-app.glitch.me
