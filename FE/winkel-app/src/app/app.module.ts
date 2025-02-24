@@ -18,7 +18,7 @@ import { PaymentComponent } from './shopping-cart/payment/payment.component';
 import { UsersService } from './users/users.service';
 import { CartService } from './shopping-cart/shopping-cart.service';
 import { LoginService } from './login/login.service';
-import { AuthInterceptor } from './intercepter/auth.interceptor';
+import { AuthInterceptor } from './interceptor/auth.interceptor';
 import { PaymentService } from './shopping-cart/payment/payment.services/payment.service';
 import { InvoiceService } from './shopping-cart/payment/payment.services/payment.invoice.service';
 
