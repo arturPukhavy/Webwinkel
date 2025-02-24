@@ -1,74 +1,153 @@
+css
+
+Copy
 .container {
-    margin-top: 30px;
-  }
+  margin-top: 30px;
+}
+
 h3 {
-    text-align: center;
-}
-
-.nav {
-  display: flex; /* Use flexbox for nav links */
-  flex-grow: 1; /* Allow nav to grow */
-}
-
-.nav-item {
-  margin-right: 15px; /* Spacing between nav items */
-}
-
-.logout-container {
-  margin-left: auto; /* Push the logout button to the right */
-}
-
-.logout-button {
-  background-color: #e93947; /* Bright red color */
-  color: azure; /* Text color */
-  border: none; /* No border */
-  border-radius: 25px; /* Rounded corners */
-  padding: 10px 20px; /* Padding for the button */
-  font-size: 16px; /* Font size */
-  font-weight: bold; /* Bold text */
-  cursor: pointer; /* Pointer cursor on hover */
-  transition: background-color 0.3s, transform 0.3s; /* Smooth transition */
-  
-}
-
-.logout-button:hover {
-  background-color: #c03614; /* Darker shade on hover */
-  transform: translateY(-2px); /* Slight lift effect */
-}
-
-.logout-button:focus {
-  outline: none; /* Remove outline on focus */
-  
+  text-align: center;
+  font-size: 1.5rem; /* Adjusted for smaller screens */
+  margin: 0;
 }
 
 .header {
-  display: flex; /* Use flexbox for layout */
+  display: flex;
+  flex-wrap: wrap; /* Allow wrapping for smaller screens */
   justify-content: space-between;
-  align-items: center; /* Center items vertically */
-  padding: 10px; /* Add some padding around the header */
-  background-color: #f8f9fa; /* Light background for the header */
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  align-items: center;
+  padding: 10px 15px;
+  background-color: #f8f9fa;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
-.user-name {
-  margin-right: 10px; /* Space between the name and the logout button */
-  color: #333; /* Text color */
-  font-weight: bold; /* Bold text for emphasis */
+
+.nav {
+  display: flex;
+  flex-grow: 1;
+  flex-wrap: wrap; /* Wrap items on smaller screens */
+  justify-content: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
+
+.nav-item {
+  margin: 5px 10px; /* Adjust spacing for smaller screens */
+}
+
 .nav-link {
-  position: relative; /* Position relative for badge positioning */
+  text-decoration: none;
+  color: #007bff;
+  font-weight: bold;
+  position: relative;
 }
 
+.nav-link:hover {
+  text-decoration: underline;
+}
+
+.logout-container {
+  display: flex;
+  flex-wrap: wrap; /* Allow wrapping */
+  justify-content: flex-end;
+  align-items: center;
+  margin-left: auto;
+  gap: 10px; /* Add spacing between elements */
+}
+
+.logout-button {
+  background-color: #e93947;
+  color: azure;
+  border: none;
+  border-radius: 25px;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+.logout-button:hover {
+  background-color: #c03614;
+  transform: translateY(-2px);
+}
+
+.user-name {
+  color: #333;
+  font-weight: bold;
+}
+
+/* Badge styling */
 .badge {
-  position: absolute; /* Position badge absolutely */
-  top: -5px; /* Adjust vertical position */
-  right: -10px; /* Adjust horizontal position */
-  background-color: red; /* Badge background color */
-  color: white; /* Badge text color */
-  border-radius: 50%; /* Make it circular */
-  padding: 3px 6px; /* Padding for the badge */
-  font-size: 12px; /* Adjust font size */
-  min-width: 20px; /* Minimum width for the badge */
-  text-align: center; /* Center text in badge */
+  position: absolute;
+  top: -5px;
+  right: -10px;
+  background-color: red;
+  color: white;
+  border-radius: 50%;
+  padding: 3px 6px;
+  font-size: 12px;
+  min-width: 20px;
+  text-align: center;
 }
 
+/* Responsive styles */
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column; /* Stack items vertically */
+    align-items: flex-start; /* Align to the left */
+    padding: 10px;
+  }
+
+  .nav {
+    flex-direction: column; /* Stack nav items vertically */
+    align-items: flex-start;
+    gap: 10px; /* Add spacing between items */
+  }
+
+  .nav-item {
+    margin: 0; /* Remove horizontal margins */
+  }
+
+  .logout-container {
+    width: 100%; /* Take full width on mobile */
+    justify-content: space-between; /* Space out username and button */
+    margin-top: 10px;
+  }
+
+  .user-name {
+    font-size: 0.9rem; /* Slightly smaller text on mobile */
+  }
+
+  .logout-button {
+    padding: 8px 16px; /* Adjust padding for smaller screens */
+    font-size: 14px; /* Adjust font size */
+  }
+}
+
+@media (max-width: 480px) {
+  h3 {
+    font-size: 1.2rem; /* Further reduce font size for very small screens */
+  }
+
+  .header {
+    align-items: stretch;
+  }
+
+  .nav {
+    width: 100%; /* Full width for nav links */
+    gap: 8px;
+  }
+
+  .logout-container {
+    flex-direction: column; /* Stack username and button vertically */
+    align-items: flex-start; /* Align to the left */
+    gap: 5px; /* Add spacing between items */
+  }
+
+  .logout-button {
+    width: 100%; /* Full-width button */
+    text-align: center;
+  }
+}
 

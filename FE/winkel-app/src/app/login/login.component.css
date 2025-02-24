@@ -71,12 +71,6 @@ html, body {
     padding:0; 
     height:50px; 
   }
-  
-  @media (max-width: 480px) {
-    .login-container {
-      width: 90%; /* Mobile responsiveness */
-    }
-  }
 
   .centered-box {
     position: fixed;
