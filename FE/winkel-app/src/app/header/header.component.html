@@ -13,7 +13,7 @@
                 <span class="badge" *ngIf="cartItemCount > 0">{{ cartItemCount }}</span>
             </a>
         </li>
-        <li role="presentation" class="nav-item" *ngIf="!isAuthenticated">
+        <li role="presentation" class="nav-login" *ngIf="!isAuthenticated">
             <a routerLink="/login" class="nav-link" routerLinkActive="active">Login</a>
         </li>
     </ul>
