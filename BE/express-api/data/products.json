@@ -1,212 +1,362 @@
 [
   {
-  "id": 1,
-  "naam": "Monitor",
-  "merk": "Samsung",
-  "voorraad": 20,
-  "price": 120
+    "id": 1,
+    "naam": "Monitor",
+    "merk": "Samsung",
+    "voorraad": 20,
+    "price": 120,
+    "details": {
+      "description": "A high-quality Samsung monitor with vibrant colors and sharp resolution.",
+      "picture": "https://images.pexels.com/photos/1029757/pexels-photo-1029757.jpeg",
+      "features": ["27-inch display", "Full HD resolution", "HDMI and DisplayPort inputs"]
+    }
   },
   {
-  "id": 2,
-  "naam": "Monitor",
-  "merk": "Accer",
-  "voorraad": 25,
-  "price": 150.5
+    "id": 2,
+    "naam": "Monitor",
+    "merk": "Acer",
+    "voorraad": 25,
+    "price": 150.5,
+    "details": {
+      "description": "Acer monitor designed for gamers with a high refresh rate.",
+      "picture": "https://images.pexels.com/photos/1029757/pexels-photo-1029757.jpeg",
+      "features": ["24-inch display", "144Hz refresh rate", "Flicker-free technology"]
+    }
   },
   {
-  "id": 3,
-  "naam": "Mac",
-  "merk": "Apple",
-  "voorraad": 15,
-  "price": 1150.15
+    "id": 3,
+    "naam": "Mac",
+    "merk": "Apple",
+    "voorraad": 15,
+    "price": 1150.15,
+    "details": {
+      "description": "The latest MacBook with a sleek design and powerful performance.",
+      "picture": "https://images.pexels.com/photos/261662/pexels-photo-261662.jpeg",
+      "features": ["M1 chip", "Retina display", "Up to 20 hours of battery life"]
+    }
   },
   {
-  "id": 4,
-  "naam": "PC",
-  "merk": "Dell",
-  "voorraad": 34,
-  "price": 1000.255
+    "id": 4,
+    "naam": "PC",
+    "merk": "Dell",
+    "voorraad": 34,
+    "price": 1000.255,
+    "details": {
+      "description": "Dell desktop PC perfect for both work and gaming.",
+      "picture": "https://images.unsplash.com/photo-1593642532973-d31b6557fa68",
+      "features": ["Intel i7 processor", "16GB RAM", "1TB SSD storage"]
+    }
   },
   {
     "id": 5,
     "naam": "Laptop",
     "merk": "HP",
     "voorraad": 20,
-    "price": 800.99
+    "price": 800.99,
+    "details": {
+      "description": "HP laptop with excellent performance and portability.",
+      "picture": "https://images.pexels.com/photos/205421/pexels-photo-205421.jpeg",
+      "features": ["15-inch touchscreen", "8GB RAM", "512GB SSD"]
+    }
   },
   {
     "id": 6,
     "naam": "Smartphone",
     "merk": "Apple",
     "voorraad": 50,
-    "price": 999.99
+    "price": 999.99,
+    "details": {
+      "description": "Latest iPhone with cutting-edge features and performance.",
+      "picture": "https://images.unsplash.com/photo-1607936854279-355d64b2c3e5",
+      "features": ["5G capable", "Super Retina display", "A15 Bionic chip"]
+    }
   },
   {
     "id": 7,
     "naam": "Tablet",
     "merk": "Samsung",
     "voorraad": 15,
-    "price": 450.75
+    "price": 450.75,
+    "details": {
+      "description": "Samsung tablet with a stunning display and powerful performance.",
+      "picture": "https://images.pexels.com/photos/1337380/pexels-photo-1337380.jpeg",
+      "features": ["10.5-inch display", "S Pen included", "Long-lasting battery"]
+    }
   },
   {
     "id": 8,
     "naam": "Monitor",
     "merk": "LG",
     "voorraad": 10,
-    "price": 300.50
+    "price": 300.50,
+    "details": {
+      "description": "LG monitor with excellent color accuracy.",
+      "picture": "https://images.pexels.com/photos/1029757/pexels-photo-1029757.jpeg",
+      "features": ["27-inch 4K display", "USB-C connectivity", "HDR support"]
+    }
   },
   {
     "id": 9,
     "naam": "Keyboard",
     "merk": "Logitech",
     "voorraad": 100,
-    "price": 49.99
+    "price": 49.99,
+    "details": {
+      "description": "Ergonomic keyboard designed for comfort and efficiency.",
+      "picture": "https://images.pexels.com/photos/2115256/pexels-photo-2115256.jpeg",
+      "features": ["Wireless connectivity", "Customizable keys", "Battery life up to 3 years"]
+    }
   },
   {
     "id": 10,
     "naam": "Mouse",
     "merk": "Razer",
     "voorraad": 80,
-    "price": 69.99
+    "price": 69.99,
+    "details": {
+      "description": "Gaming mouse with customizable RGB lighting.",
+      "picture": "https://images.unsplash.com/photo-1527864550417-7fd91fc51a46",
+      "features": ["High precision sensor", "Ergonomic design", "6 programmable buttons"]
+    }
   },
   {
     "id": 11,
     "naam": "Headphones",
     "merk": "Sony",
     "voorraad": 25,
-    "price": 199.99
+    "price": 199.99,
+    "details": {
+      "description": "Noise-canceling headphones with superior sound quality.",
+      "picture": "https://images.pexels.com/photos/205926/pexels-photo-205926.jpeg",
+      "features": ["30 hours battery life", "Touch sensor controls", "Voice assistant compatibility"]
+    }
   },
   {
     "id": 12,
     "naam": "Smartwatch",
     "merk": "Fitbit",
     "voorraad": 30,
-    "price": 149.95
+    "price": 149.95,
+    "details": {
+      "description": "Fitness-focused smartwatch with health tracking features.",
+      "picture": "https://images.pexels.com/photos/354103/pexels-photo-354103.jpeg",
+      "features": ["Heart rate monitoring", "Built-in GPS", "Swim-proof design"]
+    }
   },
   {
     "id": 13,
     "naam": "Speaker",
     "merk": "Bose",
     "voorraad": 12,
-    "price": 299.00
+    "price": 299.00,
+    "details": {
+      "description": "High-quality speaker with rich sound and deep bass.",
+      "picture": "https://images.pexels.com/photos/354103/pexels-photo-354103.jpeg",
+      "features": ["Bluetooth connectivity", "12 hours battery life", "Water-resistant"]
+    }
   },
   {
     "id": 14,
     "naam": "Camera",
     "merk": "Canon",
     "voorraad": 8,
-    "price": 1200.50
+    "price": 1200.50,
+    "details": {
+      "description": "Professional camera with exceptional image quality.",
+      "picture": "https://images.unsplash.com/photo-1516035069371-29a1b244cc49",
+      "features": ["24.1 MP sensor", "4K video recording", "Dual Pixel autofocus"]
+    }
   },
   {
     "id": 15,
     "naam": "Printer",
     "merk": "Epson",
     "voorraad": 22,
-    "price": 250.00
+    "price": 250.00,
+    "details": {
+      "description": "Versatile printer for home and office use.",
+      "picture": "https://images.pexels.com/photos/261531/pexels-photo-261531.jpeg",
+      "features": ["Wireless printing", "Auto duplex printing", "Prints up to A3 size"]
+    }
   },
   {
     "id": 16,
     "naam": "External Hard Drive",
     "merk": "Seagate",
     "voorraad": 17,
-    "price": 99.99
+    "price": 99.99,
+    "details": {
+      "description": "Portable external hard drive for extra storage.",
+      "picture": "https://images.pexels.com/photos/2582937/pexels-photo-2582937.jpeg",
+      "features": ["2TB storage capacity", "USB 3.0 interface", "Compact design"]
+    }
   },
   {
     "id": 17,
     "naam": "Graphics Card",
     "merk": "NVIDIA",
     "voorraad": 5,
-    "price": 700.00
+    "price": 700.00,
+    "details": {
+      "description": "High-performance graphics card for gaming.",
+      "picture": "https://images.pexels.com/photos/3165335/pexels-photo-3165335.jpeg",
+      "features": ["8GB GDDR6 memory", "Ray tracing technology", "Compatible with most gaming systems"]
+    }
   },
   {
     "id": 18,
     "naam": "Motherboard",
     "merk": "ASUS",
     "voorraad": 9,
-    "price": 250.75
+    "price": 250.75,
+    "details": {
+      "description": "Reliable motherboard with advanced features.",
+      "picture": "https://images.pexels.com/photos/2582937/pexels-photo-2582937.jpeg",
+      "features": ["Supports latest CPUs", "Multiple USB ports", "Dual channel DDR4"]
+    }
   },
   {
     "id": 19,
     "naam": "RAM",
     "merk": "Corsair",
     "voorraad": 40,
-    "price": 150.00
+    "price": 150.00,
+    "details": {
+      "description": "High-speed RAM for enhanced performance.",
+      "picture": "https://images.pexels.com/photos/2582937/pexels-photo-2582937.jpeg",
+      "features": ["16GB capacity", "DDR4 technology", "RGB lighting"]
+    }
   },
   {
     "id": 20,
     "naam": "SSD",
     "merk": "Samsung",
     "voorraad": 30,
-    "price": 120.00
+    "price": 120.00,
+    "details": {
+      "description": "Fast SSD for quicker load times.",
+      "picture": "https://images.pexels.com/photos/354103/pexels-photo-354103.jpeg",
+      "features": ["1TB storage capacity", "NVMe interface", "Compact design"]
+    }
   },
   {
     "id": 21,
     "naam": "Webcam",
     "merk": "Logitech",
     "voorraad": 20,
-    "price": 89.99
+    "price": 89.99,
+    "details": {
+      "description": "High-definition webcam for streaming and video calls.",
+      "picture": "https://images.pexels.com/photos/5053741/pexels-photo-5053741.jpeg",
+      "features": ["1080p video quality", "Built-in microphone", "Wide-angle lens"]
+    }
   },
   {
     "id": 22,
     "naam": "Microphone",
     "merk": "Blue",
     "voorraad": 15,
-    "price": 129.99
+    "price": 129.99,
+    "details": {
+      "description": "Professional microphone for recording and streaming.",
+      "picture": "https://images.unsplash.com/photo-1600585154340-be6161a56a0c",
+      "features": ["USB connectivity", "Cardioid pickup pattern", "High-quality audio"]
+    }
   },
   {
     "id": 23,
     "naam": "Game Console",
     "merk": "Sony",
     "voorraad": 10,
-    "price": 499.99
+    "price": 499.99,
+    "details": {
+      "description": "Next-gen gaming console with powerful performance.",
+      "picture": "https://images.pexels.com/photos/3945667/pexels-photo-3945667.jpeg",
+      "features": ["4K gaming", "Game streaming capabilities", "Wide game library"]
+    }
   },
   {
     "id": 24,
     "naam": "Smart TV",
     "merk": "Samsung",
     "voorraad": 7,
-    "price": 799.00
+    "price": 799.00,
+    "details": {
+      "description": "Smart TV with vibrant colors and smart features.",
+      "picture": "https://images.pexels.com/photos/1029757/pexels-photo-1029757.jpeg",
+      "features": ["4K resolution", "Built-in streaming apps", "Voice control"]
+    }
   },
   {
     "id": 25,
     "naam": "Router",
     "merk": "TP-Link",
     "voorraad": 35,
-    "price": 59.99
+    "price": 59.99,
+    "details": {
+      "description": "Reliable router for fast internet connectivity.",
+      "picture": "https://images.pexels.com/photos/159304/network-switch-ethernet-cable-connection-159304.jpeg",
+      "features": ["Dual-band Wi-Fi", "Easy setup", "Parental controls"]
+    }
   },
   {
     "id": 26,
     "naam": "Charger",
     "merk": "Anker",
     "voorraad": 60,
-    "price": 25.99
+    "price": 25.99,
+    "details": {
+      "description": "Fast charger with multiple ports.",
+      "picture": "https://images.pexels.com/photos/354103/pexels-photo-354103.jpeg",
+      "features": ["PowerIQ technology", "Compact design", "Safety features"]
+    }
   },
   {
     "id": 27,
     "naam": "Gaming Mouse",
     "merk": "SteelSeries",
     "voorraad": 20,
-    "price": 89.99
+    "price": 89.99,
+    "details": {
+      "description": "Gaming mouse with customizable settings.",
+      "picture": "https://images.pexels.com/photos/2115257/pexels-photo-2115257.jpeg",
+      "features": ["High DPI sensor", "RGB lighting", "Ergonomic shape"]
+    }
   },
   {
     "id": 28,
     "naam": "VR Headset",
     "merk": "Oculus",
     "voorraad": 12,
-    "price": 399.99
+    "price": 399.99,
+    "details": {
+      "description": "Immersive VR headset for gaming and experiences.",
+      "picture": "https://images.unsplash.com/photo-1597843786186-826cc3489f56",
+      "features": ["High-resolution display", "Wireless functionality", "Large game library"]
+    }
   },
   {
     "id": 29,
     "naam": "Smart Speaker",
     "merk": "Amazon",
     "voorraad": 40,
-    "price": 99.99
+    "price": 99.99,
+    "details": {
+      "description": "Smart speaker with voice assistant integration.",
+      "picture": "https://images.pexels.com/photos/3736352/pexels-photo-3736352.jpeg",
+      "features": ["Voice control", "Music streaming capabilities", "Smart home integration"]
+    }
   },
   {
     "id": 30,
     "naam": "Electric Kettle",
     "merk": "Philips",
     "voorraad": 25,
-    "price": 49.99
+    "price": 49.99,
+    "details": {
+      "description": "Fast boiling electric kettle with safety features.",
+      "picture": "https://images.pexels.com/photos/258802/pexels-photo-258802.jpeg",
+      "features": ["1.7L capacity", "Auto shut-off", "Cordless design"]
+    }
   }
-  ]
+]

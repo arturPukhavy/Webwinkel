@@ -19,11 +19,11 @@ export class ProductsService {
     return this.http.get<Product[]>('/api/v1/products')
   };
 
-  createPost(postData: {naam: string; merk: string; voorraad: number; price: number}) {
+  createPost(postData: {naam: string; merk: string; voorraad: number; price: number, details?: { description: string, picture: string, features: string[] }}) {
     return this.http.post<Product[]>('/api/v1/products', postData)
   }
 
-  updatePost(putData: { id: number, naam: string; merk: string; voorraad: number; price: number}) {
+  updatePost(putData: { id: number, naam: string; merk: string; voorraad: number; price: number, details?: { description: string, picture: string, features: string[] }}) {
     console.log('PUT data: ' + JSON.stringify(putData));
      return this.http.put<Product[]>('/api/v1/products', putData)
   }

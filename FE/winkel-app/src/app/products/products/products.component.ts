@@ -58,7 +58,10 @@ export class ProductsComponent implements OnInit, OnDestroy{
             naam: this.editedItem.naam,
             merk: this.editedItem.merk,
             voorraad: this.editedItem.voorraad,
-            price: this.editedItem.price
+            price: this.editedItem.price,
+            description: this.editedItem.details?.description,
+            picture: this.editedItem.details?.picture,
+            features: this.editedItem.details?.features
           });
         }
       }
@@ -184,6 +187,11 @@ export class ProductsComponent implements OnInit, OnDestroy{
 
   onAddToCart(product: Product) {
     this.cartService.addToCart(product);
+  }
+
+  toggleDetails(index: number): void {
+    const product = this.paginatedProducts[index]; 
+    product.showDetails = !product.showDetails; // Toggle the visibility
   }
 
   ngOnDestroy() {

@@ -1,110 +1,158 @@
 <div class="container">
-    <div class="row">
-      <app-alert
+  <div class="row">
+    <app-alert
       [message]="error"
       *ngIf="errorHandlingMode"
       (close)="onHandleError()"
-      ></app-alert>
-      <div class="col-xs-12 col-md-6 col-md-offset-3">
-        <form #postForm="ngForm" (ngSubmit)="onCreatePost()" *ngIf="user?.role !== role.Custm">
-          <div class="form-group invisible">
-            <label for="id">Id</label>
-            <input
-              type="text"
-              class="form-control"
-              id="id"
-              ngModel
-              readonly
-              name="id"
-            />
+    ></app-alert>
+    <div class="col-xs-12 col-md-6 col-md-offset-3">
+      <form #postForm="ngForm" (ngSubmit)="onCreatePost()" *ngIf="user?.role !== role.Custm">
+        <div class="form-group invisible">
+          <label for="id">Id</label>
+          <input
+            type="text"
+            class="form-control"
+            id="id"
+            ngModel
+            readonly
+            name="id"
+          />
+        </div>
+        <div class="custom-field">
+          <label for="naam">Naam</label>
+          <input
+            type="text"
+            class="form-control"
+            id="naam"
+            required
+            ngModel
+            #naam="ngModel"
+            name="naam"
+          />
+          <div *ngIf="naam.invalid && naam.touched" class="validation-message">
+            <small *ngIf="naam.errors?.['required']">Name is required</small>
           </div>
-          <div class="custom-field">
-            <label for="naam">Naam</label>
-            <input
-              type="text"
-              class="form-control"
-              id="naam"
-              required
-              ngModel
-              #naam="ngModel"
-              name="naam"
-            />
-            <div *ngIf="naam.invalid && naam.touched" class="validation-message">
-              <small *ngIf="naam.errors?.['required']">Name is required</small>
-            </div>
+        </div>
+        <div class="custom-field">
+          <label for="merk">Brand</label>
+          <input
+            type="text"
+            class="form-control"
+            id="merk"
+            required
+            ngModel
+            #merk="ngModel"
+            name="merk"
+          />
+          <div *ngIf="merk.invalid && merk.touched" class="validation-message">
+            <small *ngIf="merk.errors?.['required']">Brand is required</small>
           </div>
-          <div class="custom-field">
-            <label for="merk">Brand</label>
-            <input
-              type="text"
-              class="form-control"
-              id="merk"
-              required
-              ngModel
-              #merk="ngModel"
-              name="merk"
-            />
-            <div *ngIf="merk.invalid && merk.touched" class="validation-message">
-              <small *ngIf="merk.errors?.['required']">Brand is required</small>
-            </div>
+        </div>
+        <div class="custom-field">
+          <label for="voorraad">Stock</label>
+          <input
+            type="number"
+            class="form-control"
+            id="voorraad"
+            required
+            pattern="^[1-9]+[0-9]*$"
+            ngModel
+            #voorraad="ngModel"
+            name="voorraad"
+          />
+          <div *ngIf="voorraad.invalid && voorraad.touched" class="validation-message">
+            <small *ngIf="voorraad.errors?.['required']">Stock is required</small>
+            <small *ngIf="voorraad.errors?.['pattern']">Stock must contain only digits</small>
           </div>
-          <div class="custom-field">
-            <label for="voorraad">Stock</label>
-            <input
-              type="number"
-              class="form-control"
-              id="voorraad"
-              required
-              pattern="^[1-9]+[0-9]*$"
-              ngModel
-              #voorraad="ngModel"
-              name="voorraad"
-            />
-            <div *ngIf="voorraad.invalid && voorraad.touched" class="validation-message">
-              <small *ngIf="voorraad.errors?.['required']">Stock is required</small>
-              <small *ngIf="voorraad.errors?.['pattern']">Stock must contain only digits</small>
-            </div>
+        </div>
+        <div class="custom-field">
+          <label for="price">Price, €</label>
+          <input
+            type="number"
+            class="form-control"
+            id="price"
+            required
+            pattern="^\d*.?\d{1,2}?$"
+            ngModel
+            #price="ngModel"
+            name="price"
+          />
+          <div *ngIf="price.invalid && price.touched" class="validation-message">
+            <small *ngIf="price.errors?.['required']">Price is required</small>
+            <small *ngIf="price.errors?.['pattern']">Price must contain only digits</small>
           </div>
-          <div class="custom-field">
-            <label for="price">Price, €</label>
-            <input
-              type="number"
-              class="form-control"
-              id="price"
-              required
-              pattern="^\d*.?\d{1,2}?$"
-              ngModel
-              #price="ngModel"
-              name="price"
-            />
-            <div *ngIf="price.invalid && price.touched" class="validation-message">
-              <small *ngIf="price.errors?.['required']">Price is required</small>
-              <small *ngIf="price.errors?.['pattern']">Price must contain only digits</small>
-            </div>
+        </div>
+        <div class="custom-field">
+          <label for="description">Description</label>
+          <textarea
+            class="form-control"
+            id="description"
+            required
+            ngModel
+            #description="ngModel"
+            name="description"
+            rows="3"
+            placeholder="Enter product description"
+          ></textarea>
+          <div *ngIf="description.invalid && description.touched" class="validation-message">
+            <small *ngIf="description.errors?.['required']">Description is required</small>
           </div>
-          <button
-            class="btn btn-primary"
-            type="submit"
-            [disabled]="editMode || !postForm.valid"
-          >
-            Add Product
-          </button>
-          <button
+        </div>
+        <div class="custom-field">
+          <label for="picture">Picture URL</label>
+          <input
+            type="text"
+            class="form-control"
+            id="picture"
+            required
+            ngModel
+            #picture="ngModel"
+            name="picture"
+            placeholder="Enter image URL"
+          />
+          <div *ngIf="picture.invalid && picture.touched" class="validation-message">
+            <small *ngIf="picture.errors?.['required']">Picture URL is required</small>
+          </div>
+        </div>
+        <div class="custom-field">
+          <label for="features">Features (comma-separated)</label>
+          <input
+            type="text"
+            class="form-control"
+            id="features"
+            required
+            ngModel
+            #features="ngModel"
+            name="features"
+            placeholder="e.g., Feature 1, Feature 2, Feature 3"
+          />
+          <div *ngIf="features.invalid && features.touched" class="validation-message">
+            <small *ngIf="features.errors?.['required']">Features are required</small>
+          </div>
+        </div>
+        <button
+          class="btn btn-primary"
+          type="submit"
+          [disabled]="editMode || !postForm.valid"
+        >
+          Add Product
+        </button>
+        <button
           class="btn btn-success"
           type="button"
           [disabled]="!editMode || !postForm.valid"
           (click)="onUpdatePost()"
-          >
-            Update Product
-          </button>
-          <button
+        >
+          Update Product
+        </button>
+        <button
           class="btn btn-danger"
           type="button"
           (click)="onCancel()"
-          >
-            Cancel
-          </button>
-        </form>
+        >
+          Cancel
+        </button>
+      </form>
         <div class="search-container">
           <input 
             type="text" 
@@ -126,53 +174,82 @@
       </div>
     </ngx-spinner>
     <div class="row">
-    <h2 class="table-header">Product List</h2>
-    <table class="table table-striped">
-      <tr>
-        <th scope="col">#</th>
-        <th scope="col">Name</th>
-        <th scope="col">Brand</th>
-        <th scope="col">Stock</th>
-        <th scope="col">Price</th>
-        <th scope="col"> 
-            <button
-              class="btn btn-danger"
-              [disabled]="products != undefined && products.length < 1"
-              (click)="onClearProducts()"
-              *ngIf="user?.role !== role.Custm"
-            >
-              Clear All Products
-            </button>   
-        </th>
-      </tr>
-      <tbody>
-        <tbody *ngIf="products != undefined && paginatedProducts.length < 1">No products available!</tbody>
-        <tbody *ngIf="products != undefined && paginatedProducts.length >= 1">
-          <tr *ngFor="let item of paginatedProducts; let i = index">
-            <th scope="row">{{item.id}}</th>
-            <td>{{item.naam}}</td>
-            <td>{{item.merk}}</td>
-            <td>{{item.voorraad}}</td>
-            <td>{{item.price}}</td>
-            <td>
-              <button 
-                *ngIf="user?.role !== role.Custm" 
-                class="btn btn-danger" 
-                (click)="onDeleteProduct(item.id)"
-                style="margin-right: 2px;">
-                Delete
-              </button>
-              <button 
-                *ngIf="user?.role !== role.Custm" 
-                class="btn btn-success" 
-                (click)="onEditProduct(i)"
-                style="margin-left: 2px;">
-                Edit
-              </button>
-              <button *ngIf="user?.role === role.Custm" class="btn btn-primary" (click)="onAddToCart(item)">Add to Cart</button>
-            </td>
+      <h2 class="table-header">Product List</h2>
+      <table class="table table-striped">
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Name</th>
+          <th scope="col">Brand</th>
+          <th scope="col">Stock</th>
+          <th scope="col">Price</th>
+          <th scope="col">Actions</th>
+        </tr>
+        <tbody *ngIf="products != undefined && paginatedProducts.length < 1">
+          <tr>
+            <td colspan="6" class="text-center">No products available!</td>
           </tr>
-      </tbody> 
+        </tbody>
+        <tbody *ngIf="products != undefined && paginatedProducts.length >= 1">
+          <ng-container *ngFor="let item of paginatedProducts; let i = index">
+            <!-- Product row -->
+            <tr>
+              <th scope="row">{{ item.id }}</th>
+              <td>{{ item.naam }}</td>
+              <td>{{ item.merk }}</td>
+              <td>{{ item.voorraad }}</td>
+              <td>{{ item.price }}</td>
+              <td>
+                <button
+                  class="btn btn-info"
+                  (click)="toggleDetails(i)"
+                  aria-expanded="false"   
+                >
+                  {{ item.showDetails ? 'Hide Details' : 'Details' }}
+                </button>
+                <button
+                  *ngIf="user?.role !== role.Custm"
+                  class="btn btn-danger"
+                  (click)="onDeleteProduct(item.id)"
+                >
+                  Delete
+                </button>
+                <button
+                  *ngIf="user?.role !== role.Custm"
+                  class="btn btn-success"
+                  (click)="onEditProduct(i)"
+                >
+                  Edit
+                </button>
+                <button
+                  *ngIf="user?.role === role.Custm"
+                  class="btn btn-primary"
+                  (click)="onAddToCart(item)"
+                >
+                  Add to Cart
+                </button>
+              </td>
+            </tr>
+            <!-- Details row embedded under the product row -->
+            <tr *ngIf="item.showDetails" class="details-row">
+              <td colspan="6">
+                <div class="details-container">
+                  <p><strong>Description:</strong> {{ item.details?.description }}</p>
+                  <img
+                    [src]="item.details?.picture"
+                    alt="{{ item.naam }} image"
+                    class="details-image"
+                  />
+                  <ul>
+                    <strong>Features:</strong>
+                    <li *ngFor="let feature of item.details?.features">
+                      {{ feature }}
+                    </li>
+                  </ul>
+                </div>
+              </td>
+            </tr>
+          </ng-container>
+      </tbody>
     </table>
     <div class="pagination-container">
       <button class="btn pagination-btn" [disabled]="currentPage === 1" 

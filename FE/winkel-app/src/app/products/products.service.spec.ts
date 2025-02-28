@@ -7,7 +7,7 @@ describe('ProductsService', () => {
   let service: ProductsService;
   let httpMock: HttpTestingController;
 
-  const mockProduct: Product = { id: 1, naam: 'Test Product', merk: 'Test Brand', voorraad: 5, price: 100 };
+  const mockProduct: Product = { id: 1, naam: 'Test Product', merk: 'Test Brand', voorraad: 5, price: 100, details: { description: 'desc', picture: 'url', features: ["4K gaming", "Game streaming capabilities", "Wide game library"] } };
   const mockProductArray: Product[] = [mockProduct]; // Ensure we are mocking an array when needed
 
   beforeEach(() => {
