@@ -30,6 +30,7 @@ export class ProductsComponent implements OnInit, OnDestroy{
   user: Login | null = null;
   currentPage: number = 1;
   itemsPerPage: number = 10;
+  showFields = false;
   
 
   constructor(private prService: ProductsService, 
@@ -66,6 +67,10 @@ export class ProductsComponent implements OnInit, OnDestroy{
         }
       }
     ));
+  }
+
+  toggleFields() {
+    this.showFields = !this.showFields;
   }
 
   filterProducts() {
