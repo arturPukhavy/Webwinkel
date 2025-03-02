@@ -215,6 +215,32 @@
   align-items: center;
 }
 
+.image-feature-row {
+  display: flex;
+  align-items: flex-start;
+}
+
+.details-image {
+  margin-right: 15px;
+}
+
+.features-section {
+  margin-left: 15px;
+}
+
+.features-section p {
+  margin-bottom: 5px;
+}
+
+.rotate-180 {
+  transform: rotate(180deg);
+  transition: transform 0.3s;
+}
+
+.fa-caret-down {
+  transition: transform 0.3s;
+}
+
 .cssload-speeding-wheel {
   width: 63px;
   height: 63px;
