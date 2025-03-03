@@ -7,11 +7,13 @@
     ></app-alert>
     <div class="col-xs-12 col-md-6 col-md-offset-3">
       <button
-      class="btn btn-info"
-      (click)="toggleFields()"
-    >
-      {{ showFields ? 'Hide fields' : 'Add new product' }}
-    </button>
+        *ngIf="user?.role !== role.Custm"
+        class="btn"
+        [ngClass]="{'btn-info': !showFields, 'btn-warning': showFields}"
+        (click)="toggleFields()"
+      >
+        {{ showFields ? 'Hide fields' : 'Add new product' }}
+      </button>
       <form #postForm="ngForm" (ngSubmit)="onCreatePost()" *ngIf="showFields && user?.role !== role.Custm">
         <div class="form-group invisible">
           <label for="id">Id</label>
@@ -206,7 +208,8 @@
               <td>{{ item.price }}</td>
               <td>
                 <button
-                  class="btn btn-info"
+                  class="btn"
+                  [ngClass]="{'btn-info': !item.showDetails, 'btn-secondary': item.showDetails}"
                   (click)="toggleDetails(i)"
                   aria-expanded="false"
                 >

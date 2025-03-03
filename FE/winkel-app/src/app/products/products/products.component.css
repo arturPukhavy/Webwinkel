@@ -134,7 +134,16 @@
   border-radius: 5px;
   font-size: 14px;
   font-weight: bold;
-  transition: background-color 0.3s;
+  transition: background-color 0.3s, transform 0.2s; 
+}
+
+.btn-info {
+  background-color: #17a2b8; 
+  color: white;
+}
+
+.btn-info:hover {
+  background-color: #138496; 
 }
 
 .btn-primary {
@@ -230,6 +239,28 @@
 
 .features-section p {
   margin-bottom: 5px;
+}
+
+.btn-warning {
+  background-color: #ffc107; 
+  color: #212529; 
+}
+
+.btn-warning:hover {
+  background-color: #e0a800; 
+}
+
+.btn-secondary {
+  background-color: #6c757d; 
+  color: white;
+}
+
+.btn-secondary:hover {
+  background-color: #5a6268; 
+}
+
+.btn:active {
+  transform: scale(0.95); 
 }
 
 .rotate-180 {
