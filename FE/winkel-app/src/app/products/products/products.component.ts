@@ -105,17 +105,17 @@ export class ProductsComponent implements OnInit, OnDestroy{
 
   onCreatePost() {
     this.spinnerService.show();
+    const formValue = this.productForm.value;
+    const featuresValue = formValue.features || '';
     const postData = {
-      naam: this.productForm.value.naam,
-      merk: this.productForm.value.merk,
-      voorraad: this.productForm.value.voorraad,
-      price: this.productForm.value.price,
+      naam: formValue.naam,
+      merk: formValue.merk,
+      voorraad: formValue.voorraad,
+      price: formValue.price,
       details: {
-        description: this.productForm.value.description,
-        picture: this.productForm.value.picture,
-        features: this.productForm.value.features
-          ? this.productForm.value.features.split(',').map((feature: string) => feature.trim()).filter((feature: string) => feature.length > 0)
-          : []
+        description: formValue.description !== undefined ? formValue.description : '',
+        picture: formValue.picture !== undefined ? formValue.picture : '',
+        features: featuresValue.split(',').map((feature: string) => feature.trim()).filter((feature: string) => feature.length > 0)
       }
     };
     console.log('Creating product with:', JSON.stringify(postData));
@@ -126,6 +126,7 @@ export class ProductsComponent implements OnInit, OnDestroy{
         this.onFetchPosts();
       },
       error: (error: HttpErrorResponse) => {
+        this.spinnerService.hide();
         this.errorHandlingMode = true;
         this.error = error.error.error;
         console.error('There was an error: ', error.error.error);
