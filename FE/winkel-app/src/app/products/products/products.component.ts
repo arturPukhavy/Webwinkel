@@ -33,11 +33,13 @@ export class ProductsComponent implements OnInit, OnDestroy{
   showFields = false;
   
 
-  constructor(private prService: ProductsService, 
-              private cartService: CartService,
-              private loginService: LoginService, 
-              private spinnerService: NgxSpinnerService ) {}
+  constructor( private prService: ProductsService, 
+               private cartService: CartService,
+               private loginService: LoginService, 
+               private spinnerService: NgxSpinnerService 
+  ) {}
   
+
   ngOnInit() {
     this.onFetchPosts(); 
 
@@ -60,9 +62,9 @@ export class ProductsComponent implements OnInit, OnDestroy{
             merk: this.editedItem.merk,
             voorraad: this.editedItem.voorraad,
             price: this.editedItem.price,
-            description: this.editedItem.details?.description,
-            picture: this.editedItem.details?.picture,
-            features: this.editedItem.details?.features
+            description: this.editedItem.details?.description || '',
+            picture: this.editedItem.details?.picture || '',
+            features: this.editedItem.details?.features?.join(', ') || '' // Join array to string for form
           });
         }
       }
@@ -103,33 +105,64 @@ export class ProductsComponent implements OnInit, OnDestroy{
 
   onCreatePost() {
     this.spinnerService.show();
-    this.prService.createPost(this.productForm.value).subscribe({
+    const formValue = this.productForm.value;
+    const featuresValue = formValue.features || '';
+    const postData = {
+      naam: formValue.naam,
+      merk: formValue.merk,
+      voorraad: formValue.voorraad,
+      price: formValue.price,
+      details: {
+        description: formValue.description !== undefined ? formValue.description : '',
+        picture: formValue.picture !== undefined ? formValue.picture : '',
+        features: featuresValue.split(',').map((feature: string) => feature.trim()).filter((feature: string) => feature.length > 0)
+      }
+    };
+    console.log('Creating product with:', JSON.stringify(postData));
+    this.prService.createPost(postData).subscribe({
       next: data => {
         this.spinnerService.hide();
         console.log('Product added: ' + JSON.stringify(data));
         this.onFetchPosts();
       },
       error: (error: HttpErrorResponse) => {
+        this.spinnerService.hide();
         this.errorHandlingMode = true;
         this.error = error.error.error;
         console.error('There was an error: ', error.error.error);
       }
-    })
-  };
+    });
+  }
 
   onUpdatePost() {
-    this.prService.updatePost(this.productForm.value).subscribe({
+    const putData = {
+      id: this.productForm.value.id,
+      naam: this.productForm.value.naam,
+      merk: this.productForm.value.merk,
+      voorraad: this.productForm.value.voorraad,
+      price: this.productForm.value.price,
+      details: {
+        description: this.productForm.value.description,
+        picture: this.productForm.value.picture,
+        features: this.productForm.value.features
+          ? this.productForm.value.features.split(',').map((feature: string) => feature.trim()).filter((feature: string) => feature.length > 0)
+          : []
+      }
+    };
+    console.log('Updating product with:', JSON.stringify(putData));
+    this.prService.updatePost(putData).subscribe({
       next: data => {
         console.log('Product changed: ' + JSON.stringify(data));
-        this.onFetchPosts()
+        this.onFetchPosts();
+        this.showFields = false;
       },
       error: (error: HttpErrorResponse) => {
         this.errorHandlingMode = true;
         this.error = error.error.error;
         console.error('There was an error: ', error.error.error);
       }
-    }) 
-  };
+    });
+  }
 
   onFetchPosts() {
     this.prService.fetchPosts().subscribe({
@@ -174,7 +207,10 @@ export class ProductsComponent implements OnInit, OnDestroy{
   };
 
   onEditProduct(index: number) {
-    this.prService.startedEditing.next(index);
+    this.showFields = true;
+    setTimeout(() => {
+      this.prService.startedEditing.next(index);
+    }, 1);
   }
 
   onCancel() {

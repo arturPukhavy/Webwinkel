@@ -18,7 +18,14 @@ describe('ProductsComponent', () => {
   let loginServiceSpy: jasmine.SpyObj<LoginService>;
   let spinnerServiceSpy: jasmine.SpyObj<NgxSpinnerService>;
 
-  const mockProduct: Product = { id: 1, naam: 'Test Product', merk: 'Test Brand', voorraad: 5, price: 100 };
+  const mockProduct: Product = { 
+    id: 1, 
+    naam: 'Test Product', 
+    merk: 'Test Brand', 
+    voorraad: 5, 
+    price: 100, 
+    details: { description: 'description', picture: 'url', features: ['1', '2', '3'] } 
+  };
   const mockProductArray: Product[] = [mockProduct];
 
   beforeEach(async () => {
@@ -85,17 +92,38 @@ describe('ProductsComponent', () => {
   });
 
   it('should create a new product', () => {
+    // Mock the form with only the basic fields
     component.productForm = {
-      value: { naam: 'New Product', merk: 'Brand', voorraad: 10, price: 200 },
+      value: { 
+        naam: 'New Product', 
+        merk: 'Brand', 
+        voorraad: 10, 
+        price: 200,
+        description: undefined, // Optional: explicitly undefined to match default behavior
+        picture: undefined,
+        features: undefined
+      },
       reset: () => {}
     } as NgForm;
-
+  
     // Mock createPost to return an observable
     productsServiceSpy.createPost.and.returnValue(of(mockProductArray));
     component.onCreatePost();
-
+  
+    // Expect createPost to be called with the transformed data including details
+    expect(productsServiceSpy.createPost).toHaveBeenCalledWith({
+      naam: 'New Product',
+      merk: 'Brand',
+      voorraad: 10,
+      price: 200,
+      details: {
+        description: '',
+        picture: '',
+        features: []
+      }
+    });
+  
     expect(spinnerServiceSpy.show).toHaveBeenCalled();
-    expect(productsServiceSpy.createPost).toHaveBeenCalledWith(component.productForm.value);
   });
 
   it('should unsubscribe from subscriptions on destroy', () => {
