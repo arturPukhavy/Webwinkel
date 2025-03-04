@@ -62,6 +62,7 @@ app.put('/api/v1/products', (req, res) => {
     productToUpdate.merk = product.merk
     productToUpdate.voorraad = product.voorraad
     productToUpdate.price = product.price
+    productToUpdate.details = product.details
   } else {
     //TODO return an error
     console.log('Product not found');
